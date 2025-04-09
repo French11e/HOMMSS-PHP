@@ -517,9 +517,12 @@
             iframe,
             embed,
             object {
-                vertical-align: middle;
-                display: block
+                display: block;
+                margin: 0 auto;
+                max-width: 100%;
+                height: auto;
             }
+
 
             img,
             video {
