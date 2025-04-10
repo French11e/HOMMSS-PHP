@@ -15,7 +15,7 @@
                     <i class="icon-chevron-right"></i>
                 </li>
                 <li>
-                    <a href="{{'admin.brands'}}">
+                    <a href="{{'admin.brands'}}">//
                         <div class="text-tiny">Brands</div>
                     </a>
                 </li>
