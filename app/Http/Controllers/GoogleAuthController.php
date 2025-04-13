@@ -20,24 +20,26 @@ class GoogleAuthController extends Controller
         try {
             $google_user = Socialite::driver('google')->stateless()->user();
 
+            // Check if user with this email already exists
+            $user = User::where('email', $google_user->getEmail())->first();
 
-            $user = User::where('google_id', $google_user->getId())->first();
-
-            if (!$user) {
-                $new_user = User::create([
+            if ($user) {
+                // If google_id is not yet linked, update it
+                if (!$user->google_id) {
+                    $user->google_id = $google_user->getId();
+                    $user->save();
+                }
+            } else {
+                // If no user with this email, create a new one
+                $user = User::create([
                     'name' => $google_user->getName(),
                     'email' => $google_user->getEmail(),
                     'google_id' => $google_user->getId(),
                 ]);
-
-                Auth::login($new_user);
-
-                return redirect('/');
-            } else {
-                Auth::login($user);
-
-                return redirect('/');
             }
+
+            Auth::login($user);
+            return redirect('/');
         } catch (\Throwable $th) {
             dd($th);
         }
