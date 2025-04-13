@@ -50,6 +50,13 @@
                 </div>
             </div>
         </div>
+        <div class="mt-3">
+            <a href="{{route('google-auth')}}" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center gap-2">
+                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" style="width:20px; height:20px;">
+                <span>Continue with Google</span>
+            </a>
+        </div>
+
     </section>
 </main>
 <!-- <div class="container">
