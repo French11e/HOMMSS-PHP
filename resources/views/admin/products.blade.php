@@ -77,8 +77,8 @@
                                     <div class="text-tiny mt-3">{{$product->slug}}</div>
                                 </div>
                             </td>
-                            <td>${{$product->regular_price}}</td>
-                            <td>${{$product->sale_price}}</td>
+                            <td>₱{{$product->regular_price}}</td>
+                            <td>₱{{$product->sale_price}}</td>
                             <td>{{$product->SKU}}</td>
                             <td>{{$product->category->name}}</td>
                             <td>{{$product->brand->name}}</td>
@@ -87,15 +87,21 @@
                             <td>{{$product->quantity}}</td>
                             <td>
                                 <div class="list-icon-function">
-                                    <div class="item eye">
-                                        <i class="icon-eye"></i>
-                                    </div>
-                                    <div class="item edit">
-                                        <i class="icon-edit-3"></i>
-                                    </div>
-                                    <div class="item text-danger delete">
-                                        <i class="icon-trash-2"></i>
-                                    </div>
+                                    <a href="#">
+                                        <div class="item eye">
+                                            <i class="icon-eye"></i>
+                                        </div>
+                                    </a>
+                                    <a href="{{route('admin.product.edit',['id'=>$product->id])}}">
+                                        <div class="item edit">
+                                            <i class="icon-edit-3"></i>
+                                        </div>
+                                    </a>
+                                    <form action="#" method="POST">
+                                        <div class="item text-danger delete">
+                                            <i class="icon-trash-2"></i>
+                                        </div>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
