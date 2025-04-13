@@ -46,4 +46,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // app/Models/User.php
+    public function setMobileAttribute($value)
+    {
+        // Store only digits in database
+        $this->attributes['mobile'] = preg_replace('/[^0-9]/', '', $value);
+    }
 }
