@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Auth\RegisterController;
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->middleware('throttle:5,1');
