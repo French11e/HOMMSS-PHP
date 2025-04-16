@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('featured')->default(false);
             $table->unsignedInteger('quantity')->default(10);
             $table->string('image')->nullable();  // Removed duplicate 'text' image column
+            $table->text('images')->nullable();  // Added the 'images' column (for multiple gallery images)
             $table->bigInteger('category_id')->unsigned()->nullable();
             $table->bigInteger('brand_id')->unsigned()->nullable();
             $table->timestamps();  // Only one timestamps() needed
