@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('mobile')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->string('google_id')->nullable();
             $table->string('utype')->default('USR')->comment('ADM for Admin and USR for User or Customer');
             $table->rememberToken();
             $table->timestamps();
