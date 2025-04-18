@@ -17,12 +17,14 @@ Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
-Route::get('/shop/{product_slug}',[ShopController::class,'product_details'])->name('shop.product.details');
+Route::get('/shop/{product_slug}', [ShopController::class, 'product_details'])->name('shop.product.details');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/shop/{product_slug}', [CartController::class, 'add_to_cart'])->name('cart.add');
-Route::put('cart/increase-quantity/{rowId}', [CartController::class, 'increase_cart_quantity'])->name('cart.qty.increase');
-Route::put('cart/increase-decrease/{rowId}', [CartController::class, 'decrease_cart_quantity'])->name('cart.qty.decrease');
+Route::put('/cart/increase-quantity/{rowId}', [CartController::class, 'increase_cart_quantity'])->name('cart.qty.increase');
+Route::put('/cart/increase-decrease/{rowId}', [CartController::class, 'decrease_cart_quantity'])->name('cart.qty.decrease');
+Route::delete('/cart/remove/{rowId}', [CartController::class, 'remove_item'])->name('cart.item.remove');
+Route::delete('/cart/clear', [CartController::class, 'empty_cart'])->name('cart.empty');
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->middleware('throttle:5,1');
