@@ -185,16 +185,16 @@
                     </h5>
                     <div id="accordion-filter-price" class="accordion-collapse collapse show border-0"
                         aria-labelledby="accordion-heading-price" data-bs-parent="#price-filters">
-                        <input class="price-range-slider" type="text" name="price_range" value="" data-slider-min="10"
-                            data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]" data-currency="$" />
+                        <input class="price-range-slider" type="text" name="price_range" value="" data-slider-min="1"
+                            data-slider-max="1000" data-slider-step="5" data-slider-value="[{{$min_price}},{{$max_price}}]" data-currency="₱" />
                         <div class="price-range__info d-flex align-items-center mt-2">
                             <div class="me-auto">
                                 <span class="text-secondary">Min Price: </span>
-                                <span class="price-range__min">$250</span>
+                                <span class="price-range__min">₱1</span>
                             </div>
                             <div>
                                 <span class="text-secondary">Max Price: </span>
-                                <span class="price-range__max">$450</span>
+                                <span class="price-range__max">₱1000</span>
                             </div>
                         </div>
                     </div>
@@ -427,11 +427,13 @@
 </main>
 
 <form id="frmfilter" method="GET" action="{{ route('shop.index') }}">
-    <input type="hidden" name="page" value="{{$products->currentPage()}}">
+    <input type="hidden" name="page" value="1"> <!-- Always reset to page 1 on filter change -->
     <input type="hidden" id="size" name="size" value="{{ $size }}" />
-    <input type="hidden" name="order" id="order" value="{{$order}}" />
-    <input type="hidden" name="brands" id="hdnBrands" />
-    <input type="hidden" name="categories" id="hdnCategories" />
+    <input type="hidden" id="orderby" name="orderby" value="{{ $order }}" /> <!-- Changed name to match controller -->
+    <input type="hidden" name="brands" id="hdnBrands" value="{{ $f_brands }}" />
+    <input type="hidden" name="categories" id="hdnCategories" value="{{ $f_categories }}" />
+    <input type="hidden" name="min" id="hdnMinPrice" value="{{ $min_price }}" />
+    <input type="hidden" name="max" id="hdnMaxPrice" value="{{ $max_price }}" />
 </form>
 
 <select class="shop-acs__select form-select w-auto border-0 py-0 order-1 order-md-0" aria-label="Page Size" id="pagesize" name="pagesize">
@@ -445,34 +447,56 @@
 @push('scripts')
 <script>
     $(function() {
-        $("#pagesize").on("change", function() {
-            $("#size").val($("#pagesize option:selected").val());
+        // Debounce function to prevent rapid submissions
+        function debounce(func, timeout = 300){
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => { func.apply(this, args); }, timeout);
+            };
+        }
+        
+        // Submit handler with debounce
+        const submitForm = debounce(() => {
+            // Reset to first page on any filter change
+            $("input[name='page']").val(1);
             $("#frmfilter").submit();
+        });
+
+        $("#pagesize").on("change", function() {
+            $("#size").val($(this).val());
+            submitForm();
         });
 
         $("#orderby").on("change", function() {
-            $("#order").val($("#orderby option:selected").val());
-            $("#frmfilter").submit();
+            $("#orderby").val($(this).val());
+            submitForm();
         });
 
         $("input[name='categories[]']").on("change", function() {
-            var categories = "";
-            $("input[name='categories[]']:checked").each(function() {
-                categories += (categories === "" ? "" : ",") + $(this).val();
-            });
+            var categories = $("input[name='categories[]']:checked")
+                .map(function() { return this.value; })
+                .get()
+                .join(",");
             $("#hdnCategories").val(categories);
-            $("#frmfilter").submit();
+            submitForm();
         });
 
-        $("input[name='brands']").on("change", function() {
-            var brands = "";
-            $("input[name='brands']:checked").each(function() {
-                brands += (brands === "" ? "" : ",") + $(this).val();
-            });
+        $("input[name='brands[]']").on("change", function() {
+            var brands = $("input[name='brands[]']:checked")
+                .map(function() { return this.value; })
+                .get()
+                .join(",");
             $("#hdnBrands").val(brands);
-            $("#frmfilter").submit();
+            submitForm();
         });
 
+        $("input[name='price_range']").on("change", function() {
+            var prices = $(this).val().split(",");
+            $("#hdnMinPrice").val(prices[0]);
+            $("#hdnMaxPrice").val(prices[1]);
+            submitForm();
+        });
     });
 </script>
 @endpush
