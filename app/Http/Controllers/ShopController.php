@@ -9,10 +9,9 @@ class ShopController extends Controller
 {
     public function index(Request $request)
     {
-        $size = $request->input('size') ? $request->query('size') : 12;
-        $o_column = "";
-        $o_order = "";
-        $order = $request->query('order') ? $request->query('order') : -1;
+        $size = $request->query('size', 12);
+        $order = (int) $request->query('orderby', -1);
+
         switch ($order) {
             case 1:
                 $o_column = "created_at";
@@ -36,6 +35,7 @@ class ShopController extends Controller
         }
 
         $products = Product::orderBy($o_column, $o_order)->paginate($size);
+
         return view('shop', compact('products', 'size', 'order'));
     }
 

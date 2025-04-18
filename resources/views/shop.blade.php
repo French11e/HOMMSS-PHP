@@ -467,6 +467,7 @@
     <option value="48" {{ $size == 48 ? 'selected' : '' }}>48</option>
     <option value="102" {{ $size == 102 ? 'selected' : '' }}>102</option>
 </select>
+@endsection
 
 @push('scripts')
 <script>
