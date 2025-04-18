@@ -184,11 +184,11 @@
                     <div class="header-dashboard">
                         <div class="wrap">
                             <div class="header-left">
-                                <a href="index-2.html">
+                                <!-- <a href="index-2.html">
                                     <img class="" id="logo_header_mobile" alt="" src="{{ asset('images/logo/logo.png') }}"
                                         data-light="{{ asset('images/logo/logo.png') }}" data-dark="{{ asset('images/logo/logo.png') }}"
                                         data-width="154px" data-height="52px" data-retina="{{ asset('images/logo/logo.png') }}">
-                                </a>
+                                </a> -->
                                 <div class="button-show-hide">
                                     <i class="icon-menu-left"></i>
                                 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -11,6 +12,7 @@ class ShopController extends Controller
     {
         $size = $request->query('size', 12);
         $order = (int) $request->query('orderby', -1);
+        $f_brands = $request->query('brands');  
 
         switch ($order) {
             case 1:
@@ -34,9 +36,12 @@ class ShopController extends Controller
                 $o_order = "DESC";
         }
 
-        $products = Product::orderBy($o_column, $o_order)->paginate($size);
-
-        return view('shop', compact('products', 'size', 'order'));
+        $brands = Brand::orderBy('name', 'ASC')->get();
+        $products = Product::where(function($query) use($f_brands) {
+            $query->whereIn('brand_id',explode(',',$f_brands))->orWhereRaw("'".$f_brands."' = ''"); 
+        })            
+                        ->orderBy($o_column, $o_order)->paginate($size);
+        return view('shop', compact('products', 'size', 'order', 'brands','f_brands'));
     }
 
 
