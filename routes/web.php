@@ -21,6 +21,8 @@ Route::get('/shop/{product_slug}',[ShopController::class,'product_details'])->na
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/shop/{product_slug}', [CartController::class, 'add_to_cart'])->name('cart.add');
+Route::put('cart/increase-quantity/{rowId}', [CartController::class, 'increase_cart_quantity'])->name('cart.qty.increase');
+Route::put('cart/increase-decrease/{rowId}', [CartController::class, 'decrease_cart_quantity'])->name('cart.qty.decrease');
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->middleware('throttle:5,1');
