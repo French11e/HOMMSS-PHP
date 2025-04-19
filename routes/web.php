@@ -26,6 +26,12 @@ Route::put('/cart/increase-decrease/{rowId}', [CartController::class, 'decrease_
 Route::delete('/cart/remove/{rowId}', [CartController::class, 'remove_item'])->name('cart.item.remove');
 Route::delete('/cart/clear', [CartController::class, 'empty_cart'])->name('cart.empty');
 
+Route::post('/wishlist/add', [WishlistController::class, 'add_to_wishlist'])->name('wishlist.add');
+Route::get('/wishlist', [WishlistController::class,'index'])->name('wishlist.index');
+Route::delete('/wishlist/item/remove/{rowId}', [WishlistController::class, 'remove_item'])->name('wishlist.item.remove');
+Route::delete('/wishlist/clear', [WishlistController::class, 'empty_wishlist'])->name('wishlist.items.clear');
+    
+
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->middleware('throttle:5,1');
 

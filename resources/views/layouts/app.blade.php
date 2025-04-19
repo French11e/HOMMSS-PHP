@@ -484,10 +484,16 @@
                         </a>
                     </div>
                     @endguest
-                    <a href="wishlist.html" class="header-tools__item">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                    <a href="{{route('wishlist.index')}}" class="header-tools__item position-relative d-flex align-items-center justify-content-center text-decoration-none">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" class="text-muted">
                             <use href="#icon_heart" />
                         </svg>
+                        @if(Cart::instance('wishlist')->content()->count() > 0)
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6em;">
+                            {{Cart::instance('wishlist')->content()->count()}}
+                        </span>
+                        @endif
                     </a>
 
                     <a href="{{route('cart.index')}}" class="header-tools__item header-tools__cart">

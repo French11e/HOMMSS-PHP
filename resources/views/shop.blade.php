@@ -15,6 +15,10 @@
         border-radius: 0;
         margin-right: 0.75rem;
     }
+
+    .filled-heart {
+        color: red
+    }
 </style>
 
 <main class="pt-90">
@@ -406,11 +410,31 @@
                                 <span class="reviews-note text-lowercase text-secondary ms-1">8k+ reviews</span>
                             </div>
 
-                            <button class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist" title="Add To Wishlist">
-                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_heart" />
-                                </svg>
-                            </button>
+                            @if(Cart::instance('wishlist')->content()->where('id', $product->id)->count() > 0)
+                            <form method="POST" action="{{ route('wishlist.item.remove', ['rowId' => Cart::instance('wishlist')->content()->where('id', $product->id)->first()->rowId]) }}" class="wishlist-remove-form">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist filled-heart" title="Remove from Wishlist">
+                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#icon_heart" />
+                                    </svg>
+                                </button>
+                            </form>
+                            @else
+                            <form method="POST" action="{{ route('wishlist.add') }}" class="wishlist-form">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}" />
+                                <input type="hidden" name="name" value="{{ $product->name }}" />
+                                <input type="hidden" name="price" value="{{ $product->sale_price ?: $product->regular_price }}" />
+                                <input type="hidden" name="quantity" value="1" />
+                                <button type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist" title="Remove from Wishlist">
+                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#icon_heart" />
+                                    </svg>
+                                </button>
+                            </form>
+                            @endif
+
                         </div>
                     </div>
                 </div>
@@ -448,14 +472,16 @@
 <script>
     $(function() {
         // Debounce function to prevent rapid submissions
-        function debounce(func, timeout = 300){
+        function debounce(func, timeout = 300) {
             let timer;
             return (...args) => {
                 clearTimeout(timer);
-                timer = setTimeout(() => { func.apply(this, args); }, timeout);
+                timer = setTimeout(() => {
+                    func.apply(this, args);
+                }, timeout);
             };
         }
-        
+
         // Submit handler with debounce
         const submitForm = debounce(() => {
             // Reset to first page on any filter change
@@ -475,7 +501,9 @@
 
         $("input[name='categories[]']").on("change", function() {
             var categories = $("input[name='categories[]']:checked")
-                .map(function() { return this.value; })
+                .map(function() {
+                    return this.value;
+                })
                 .get()
                 .join(",");
             $("#hdnCategories").val(categories);
@@ -484,7 +512,9 @@
 
         $("input[name='brands[]']").on("change", function() {
             var brands = $("input[name='brands[]']:checked")
-                .map(function() { return this.value; })
+                .map(function() {
+                    return this.value;
+                })
                 .get()
                 .join(",");
             $("#hdnBrands").val(brands);
@@ -498,5 +528,24 @@
             submitForm();
         });
     });
+
+    // Add this to your scripts section
+    $(document).on('submit', '.wishlist-remove-form', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        success: function(response) {
+            $('.wishlist-count').text(response.wishlist_count);
+            toastr.success(response.success || 'Removed from wishlist');
+        },
+        error: function() {
+            toastr.error('Failed to remove from wishlist');
+        }
+    });
+});
+
 </script>
 @endpush
