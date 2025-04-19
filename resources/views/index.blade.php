@@ -10,73 +10,70 @@
         "effect": "fade",
         "loop": true
       }'>
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <div class="overflow-hidden position-relative h-100">
-                    <div class="slideshow-character position-absolute bottom-0 pos_right-center">
-                        <img loading="lazy" src="{{ asset('assets/images/home/demo3/slideshow-character1.png') }}" width="542" height="733"
-                            alt="Woman Fashion 1"
-                            class="slideshow-character__img animate animate_fade animate_btt animate_delay-9 w-auto h-auto" />
-                        <div class="character_markup type2">
-                            <p
-                                class="text-uppercase font-sofia mark-grey-color animate animate_fade animate_btt animate_delay-10 mb-0">
-                                Dresses</p>
-                        </div>
-                    </div>
-                    <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
-                        <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-                            New Arrivals</h6>
-                        <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Nigga</h2>
-                        <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Dresses</h2>
-                        <a href="#"
-                            class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Shop
-                            Now</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper-slide">
-                <div class="overflow-hidden position-relative h-100">
-                    <div class="slideshow-character position-absolute bottom-0 pos_right-center">
-                        <img loading="lazy" src="{{ asset('assets/images/slideshow-character1.png') }}" width="400" height="733"
-                            alt="Woman Fashion 1"
-                            class="slideshow-character__img animate animate_fade animate_btt animate_delay-9 w-auto h-auto" />
-                        <div class="character_markup">
-                            <p class="text-uppercase font-sofia fw-bold animate animate_fade animate_rtl animate_delay-10">Summer
-                            </p>
-                        </div>
-                    </div>
-                    <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
-                        <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-                            New Arrivals</h6>
-                        <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Night Spring</h2>
-                        <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Dresses</h2>
-                        <a href="#"
-                            class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Shop
-                            Now</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper-slide">
-                <div class="overflow-hidden position-relative h-100">
-                    <div class="slideshow-character position-absolute bottom-0 pos_right-center">
-                        <img loading="lazy" src="{{ asset('assets/images/slideshow-character2.png') }}" width="400" height="690"
-                            alt="Woman Fashion 2"
-                            class="slideshow-character__img animate animate_fade animate_rtl animate_delay-10 w-auto h-auto" />
-                    </div>
-                    <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
-                        <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-                            New Arrivals</h6>
-                        <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Night Spring</h2>
-                        <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Dresses</h2>
-                        <a href="#"
-                            class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Shop
-                            Now</a>
-                    </div>
+      <div class="swiper-container home-slider">
+    <div class="swiper-wrapper">
+        <!-- Slide 1 - Tiles -->
+        <div class="swiper-slide">
+            <div class="overflow-hidden position-relative h-100 bg-light">
+                <img loading="lazy" src="{{ asset('assets/images/home/hommss/wall-tiles.png') }}" 
+                     alt="Premium Tiles Collection" 
+                     class="w-100 h-100 object-fit-cover"
+                     style="object-position: center 30%;">
+                
+                <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
+                    <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
+                        New Collection</h6>
+                    <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Luxury</h2>
+                    <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Wall Tiles</h2>
+                    <a href="{{ route('shop.index') }}"
+                        class="btn btn-primary btn-lg px-5 py-3 fw-medium animate animate_fade animate_btt animate_delay-7">Shop Now</a>
                 </div>
             </div>
         </div>
+
+        <!-- Slide 2 - Kitchen Sinks -->
+        <div class="swiper-slide">
+            <div class="overflow-hidden position-relative h-100 bg-light">
+                <img loading="lazy" src="{{ asset('assets/images/home/hommss/kitchen-sink.png') }}" 
+                     alt="Modern Kitchen Sinks" 
+                     class="w-100 h-100 object-fit-cover">
+                
+                <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
+                    <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
+                        Premium Quality</h6>
+                    <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Modern</h2>
+                    <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Kitchen Sinks</h2>
+                    <a href="{{ route('shop.index') }}"
+                        class="btn btn-primary btn-lg px-5 py-3 fw-medium animate animate_fade animate_btt animate_delay-7">Shop Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 - Sanitary Ware -->
+        <div class="swiper-slide">
+            <div class="overflow-hidden position-relative h-100 bg-light">
+                <img loading="lazy" src="{{ asset('assets/images/home/hommss/sanitary-ware.png') }}" 
+                     alt="Elegant Sanitary Ware" 
+                     class="w-100 h-100 object-fit-cover">
+                <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
+                    <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
+                        Modern Design</h6>
+                    <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Elegant</h2>
+                    <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Sanitary Ware</h2>
+                    <a href="{{ route('shop.index') }}"
+                        class="btn btn-primary btn-lg px-5 py-3 fw-medium animate animate_fade animate_btt animate_delay-7">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation buttons -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    
+    <!-- Pagination dots -->
+    <div class="swiper-pagination"></div>
+</div>
 
         <div class="container">
             <div
@@ -84,7 +81,7 @@
             </div>
         </div>
     </section>
-    <div class="container mw-1620 bg-white border-radius-10">
+    <!-- <div class="container mw-1620 bg-white border-radius-10">
         <div class="mb-3 mb-xl-5 pt-1 pb-4"></div>
         <section class="category-carousel container">
             <h2 class="section-title text-center mb-3 pb-xl-2 mb-xl-4">You Might Like</h2>
@@ -915,9 +912,125 @@
                 <a class="btn-link btn-link_lg default-underline text-uppercase fw-medium" href="#">Load More</a>
             </div>
         </section>
-    </div>
+    </div> -->
 
     <div class="mb-3 mb-xl-5 pt-1 pb-4"></div>
 
 </main>
 @endsection
+
+@push('styles')
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<style>
+    /* Custom Slider Styles */
+    .home-slider {
+        width: 100%;
+        height: 100vh;
+        min-height: 600px;
+    }
+    
+    .swiper-slide {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .object-fit-cover {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+    
+    /* Navigation arrows */
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: white;
+        background: rgba(0,0,0,0.5);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        backdrop-filter: blur(2px);
+    }
+    
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+        font-size: 1.5rem;
+    }
+    
+    /* Pagination bullets */
+    .swiper-pagination-bullet {
+        width: 12px;
+        height: 12px;
+        background: white;
+        opacity: 0.6;
+    }
+    
+    .swiper-pagination-bullet-active {
+        background: #0056b3;
+        opacity: 1;
+    }
+    
+    /* Your existing animations */
+    .animate_fade { opacity: 0; transition: opacity 0.8s ease; }
+    .animate_fade.show { opacity: 1; }
+    
+    .animate_btt { transform: translateY(30px); transition: transform 0.8s ease; }
+    .animate_btt.show { transform: translateY(0); }
+    
+    /* Delay classes */
+    .animate_delay-3 { transition-delay: 0.3s; }
+    .animate_delay-5 { transition-delay: 0.5s; }
+    .animate_delay-7 { transition-delay: 0.7s; }
+    .animate_delay-9 { transition-delay: 0.9s; }
+    .animate_delay-10 { transition-delay: 1s; }
+</style>
+@endpush
+
+@push('scripts')
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const swiper = new Swiper('.home-slider', {
+            // Core parameters
+            loop: true,
+            speed: 1000,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            
+            // Navigation
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            
+            // Pagination
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            
+            // Animation triggers
+            on: {
+                init: function() {
+                    animateElements(this.slides[this.activeIndex]);
+                },
+                slideChange: function() {
+                    animateElements(this.slides[this.activeIndex]);
+                }
+            }
+        });
+        
+        function animateElements(slide) {
+            // Reset all animations
+            const elements = slide.querySelectorAll('.animate');
+            elements.forEach(el => el.classList.remove('show'));
+            
+            // Trigger animations with delay
+            setTimeout(() => {
+                elements.forEach(el => el.classList.add('show'));
+            }, 300);
+        }
+    });
+</script>
+@endpush
