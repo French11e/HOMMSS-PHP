@@ -523,9 +523,9 @@
                             <img src="{{ asset('assets/images/logo.png') }}" alt="SurfsideMedia" class="logo__image d-block" />
                         </a>
                     </div>
-                    <p class="footer-address">123 Beach Avenue, Surfside City, CA 00000</p>
-                    <p class="m-0"><strong class="fw-medium">contact@surfsidemedia.in</strong></p>
-                    <p><strong class="fw-medium">+1 000-000-0000</strong></p>
+                    <p class="footer-address">Blk1 Lot 1 Ph6 Glocal St., Sterling Industrial Park, Libtong, Meycauayan Bulacan, Philippines 3020</p>
+                    <p class="m-0"><strong class="fw-medium">hommss@gmail.com</strong></p>
+                    <p><strong class="fw-medium">+63 9000000000</strong></p>
 
                     <ul class="social-links list-unstyled d-flex flex-wrap mb-0">
                         <li>
@@ -583,7 +583,7 @@
                     </ul>
                 </div>
 
-                <div class="footer-column footer-menu mb-4 mb-lg-0">
+                <!-- <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Shop</h6>
                     <ul class="sub-menu__list list-unstyled">
                         <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">New Arrivals</a></li>
@@ -592,7 +592,7 @@
                         <li class="sub-menu__item"><a href="shop5.html" class="menu-link menu-link_us-s">Women</a></li>
                         <li class="sub-menu__item"><a href="shop1.html" class="menu-link menu-link_us-s">Shop All</a></li>
                     </ul>
-                </div>
+                </div> -->
 
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Help</h6>
@@ -607,7 +607,7 @@
                     </ul>
                 </div>
 
-                <div class="footer-column footer-menu mb-4 mb-lg-0">
+                <!-- <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Categories</h6>
                     <ul class="sub-menu__list list-unstyled">
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shirts</a></li>
@@ -616,13 +616,13 @@
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Bags</a></li>
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shop All</a></li>
                     </ul>
-                </div>
+                </div> -->
             </div>
         </div>
 
         <div class="footer-bottom">
             <div class="container d-md-flex align-items-center">
-                <span class="footer-copyright me-auto">©2024 Surfside Media</span>
+                <span class="footer-copyright me-auto">©2025 HOMMSS CORPORATION </span>
                 <div class="footer-settings d-md-flex align-items-center">
                     <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Terms &amp;
                         Conditions</a>
