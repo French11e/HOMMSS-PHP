@@ -335,7 +335,7 @@
                         xmlns="http://www.w3.org/2000/svg">
                         <use href="#icon_user" />
                     </svg>
-                    <span class="d-inline-block ms-2 text-uppercase align-middle fw-medium">My Account</span>
+                    <a href="{{ route('login') }}" class="d-inline-block ms-2 text-uppercase align-middle fw-medium">My Account</a>
                 </div>
 
 
@@ -598,7 +598,7 @@
                     <h6 class="sub-menu__title text-uppercase">Help</h6>
                     <ul class="sub-menu__list list-unstyled">
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Customer Service</a></li>
-                        <li class="sub-menu__item"><a href="account_dashboard.html" class="menu-link menu-link_us-s">My Account</a>
+                        <li class="sub-menu__item"><a href="{{route('login')}}" class="menu-link menu-link_us-s">My Account</a>
                         </li>
                         <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Find a Store</a>
                         </li>
