@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Surfsidemedia\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
@@ -45,5 +49,16 @@ class CartController extends Controller
     {
         Cart::instance('cart')->destroy();
         return redirect()->back();
+    }
+
+    public function checkout()
+    {
+        if(!Auth::check())
+        {
+            return redirect()->route('login');
+        }
+
+        $address = Address::where('user_id', Auth::user()->id)->where('isdefault')->first();
+        return view('checkout', compact('address'));
     }
 }

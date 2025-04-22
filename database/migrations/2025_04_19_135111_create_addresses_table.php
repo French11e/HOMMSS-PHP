@@ -13,22 +13,25 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned(); 
-            $table->string('name');
-            $table->string('phone');
-            $table->string('locality');
-            $table->text('address');
-            $table->string('city');
-            $table->string('state');
-            $table->string('country');
-            $table->string('landmark')->nullable();
-            $table->string('zip');
-            $table->string('type')->default('home');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+
+            $table->string('name');                // Full name
+            $table->string('phone');               // Mobile number
+            $table->string('postal');              // Postal code
+            $table->string('barangay');            // Barangay
+            $table->string('city');                // City / Municipality
+            $table->string('province');            // Province
+            $table->string('region');              // Region
+            $table->text('address');               // Street, Building, House No.
+            $table->string('landmark')->nullable(); // Landmark (optional)
+
+            $table->string('type')->default('home'); // Address type: home, work, etc.
             $table->boolean('isdefault')->default(false);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

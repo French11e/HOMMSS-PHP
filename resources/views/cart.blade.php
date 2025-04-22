@@ -99,10 +99,6 @@
           </tbody>
         </table>
         <div class="cart-table-footer">
-          <form action="#" class="position-relative bg-body">
-            <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code">
-            <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="APPLY COUPON">
-          </form>
           <form action="{{route('cart.empty')}}" method="POST">
             @csrf
             @method('DELETE')
@@ -137,7 +133,7 @@
           </div>
           <div class="mobile_fixed-btn_wrapper">
             <div class="button-wrapper container">
-              <a href="checkout.html" class="btn btn-primary btn-checkout">PROCEED TO CHECKOUT</a>
+              <a href="{{route('cart.checkout')}}" class="btn btn-primary btn-checkout">PROCEED TO CHECKOUT</a>
             </div>
           </div>
         </div>

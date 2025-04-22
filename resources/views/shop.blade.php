@@ -224,61 +224,57 @@
                     <div class="swiper-slide">
                         <div class="slide-split h-100 d-block d-md-flex overflow-hidden">
                             <div class="slide-split_text position-relative d-flex align-items-center"
-                                style="background-color: #f5e6e0;">
+                                style="background-color: #f0f5f7;">
                                 <div class="slideshow-text container p-3 p-xl-5">
-                                    <h2
-                                        class="text-uppercase section-title fw-normal mb-3 animate animate_fade animate_btt animate_delay-2">
-                                        Women's <br /><strong>ACCESSORIES</strong></h2>
-                                    <p class="mb-0 animate animate_fade animate_btt animate_delay-5">Accessories are the best way to
-                                        update your look. Add a title edge with new styles and new colors, or go for timeless pieces.</h6>
+                                    <h2 class="text-uppercase section-title fw-normal mb-3 animate animate_fade animate_btt animate_delay-2">
+                                        Premium <br /><strong>BATHROOM SOLUTIONS</strong></h2>
+                                    <p class="mb-0 animate animate_fade animate_btt animate_delay-5">Elevate your space with our premium collection of sanitary ware. Discover modern designs, durable materials, and timeless elegance for your bathroom sanctuary.</p>
                                 </div>
                             </div>
                             <div class="slide-split_media position-relative">
-                                <div class="slideshow-bg" style="background-color: #f5e6e0;">
-                                    <img loading="lazy" src="assets/images/shop/shop_banner3.jpg" width="630" height="450"
-                                        alt="Women's accessories" class="slideshow-bg__img object-fit-cover" />
+                                <div class="slideshow-bg" style="background-color: #f0f5f7;">
+                                    <img loading="lazy" src="assets/images/products/bathroom_collection.jpg" width="630" height="450"
+                                        alt="Premium bathroom sanitary wares" class="slideshow-bg__img object-fit-cover" />
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Additional slide for kitchen sinks -->
                     <div class="swiper-slide">
                         <div class="slide-split h-100 d-block d-md-flex overflow-hidden">
                             <div class="slide-split_text position-relative d-flex align-items-center"
-                                style="background-color: #f5e6e0;">
+                                style="background-color: #e8f4f8;">
                                 <div class="slideshow-text container p-3 p-xl-5">
-                                    <h2
-                                        class="text-uppercase section-title fw-normal mb-3 animate animate_fade animate_btt animate_delay-2">
-                                        Women's <br /><strong>ACCESSORIES</strong></h2>
-                                    <p class="mb-0 animate animate_fade animate_btt animate_delay-5">Accessories are the best way to
-                                        update your look. Add a title edge with new styles and new colors, or go for timeless pieces.</h6>
+                                    <h2 class="text-uppercase section-title fw-normal mb-3 animate animate_fade animate_btt animate_delay-2">
+                                        Luxury <br /><strong>KITCHEN SINKS</strong></h2>
+                                    <p class="mb-0 animate animate_fade animate_btt animate_delay-5">Transform your kitchen with our durable, stylish sinks. From stainless steel to granite composite, find the perfect centerpiece for your culinary space.</p>
                                 </div>
                             </div>
                             <div class="slide-split_media position-relative">
-                                <div class="slideshow-bg" style="background-color: #f5e6e0;">
-                                    <img loading="lazy" src="assets/images/shop/shop_banner3.jpg" width="630" height="450"
-                                        alt="Women's accessories" class="slideshow-bg__img object-fit-cover" />
+                                <div class="slideshow-bg" style="background-color: #e8f4f8;">
+                                    <img loading="lazy" src="assets/images/products/kitchen_sinks.jpg" width="630" height="450"
+                                        alt="Premium kitchen sinks collection" class="slideshow-bg__img object-fit-cover" />
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Additional slide for tiles -->
                     <div class="swiper-slide">
                         <div class="slide-split h-100 d-block d-md-flex overflow-hidden">
                             <div class="slide-split_text position-relative d-flex align-items-center"
-                                style="background-color: #f5e6e0;">
+                                style="background-color: #f5f0e6;">
                                 <div class="slideshow-text container p-3 p-xl-5">
-                                    <h2
-                                        class="text-uppercase section-title fw-normal mb-3 animate animate_fade animate_btt animate_delay-2">
-                                        Women's <br /><strong>ACCESSORIES</strong></h2>
-                                    <p class="mb-0 animate animate_fade animate_btt animate_delay-5">Accessories are the best way to
-                                        update your look. Add a title edge with new styles and new colors, or go for timeless pieces.</h6>
+                                    <h2 class="text-uppercase section-title fw-normal mb-3 animate animate_fade animate_btt animate_delay-2">
+                                        Elegant <br /><strong>TILE COLLECTIONS</strong></h2>
+                                    <p class="mb-0 animate animate_fade animate_btt animate_delay-5">Discover our exquisite range of tiles for every space. From ceramic to porcelain, create stunning floors and walls with our premium quality tiles.</p>
                                 </div>
                             </div>
                             <div class="slide-split_media position-relative">
-                                <div class="slideshow-bg" style="background-color: #f5e6e0;">
-                                    <img loading="lazy" src="assets/images/shop/shop_banner3.jpg" width="630" height="450"
-                                        alt="Women's accessories" class="slideshow-bg__img object-fit-cover" />
+                                <div class="slideshow-bg" style="background-color: #f5f0e6;">
+                                    <img loading="lazy" src="assets/images/products/tile_collection.jpg" width="630" height="450"
+                                        alt="Premium tile collections" class="slideshow-bg__img object-fit-cover" />
                                 </div>
                             </div>
                         </div>
@@ -460,12 +456,6 @@
     <input type="hidden" name="max" id="hdnMaxPrice" value="{{ $max_price }}" />
 </form>
 
-<select class="shop-acs__select form-select w-auto border-0 py-0 order-1 order-md-0" aria-label="Page Size" id="pagesize" name="pagesize">
-    <option value="12" {{ $size == 12 ? 'selected' : '' }}>Show</option>
-    <option value="24" {{ $size == 24 ? 'selected' : '' }}>24</option>
-    <option value="48" {{ $size == 48 ? 'selected' : '' }}>48</option>
-    <option value="102" {{ $size == 102 ? 'selected' : '' }}>102</option>
-</select>
 @endsection
 
 @push('scripts')
@@ -531,21 +521,20 @@
 
     // Add this to your scripts section
     $(document).on('submit', '.wishlist-remove-form', function(e) {
-    e.preventDefault();
+        e.preventDefault();
 
-    $.ajax({
-        type: 'POST',
-        url: $(this).attr('action'),
-        data: $(this).serialize(),
-        success: function(response) {
-            $('.wishlist-count').text(response.wishlist_count);
-            toastr.success(response.success || 'Removed from wishlist');
-        },
-        error: function() {
-            toastr.error('Failed to remove from wishlist');
-        }
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: function(response) {
+                $('.wishlist-count').text(response.wishlist_count);
+                toastr.success(response.success || 'Removed from wishlist');
+            },
+            error: function() {
+                toastr.error('Failed to remove from wishlist');
+            }
+        });
     });
-});
-
 </script>
 @endpush
