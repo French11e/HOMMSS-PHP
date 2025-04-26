@@ -1,5 +1,10 @@
 @extends('layouts.admin')
 @section('content')
+<style>
+    .table-transaction>tbody>tr:nth-of-type(odd) {
+        --bs-table-accent-bg: #fff !important;
+    }
+</style>
 <div class="main-content-inner">
     <div class="main-content-wrap">
         <div class="flex items-center flex-wrap justify-between gap20 mb-27">
@@ -60,6 +65,7 @@
             </div>
             <div class="divider"></div>
         </div>
+
         <div class="wg-box">
             <div class="flex items-center justify-between gap10 flex-wrap">
                 <div class="wg-filter flex-grow">
