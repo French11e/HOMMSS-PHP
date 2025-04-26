@@ -11,7 +11,7 @@ use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
-
+use Surfsidemedia\Shoppingcart\Facades\Cart;
 
 Auth::routes();
 
@@ -27,13 +27,15 @@ Route::delete('/cart/remove/{rowId}', [CartController::class, 'remove_item'])->n
 Route::delete('/cart/clear', [CartController::class, 'empty_cart'])->name('cart.empty');
 
 Route::post('/wishlist/add', [WishlistController::class, 'add_to_wishlist'])->name('wishlist.add');
-Route::get('/wishlist', [WishlistController::class,'index'])->name('wishlist.index');
+Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 Route::delete('/wishlist/item/remove/{rowId}', [WishlistController::class, 'remove_item'])->name('wishlist.item.remove');
 Route::delete('/wishlist/clear', [WishlistController::class, 'empty_wishlist'])->name('wishlist.items.clear');
-Route::post('/wishlist/move-to-cart/{rowId}', [WishlistController::class, 'move_to_cart'])->name('wishlist.move.to.cart'); 
+Route::post('/wishlist/move-to-cart/{rowId}', [WishlistController::class, 'move_to_cart'])->name('wishlist.move.to.cart');
 
 Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-    
+Route::post('/place-an-order', [CartController::class, 'place_an_order'])->name('cart.place.an.order');
+Route::get('/order-confirmation', [CartController::class, 'order_confirmation'])->name('cart.order.confirmation');
+
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->middleware('throttle:5,1');

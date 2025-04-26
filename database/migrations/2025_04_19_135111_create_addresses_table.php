@@ -15,17 +15,17 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
-            $table->string('name');                // Full name
-            $table->string('phone');               // Mobile number
-            $table->string('postal');              // Postal code
-            $table->string('barangay');            // Barangay
-            $table->string('city');                // City / Municipality
-            $table->string('province');            // Province
-            $table->string('region');              // Region
-            $table->text('address');               // Street, Building, House No.
-            $table->string('landmark')->nullable(); // Landmark (optional)
-
-            $table->string('type')->default('home'); // Address type: home, work, etc.
+            $table->string('name');
+            $table->string('phone');
+            $table->string('postal');
+            $table->string('barangay');
+            $table->string('city');
+            $table->string('province');
+            $table->string('region');
+            $table->string('country')->default('Philippines');
+            $table->text('address');
+            $table->string('landmark')->nullable();
+            $table->string('type')->default('home');
             $table->boolean('isdefault')->default(false);
 
             $table->timestamps();

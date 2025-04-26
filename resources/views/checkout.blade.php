@@ -27,7 +27,8 @@
                 </span>
             </a>
         </div>
-        <form name="checkout-form" action="">
+        <form name="checkout-form" action="{{route('cart.place.an.order')}}" method="POST">
+            @csrf
             <div class="checkout-form">
                 <div class="billing-info__wrapper">
                     <div class="row">
@@ -63,63 +64,63 @@
                             <div class="form-floating my-3">
                                 <input type="text" class="form-control" id="name" name="name" required value="{{ old('name') }}">
                                 <label for="name">Full Name *</label>
-                                @error('name')<span class="text-danger">{{$messsage}}</span>@enderror
+                                @error('name')<span class="text-danger">{{$message}}</span>@enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating my-3">
                                 <input type="text" class="form-control" id="phone" name="phone" required value="{{ old('phone') }}">
                                 <label for="phone">Mobile Number (e.g. 09XX-XXX-XXXX) *</label>
-                                @error('phone')<span class="text-danger">{{$messsage}}</span>@enderror
+                                @error('phone')<span class="text-danger">{{$message}}</span>@enderror
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating my-3">
                                 <input type="text" class="form-control" id="postal" name="postal" required value="{{ old('postal') }}">
                                 <label for="postal">Postal Code *</label>
-                                @error('postal')<span class="text-danger">{{$messsage}}</span>@enderror
+                                @error('postal')<span class="text-danger">{{$message}}</span>@enderror
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating mt-3 mb-3">
                                 <input type="text" class="form-control" id="barangay" name="barangay" required value="{{ old('barangay') }}">
                                 <label for="barangay">Barangay *</label>
-                                @error('barangay')<span class="text-danger">{{$messsage}}</span>@enderror
+                                @error('barangay')<span class="text-danger">{{$message}}</span>@enderror
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating my-3">
                                 <input type="text" class="form-control" id="city" name="city" required value="{{ old('city') }}">
                                 <label for="city">City / Municipality *</label>
-                                @error('city')<span class="text-danger">{{$messsage}}</span>@enderror
+                                @error('city')<span class="text-danger">{{$message}}</span>@enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating my-3">
                                 <input type="text" class="form-control" id="province" name="province" required value="{{ old('province') }}">
                                 <label for="province">Province *</label>
-                                @error('province')<span class="text-danger">{{$messsage}}</span>@enderror
+                                @error('province')<span class="text-danger">{{$message}}</span>@enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating my-3">
                                 <input type="text" class="form-control" id="region" name="region" required value="{{ old('region') }}">
                                 <label for="region">Region *</label>
-                                @error('region')<span class="text-danger">{{$messsage}}</span>@enderror
+                                @error('region')<span class="text-danger">{{$message}}</span>@enderror
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-floating my-3">
                                 <input type="text" class="form-control" id="address" name="address" required value="{{ old('address') }}">
                                 <label for="address">Street, Building, House No. *</label>
-                                @error('address')<span class="text-danger">{{$messsage}}</span>@enderror
+                                @error('address')<span class="text-danger">{{$message}}</span>@enderror
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-floating my-3">
                                 <input type="text" class="form-control" id="landmark" name="landmark" required value="{{ old('landmark') }}">
                                 <label for="landmark">Nearest Landmark *</label>
-                                @error('landmark')<span class="text-danger">{{$messsage}}</span>@enderror
+                                @error('landmark')<span class="text-danger">{{$message}}</span>@enderror
                             </div>
                         </div>
                     </div>
@@ -147,7 +148,7 @@
                                             ₱{{$item->subtotal}}
                                         </td>
                                     </tr>
-                                    @endforeach                                
+                                    @endforeach
                                 </tbody>
                             </table>
                             <table class="checkout-totals">
@@ -173,50 +174,21 @@
                         </div>
                         <div class="checkout__payment-methods">
                             <div class="form-check">
-                                <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                                    id="checkout_payment_method_1" checked>
-                                <label class="form-check-label" for="checkout_payment_method_1">
-                                    Direct bank transfer
-                                    <p class="option-detail">
-                                        Make your payment directly into our bank account. Please use your Order ID as the payment
-                                        reference.Your order will not be shipped until the funds have cleared in our account.
-                                    </p>
+                                <input class="form-check-input form-check-input_fill" type="radio" name="mode " id="mode1" value="card">
+                                <label class="form-check-label" for="mode1">
+                                    Debit or Credit Card
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                                    id="checkout_payment_method_2">
-                                <label class="form-check-label" for="checkout_payment_method_2">
-                                    Check payments
-                                    <p class="option-detail">
-                                        Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
-                                        aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra nunc, ut aliquet
-                                        magna posuere eget.
-                                    </p>
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                                    id="checkout_payment_method_3">
-                                <label class="form-check-label" for="checkout_payment_method_3">
-                                    Cash on delivery
-                                    <p class="option-detail">
-                                        Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
-                                        aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra nunc, ut aliquet
-                                        magna posuere eget.
-                                    </p>
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input form-check-input_fill" type="radio" name="checkout_payment_method"
-                                    id="checkout_payment_method_4">
-                                <label class="form-check-label" for="checkout_payment_method_4">
+                                <input class="form-check-input form-check-input_fill" type="radio" name="mode" id="mode2" value="paypal">
+                                <label class="form-check-label" for="mode2">
                                     Paypal
-                                    <p class="option-detail">
-                                        Phasellus sed volutpat orci. Fusce eget lore mauris vehicula elementum gravida nec dui. Aenean
-                                        aliquam varius ipsum, non ultricies tellus sodales eu. Donec dignissim viverra nunc, ut aliquet
-                                        magna posuere eget.
-                                    </p>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input form-check-input_fill" type="radio" name="mode" id="mode3" value="cod">
+                                <label class="form-check-label" for="mode3">
+                                    Cash on delivery
                                 </label>
                             </div>
                             <div class="policy-text">
