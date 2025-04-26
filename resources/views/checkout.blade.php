@@ -174,7 +174,7 @@
                         </div>
                         <div class="checkout__payment-methods">
                             <div class="form-check">
-                                <input class="form-check-input form-check-input_fill" type="radio" name="mode " id="mode1" value="card">
+                                <input class="form-check-input form-check-input_fill" type="radio" name="mode" id="mode1" value="card">
                                 <label class="form-check-label" for="mode1">
                                     Debit or Credit Card
                                 </label>
@@ -193,10 +193,10 @@
                             </div>
                             <div class="policy-text">
                                 Your personal data will be used to process your order, support your experience throughout this
-                                website, and for other purposes described in our <a href="terms.html" target="_blank">privacy
-                                    policy</a>.
+                                website, and for other purposes described in our <a href="terms.html" target="_blank">privacy policy</a>.
                             </div>
                         </div>
+
                         <button class="btn btn-primary btn-checkout">PLACE ORDER</button>
                     </div>
                 </div>

@@ -143,20 +143,26 @@
                         <th>Tax</th>
                         <td>₱{{$order->tax}}</td>
                         <!-- <th>Discount</th>
-                        <td>0.00</td> -->
+                <td>0.00</td> -->
                     </tr>
                     <tr>
                         <th>Total</th>
                         <td>₱{{$order->total}}</td>
                         <th>Payment Mode</th>
-                        <td>{{$transaction->mode}}</td>
+                        <td>
+                            @if($transaction)
+                            {{$transaction->mode}}
+                            @else
+                            Not available
+                            @endif
+                        </td>
                         <th>Status</th>
                         <td>
-                            @if($transaction->status == 'approved')
+                            @if($transaction && $transaction->status == 'approved')
                             <span class="badge bg-success">Approved</span>
-                            @elseif($transaction->status == 'declined')
+                            @elseif($transaction && $transaction->status == 'declined')
                             <span class="badge bg-danger">Declined</span>
-                            @elseif($transaction->status == 'refunded')
+                            @elseif($transaction && $transaction->status == 'refunded')
                             <span class="badge secondary">Refunded</span>
                             @else
                             <span class="badge bg-warning">Pending</span>
@@ -166,6 +172,7 @@
                 </tbody>
             </table>
         </div>
+
     </div>
 </div>
 @endsection

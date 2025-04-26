@@ -53,7 +53,7 @@
                 </div>
                 <div class="order-info__item">
                     <label>Payment Method</label>
-                    <span>{{$order->transaction->mode}}</span>
+                    <span>{{ $order->transaction ? $order->transaction->mode : 'Not available' }}</span>
                 </div>
             </div>
             <div class="checkout__totals-wrapper">
