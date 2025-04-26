@@ -132,7 +132,7 @@ class CartController extends Controller
             //
         } elseif ($request->mode == 'card') {
             //
-        } elseif ($request->mode == 'cod') {
+        } elseif ($request->mode == 'Cash on Delivery') {
             $transaction = new Transaction();
             $transaction->user_id = $user_id;
             $transaction->order_id = $order->id;
