@@ -42,10 +42,12 @@ class RegisterController extends Controller
             'password' => [
                 'required',
                 'string',
-                'min:16',
+                'min:12',
                 'confirmed',
-                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{16,}$/'
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.]).{12,}$/', // Updated regex
             ],
+
+
             'honeypot' => ['present', 'max:0']
         ], [
             'password.regex' => 'The password must contain at least: 1 uppercase, 1 lowercase, 1 number and 1 special character',

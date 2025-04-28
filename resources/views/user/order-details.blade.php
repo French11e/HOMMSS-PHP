@@ -313,8 +313,46 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="wg-box mt-5 text-right">
+                    <form action="{{route('user.order.cancel')}}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="order_id" value="{{$order->id}}">
+                        <!-- Changed button type to submit -->
+                        <button type="submit" class="btn btn-danger cancel-order">Cancel Order</button>
+                    </form>
+                </div>
+
+
             </div>
         </div>
     </section>
 </main>
 @endsection
+
+@push('scripts')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    $(function() {
+        // The confirmation is still triggered by the cancel-order button
+        $('.cancel-order').on('click', function(e) {
+            e.preventDefault(); // Prevent the default form submit behavior
+            var form = $(this).closest('form');
+
+            swal({
+                title: "Are you sure?",
+                text: "You want to cancel this order?",
+                icon: "warning",
+                buttons: ["No", "Yes"],
+                dangerMode: true,
+            }).then(function(result) {
+                if (result) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
+@endpush

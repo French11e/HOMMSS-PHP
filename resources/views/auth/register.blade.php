@@ -65,12 +65,13 @@
                                     placeholder="Enter a strong password"
                                     required autocomplete="new-password">
                                 <div class="form-text">
-                                    Must be 16+ characters and include uppercase, lowercase, number, and special character.
+                                    Must be 12+ characters and include uppercase, lowercase, number, and special character.
                                 </div>
                                 @error('password')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+
 
                             <div class="mb-3">
                                 <label for="password-confirm" class="form-label">Confirm Password</label>

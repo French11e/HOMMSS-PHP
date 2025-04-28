@@ -142,7 +142,7 @@
                                         @elseif($order->status == 'canceled')
                                         <span class="badge bg-danger">Canceled</span>
                                         @else
-                                        <span class="badge bg-warning">{{ucfirst($order->status)}}</span>
+                                        <span class="badge bg-warning">Ordered</span>
                                         @endif
                                     </td>
                                     <td class="text-center">{{$order->created_at}}</td>
