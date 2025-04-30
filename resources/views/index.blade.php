@@ -10,70 +10,70 @@
         "effect": "fade",
         "loop": true
       }'>
-      <div class="swiper-container home-slider">
-    <div class="swiper-wrapper">
-        <!-- Slide 1 - Tiles -->
-        <div class="swiper-slide">
-            <div class="overflow-hidden position-relative h-100 bg-light">
-                <img loading="lazy" src="{{ asset('assets/images/home/hommss/wall-tiles.png') }}" 
-                     alt="Premium Tiles Collection" 
-                     class="w-100 h-100 object-fit-cover"
-                     style="object-position: center 30%;">
-                
-                <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
-                    <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-                        New Collection</h6>
-                    <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Luxury</h2>
-                    <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Wall Tiles</h2>
-                    <a href="{{ route('shop.index') }}"
-                        class="btn btn-primary btn-lg px-5 py-3 fw-medium animate animate_fade animate_btt animate_delay-7">Shop Now</a>
+        <div class="swiper-container home-slider">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 - Tiles -->
+                <div class="swiper-slide">
+                    <div class="overflow-hidden position-relative h-100 bg-light">
+                        <img loading="lazy" src="{{ asset('assets/images/home/hommss/wall-tiles.png') }}"
+                            alt="Premium Tiles Collection"
+                            class="w-100 h-100 object-fit-cover"
+                            style="object-position: center 30%;">
+
+                        <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
+                            <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
+                                New Collection</h6>
+                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Luxury</h2>
+                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Wall Tiles</h2>
+                            <a href="{{ route('shop.index') }}"
+                                class="btn btn-primary btn-lg px-5 py-3 fw-medium animate animate_fade animate_btt animate_delay-7">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 - Kitchen Sinks -->
+                <div class="swiper-slide">
+                    <div class="overflow-hidden position-relative h-100 bg-light">
+                        <img loading="lazy" src="{{ asset('assets/images/home/hommss/kitchen-sink.png') }}"
+                            alt="Modern Kitchen Sinks"
+                            class="w-100 h-100 object-fit-cover">
+
+                        <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
+                            <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
+                                Premium Quality</h6>
+                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Modern</h2>
+                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Kitchen Sinks</h2>
+                            <a href="{{ route('shop.index') }}"
+                                class="btn btn-primary btn-lg px-5 py-3 fw-medium animate animate_fade animate_btt animate_delay-7">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 - Sanitary Ware -->
+                <div class="swiper-slide">
+                    <div class="overflow-hidden position-relative h-100 bg-light">
+                        <img loading="lazy" src="{{ asset('assets/images/home/hommss/sanitary-ware.png') }}"
+                            alt="Elegant Sanitary Ware"
+                            class="w-100 h-100 object-fit-cover">
+                        <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
+                            <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
+                                Modern Design</h6>
+                            <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Elegant</h2>
+                            <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Sanitary Ware</h2>
+                            <a href="{{ route('shop.index') }}"
+                                class="btn btn-primary btn-lg px-5 py-3 fw-medium animate animate_fade animate_btt animate_delay-7">Shop Now</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Slide 2 - Kitchen Sinks -->
-        <div class="swiper-slide">
-            <div class="overflow-hidden position-relative h-100 bg-light">
-                <img loading="lazy" src="{{ asset('assets/images/home/hommss/kitchen-sink.png') }}" 
-                     alt="Modern Kitchen Sinks" 
-                     class="w-100 h-100 object-fit-cover">
-                
-                <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
-                    <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-                        Premium Quality</h6>
-                    <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Modern</h2>
-                    <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Kitchen Sinks</h2>
-                    <a href="{{ route('shop.index') }}"
-                        class="btn btn-primary btn-lg px-5 py-3 fw-medium animate animate_fade animate_btt animate_delay-7">Shop Now</a>
-                </div>
-            </div>
-        </div>
+            <!-- Navigation buttons -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
 
-        <!-- Slide 3 - Sanitary Ware -->
-        <div class="swiper-slide">
-            <div class="overflow-hidden position-relative h-100 bg-light">
-                <img loading="lazy" src="{{ asset('assets/images/home/hommss/sanitary-ware.png') }}" 
-                     alt="Elegant Sanitary Ware" 
-                     class="w-100 h-100 object-fit-cover">
-                <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
-                    <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-                        Modern Design</h6>
-                    <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Elegant</h2>
-                    <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Sanitary Ware</h2>
-                    <a href="{{ route('shop.index') }}"
-                        class="btn btn-primary btn-lg px-5 py-3 fw-medium animate animate_fade animate_btt animate_delay-7">Shop Now</a>
-                </div>
-            </div>
+            <!-- Pagination dots -->
+            <div class="swiper-pagination"></div>
         </div>
-    </div>
-
-    <!-- Navigation buttons -->
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-    
-    <!-- Pagination dots -->
-    <div class="swiper-pagination"></div>
-</div>
 
         <div class="container">
             <div
@@ -182,29 +182,16 @@
                             </div>
                         </div>
                     </div><!-- /.swiper-wrapper -->
-                </div><!-- /.swiper-container js-swiper-slider -->
+    </div><!-- /.swiper-container js-swiper-slider -->
+    </div><!-- /.position-relative -->
+    </section>
 
-                <div
-                    class="products-carousel__prev products-carousel__prev-1 position-absolute top-50 d-flex align-items-center justify-content-center">
-                    <svg width="25" height="25" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_prev_md" />
-                    </svg>
-                </div><!-- /.products-carousel__prev -->
-                <div
-                    class="products-carousel__next products-carousel__next-1 position-absolute top-50 d-flex align-items-center justify-content-center">
-                    <svg width="25" height="25" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_next_md" />
-                    </svg>
-                </div><!-- /.products-carousel__next -->
-            </div><!-- /.position-relative -->
-        </section>
+    <div class="mb-3 mb-xl-5 pt-1 pb-4"></div>
 
-        <div class="mb-3 mb-xl-5 pt-1 pb-4"></div>
-
-        <!-- Balik dito from Index1.blade.php -->
+    <!-- Balik dito from Index1.blade.php -->
 
 
-    </div> 
+    </div>
 
     <div class="mb-3 mb-xl-5 pt-1 pb-4"></div>
 
@@ -220,34 +207,34 @@
         height: 100vh;
         min-height: 600px;
     }
-    
+
     .swiper-slide {
         position: relative;
         overflow: hidden;
     }
-    
+
     .object-fit-cover {
         object-fit: cover;
         width: 100%;
         height: 100%;
     }
-    
+
     /* Navigation arrows */
     .swiper-button-next,
     .swiper-button-prev {
         color: white;
-        background: rgba(0,0,0,0.5);
+        background: rgba(0, 0, 0, 0.5);
         width: 50px;
         height: 50px;
         border-radius: 50%;
         backdrop-filter: blur(2px);
     }
-    
+
     .swiper-button-next:after,
     .swiper-button-prev:after {
         font-size: 1.5rem;
     }
-    
+
     /* Pagination bullets */
     .swiper-pagination-bullet {
         width: 12px;
@@ -255,25 +242,51 @@
         background: white;
         opacity: 0.6;
     }
-    
+
     .swiper-pagination-bullet-active {
         background: #0056b3;
         opacity: 1;
     }
-    
+
     /* Your existing animations */
-    .animate_fade { opacity: 0; transition: opacity 0.8s ease; }
-    .animate_fade.show { opacity: 1; }
-    
-    .animate_btt { transform: translateY(30px); transition: transform 0.8s ease; }
-    .animate_btt.show { transform: translateY(0); }
-    
+    .animate_fade {
+        opacity: 0;
+        transition: opacity 0.8s ease;
+    }
+
+    .animate_fade.show {
+        opacity: 1;
+    }
+
+    .animate_btt {
+        transform: translateY(30px);
+        transition: transform 0.8s ease;
+    }
+
+    .animate_btt.show {
+        transform: translateY(0);
+    }
+
     /* Delay classes */
-    .animate_delay-3 { transition-delay: 0.3s; }
-    .animate_delay-5 { transition-delay: 0.5s; }
-    .animate_delay-7 { transition-delay: 0.7s; }
-    .animate_delay-9 { transition-delay: 0.9s; }
-    .animate_delay-10 { transition-delay: 1s; }
+    .animate_delay-3 {
+        transition-delay: 0.3s;
+    }
+
+    .animate_delay-5 {
+        transition-delay: 0.5s;
+    }
+
+    .animate_delay-7 {
+        transition-delay: 0.7s;
+    }
+
+    .animate_delay-9 {
+        transition-delay: 0.9s;
+    }
+
+    .animate_delay-10 {
+        transition-delay: 1s;
+    }
 </style>
 @endpush
 
@@ -289,19 +302,19 @@
                 delay: 5000,
                 disableOnInteraction: false,
             },
-            
+
             // Navigation
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
-            
+
             // Pagination
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
             },
-            
+
             // Animation triggers
             on: {
                 init: function() {
@@ -312,12 +325,12 @@
                 }
             }
         });
-        
+
         function animateElements(slide) {
             // Reset all animations
             const elements = slide.querySelectorAll('.animate');
             elements.forEach(el => el.classList.remove('show'));
-            
+
             // Trigger animations with delay
             setTimeout(() => {
                 elements.forEach(el => el.classList.add('show'));
