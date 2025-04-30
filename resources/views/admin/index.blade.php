@@ -201,48 +201,7 @@
                 </div>
                 <div class="wg-table table-all-user">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th style="width: 80px">OrderNo</th>
-                                    <th>Name</th>
-                                    <th class="text-center">Phone</th>
-                                    <th class="text-center">Subtotal</th>
-                                    <th class="text-center">Tax</th>
-                                    <th class="text-center">Total</th>
-
-                                    <th class="text-center">Status</th>
-                                    <th class="text-center">Order Date</th>
-                                    <th class="text-center">Total Items</th>
-                                    <th class="text-center">Delivered On</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td class="text-center">Divyansh Kumar</td>
-                                    <td class="text-center">1234567891</td>
-                                    <td class="text-center">$172.00</td>
-                                    <td class="text-center">$36.12</td>
-                                    <td class="text-center">$208.12</td>
-
-                                    <td class="text-center">ordered</td>
-                                    <td class="text-center">2024-07-11 00:54:14</td>
-                                    <td class="text-center">2</td>
-                                    <td></td>
-                                    <td class="text-center">
-                                        <a href="#">
-                                            <div class="list-icon-function view-icon">
-                                                <div class="item eye">
-                                                    <i class="icon-eye"></i>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        HOMMSS-PHP/resources/views/admin/orders.blade.php
                     </div>
                 </div>
             </div>
