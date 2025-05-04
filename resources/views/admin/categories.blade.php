@@ -62,7 +62,7 @@
                                         <a href="#" class="body-title-2">{{$category->name}}</a>
                                     </div>
                                 </td>
-                                <td>{$category->slug}</td>
+                                <td>{{$category->slug}}</td>
                                 <td><a href="#" target="_blank">0</a></td>
                                 <td>
                                     <div class="list-icon-function">
