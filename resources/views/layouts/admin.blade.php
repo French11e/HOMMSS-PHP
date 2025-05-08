@@ -202,7 +202,7 @@
                                     <div class="button-submit">
                                         <button class="" type="submit"><i class="icon-search"></i></button>
                                     </div>
-                                    <div class="box-content-search" id="box-content-search">
+                                    <!-- <div class="box-content-search" id="box-content-search">
                                         <ul class="mb-24">
                                             <li class="mb-14">
                                                 <div class="body-title">Top selling product</div>
@@ -319,7 +319,7 @@
                                                 </ul>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div> -->
                                 </form>
 
                             </div>
@@ -339,7 +339,7 @@
                                             <li>
                                                 <h6>Notifications</h6>
                                             </li>
-                                            <li>
+                                            <!-- <li>
                                                 <div class="message-item item-1">
                                                     <div class="image">
                                                         <i class="icon-noti-1"></i>
@@ -386,7 +386,7 @@
                                                         <div class="text-tiny">Ultricies at rhoncus at ullamcorper</div>
                                                     </div>
                                                 </div>
-                                            </li>
+                                            </li> -->
                                             <li><a href="#" class="tf-button w-full">View all</a></li>
                                         </ul>
                                     </div>
@@ -401,10 +401,10 @@
                                             id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="header-user wg-user">
                                                 <span class="image">
-                                                    <img src="images/avatar/user-1.png" alt="">
+                                                    <img src="https://www.pngall.com/wp-content/uploads/5/Profile.png" alt="">
                                                 </span>
                                                 <span class="flex flex-column">
-                                                    <span class="body-title mb-2">Kristin Watson</span>
+                                                    <span class="body-title mb-2">Rommel Calpe</span>
                                                     <span class="text-tiny">Admin</span>
                                                 </span>
                                             </span>
@@ -445,12 +445,15 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="login.html" class="user-item">
+                                                <a href="{{ route('logout') }}" class="user-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                     <div class="icon">
                                                         <i class="icon-log-out"></i>
                                                     </div>
                                                     <div class="body-title-2">Log out</div>
                                                 </a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
                                             </li>
                                         </ul>
                                     </div>

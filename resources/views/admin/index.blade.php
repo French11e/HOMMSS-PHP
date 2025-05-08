@@ -194,14 +194,55 @@
                 <div class="flex items-center justify-between">
                     <h5>Recent orders</h5>
                     <div class="dropdown default">
-                        <a class="btn btn-secondary dropdown-toggle" href="#">
+                        <a class="btn btn-secondary dropdown-toggle" href="{{route('admin.orders')}}">
                             <span class="view-all">View all</span>
                         </a>
                     </div>
                 </div>
                 <div class="wg-table table-all-user">
                     <div class="table-responsive">
-                        HOMMSS-PHP/resources/views/admin/orders.blade.php
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width:70px">OrderNo</th>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Phone</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Order Date</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($orders as $order)
+                                <tr>
+                                    <td class="text-center">{{$order->id}}</td>
+                                    <td class="text-center">{{$order->name}}</td>
+                                    <td class="text-center">{{$order->phone}}</td>
+                                    <td class="text-center">₱{{$order->total}}</td>
+                                    <td class="text-center">
+                                        @if($order->status == 'delivered')
+                                        <span class="badge bg-success">Delivered</span>
+                                        @elseif($order->status == 'canceled')
+                                        <span class="badge bg-danger">Canceled</span>
+                                        @else
+                                        <span class="badge bg-warning">Ordered</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">{{$order->created_at}}</td>
+                                    <td class="text-center">
+                                        <a href="{{route('admin.order.details', ['order_id' => $order->id])}}">
+                                            <div class="list-icon-function view-icon">
+                                                <div class="item eye">
+                                                    <i class="icon-eye"></i>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
