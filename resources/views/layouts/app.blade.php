@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/style.css') }}" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.min.css') }}">
     <link rel="stylesheet" href="{{asset('assets/css/custom.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{asset('assets/css/lazy-loading.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -152,7 +153,17 @@
         </symbol>
         <symbol id="icon_shipping" viewBox="0 0 52 52">
             <path
-                d="M47.125 43.875H43.875V21.125C43.875 20.2276 43.1475 19.5 42.25 19.5H33.3125H25.1875H17.875V7.3125C17.875 5.36027 17.1146 3.52402 15.7328 2.14104C14.3509 0.760398 12.5146 0 10.5625 0C6.53037 0 3.25 3.28037 3.25 7.3125C3.25 8.20991 3.97749 8.9375 4.875 8.9375C5.77251 8.9375 6.5 8.20991 6.5 7.3125C6.5 5.07244 8.32244 3.25 10.5625 3.25C11.6472 3.25 12.6676 3.6727 13.4347 4.43909C14.2023 5.20731 14.625 6.22781 14.625 7.3125V21.125V39.2057C11.8246 39.9291 9.75 42.4768 9.75 45.5C9.75 49.0841 12.6659 52 16.25 52C19.2732 52 21.8209 49.9254 22.5443 47.125H42.25H47.125C48.0225 47.125 48.75 46.3974 48.75 45.5C48.75 44.6026 48.0225 43.875 47.125 43.875ZM31.6875 22.75V26H26.8125V22.75H31.6875ZM16.25 48.75C14.4579 48.75 13 47.2921 13 45.5C13 43.7079 14.4579 42.25 16.25 42.25C18.0421 42.25 19.5 43.7079 19.5 45.5C19.5 47.2921 18.0421 48.75 16.25 48.75ZM22.5443 43.875C21.9552 41.5942 20.1558 39.7948 17.875 39.2057V22.75H23.5625V27.625C23.5625 28.5224 24.29 29.25 25.1875 29.25H33.3125C34.21 29.25 34.9375 28.5224 34.9375 27.625V22.75H40.625V43.875H22.5443Z"
+                d="M19.017 13.3923L7.77464 24.631C7.28133 25.123 6.48209 25.123 5.98753 24.631C5.49423 24.1389 5.49423 23.3397 5.98753 22.8476L16.3382 12.5007L5.98878 2.15376C5.49547 1.66169 5.49547 0.862455 5.98878 0.369148C6.48209 -0.122915 7.28257 -0.122915 7.77588 0.369148L19.0183 11.6078C19.5041 12.0948 19.5041 12.9066 19.017 13.3923Z"
+                fill="currentColor" />
+        </symbol>
+        <symbol id="icon_prev_md" viewBox="0 0 25 25">
+            <path
+                d="M5.98293 11.6078L17.2253 0.369152C17.7186 -0.12291 18.5179 -0.12291 19.0124 0.369152C19.5057 0.861216 19.5057 1.66045 19.0124 2.15252L8.66176 12.4994L19.0112 22.8463C19.5045 23.3384 19.5045 24.1376 19.0112 24.631C18.5179 25.123 17.7174 25.123 17.2241 24.631L5.98168 13.3924C5.49595 12.9054 5.49595 12.0936 5.98293 11.6078Z"
+                fill="currentColor" />
+        </symbol>
+        <symbol id="icon_shield" viewBox="0 0 52 52">
+            <g clip-path="
+                d=" M47.125 43.875H43.875V21.125C43.875 20.2276 43.1475 19.5 42.25 19.5H33.3125H25.1875H17.875V7.3125C17.875 5.36027 17.1146 3.52402 15.7328 2.14104C14.3509 0.760398 12.5146 0 10.5625 0C6.53037 0 3.25 3.28037 3.25 7.3125C3.25 8.20991 3.97749 8.9375 4.875 8.9375C5.77251 8.9375 6.5 8.20991 6.5 7.3125C6.5 5.07244 8.32244 3.25 10.5625 3.25C11.6472 3.25 12.6676 3.6727 13.4347 4.43909C14.2023 5.20731 14.625 6.22781 14.625 7.3125V21.125V39.2057C11.8246 39.9291 9.75 42.4768 9.75 45.5C9.75 49.0841 12.6659 52 16.25 52C19.2732 52 21.8209 49.9254 22.5443 47.125H42.25H47.125C48.0225 47.125 48.75 46.3974 48.75 45.5C48.75 44.6026 48.0225 43.875 47.125 43.875ZM31.6875 22.75V26H26.8125V22.75H31.6875ZM16.25 48.75C14.4579 48.75 13 47.2921 13 45.5C13 43.7079 14.4579 42.25 16.25 42.25C18.0421 42.25 19.5 43.7079 19.5 45.5C19.5 47.2921 18.0421 48.75 16.25 48.75ZM22.5443 43.875C21.9552 41.5942 20.1558 39.7948 17.875 39.2057V22.75H23.5625V27.625C23.5625 28.5224 24.29 29.25 25.1875 29.25H33.3125C34.21 29.25 34.9375 28.5224 34.9375 27.625V22.75H40.625V43.875H22.5443Z"
                 fill="currentColor" />
         </symbol>
         <symbol id="icon_home" viewBox="0 0 18 18">
@@ -261,6 +272,52 @@
 
         .logo__image {
             max-width: 220px;
+        }
+
+        .search-result-link {
+            color: #1d4ed8;
+            /* Tailwind's blue-700 */
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .search-result-link:hover {
+            text-decoration: underline;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            border-bottom: 1px solid #e5e7eb;
+            transition: background 0.2s;
+        }
+
+        .search-result-item:hover {
+            background-color: #f9fafb;
+        }
+
+        .search-result-image img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .search-result-text {
+            flex-grow: 1;
+        }
+
+        .search-result-link {
+            color: #1d4ed8;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .search-result-link:hover {
+            text-decoration: underline;
         }
     </style>
     <div class="header-mobile header_sticky">
@@ -434,8 +491,7 @@
                             <form action="#" method="GET" class="search-field container">
                                 <p class="text-uppercase text-secondary fw-medium mb-4">What are you looking for?</p>
                                 <div class="position-relative">
-                                    <input class="search-field__input search-popup__input w-100 fw-medium" type="text"
-                                        name="search-keyword" placeholder="Search products" />
+                                    <input class="search-field__input search-popup__input w-100 fw-medium" type="text" name="search-keyword" id="search-input" placeholder="Search products" />
                                     <button class="btn-icon search-popup__submit" type="submit">
                                         <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -446,20 +502,8 @@
                                 </div>
 
                                 <div class="search-popup__results">
-                                    <div class="sub-menu search-suggestion">
-                                        <h6 class="sub-menu__title fs-base">Quicklinks</h6>
-                                        <ul class="sub-menu__list list-unstyled">
-                                            <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">New Arrivals</a>
-                                            </li>
-                                            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Dresses</a></li>
-                                            <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Accessories</a>
-                                            </li>
-                                            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Footwear</a></li>
-                                            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Sweatshirt</a></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="search-result row row-cols-5"></div>
+                                    <ul id="box-content-search">
+                                    </ul>
                                 </div>
                             </form>
                         </div>
@@ -679,8 +723,63 @@
     <script src="{{ asset('js/sweetalert.min.js') }}"></script>
     <script src="{{asset ('assets/js/plugins/swiper.min.js') }}"></script>
     <script src="{{asset ('assets/js/plugins/countdown.js') }}"></script>
+    <script src="{{asset ('assets/js/lazy-loading.js') }}"></script>
+    <script>
+        $("#search-input").on("keyup", function() {
+            var searchQuery = $(this).val();
+            if (searchQuery.length > 2) {
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('home.search') }}",
+                    data: {
+                        query: searchQuery
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        $("#box-content-search").html('');
+                        $.each(data, function(index, item) {
+                            var link = "/product/" + item.slug; // adjust if route differs
+                            $("#box-content-search").append(`
+                            <li>
+                                <ul>
+                                    <li class="product-item gap14 mb-10">
+                                        <div class="image no-bg">
+                                            <img src="{{ asset('uploads/products/thumbnails') }}/${item.image}" alt="${item.name}">
+                                        </div>
+                                        <div class="flex items-center justify-between gap20 flex-grow">
+                                            <div class="name">
+                                                <a href="${link}" class="body-text">${item.name}</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="mb-10">
+                                        <div class="divider"></div>
+                                    </li>
+                                </ul>
+                            </li>
+                        `);
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+
     <script src="{{asset ('assets/js/theme.js') }}"></script>
     @stack('scripts')
+    <script>
+        // Simple lazy loading that won't break existing images
+        document.addEventListener("DOMContentLoaded", function() {
+            // Use native lazy loading which is already in your HTML
+            // This script is just for browsers that don't support it
+            if (!('loading' in HTMLImageElement.prototype)) {
+                const images = document.querySelectorAll('img[loading="lazy"]');
+                images.forEach(img => {
+                    img.setAttribute('loading', 'eager');
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

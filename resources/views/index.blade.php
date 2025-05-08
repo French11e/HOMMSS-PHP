@@ -34,9 +34,7 @@
                 <!-- Slide 2 - Kitchen Sinks -->
                 <div class="swiper-slide">
                     <div class="overflow-hidden position-relative h-100 bg-light">
-                        <img loading="lazy" src="{{ asset('assets/images/home/hommss/kitchen-sink.png') }}"
-                            alt="Modern Kitchen Sinks"
-                            class="w-100 h-100 object-fit-cover">
+                        <img loading="lazy" src="{{ asset('assets/images/home/hommss/kitchen-sink.png') }}" alt="Modern Kitchen Sinks" class="w-100 h-100 object-fit-cover">
 
                         <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
                             <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
@@ -302,19 +300,21 @@
                 delay: 5000,
                 disableOnInteraction: false,
             },
-
+            // Add lazy loading
+            lazy: {
+                loadPrevNext: true,
+                loadPrevNextAmount: 2,
+            },
             // Navigation
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
-
             // Pagination
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
             },
-
             // Animation triggers
             on: {
                 init: function() {
