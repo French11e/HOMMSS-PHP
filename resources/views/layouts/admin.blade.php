@@ -404,7 +404,7 @@
                                                     <img src="https://www.pngall.com/wp-content/uploads/5/Profile.png" alt="">
                                                 </span>
                                                 <span class="flex flex-column">
-                                                    <span class="body-title mb-2">Rommel Calpe</span>
+                                                    <span class="body-title mb-2">{{ Auth::user()->name }}</span>
                                                     <span class="text-tiny">Admin</span>
                                                 </span>
                                             </span>
