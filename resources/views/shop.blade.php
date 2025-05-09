@@ -297,8 +297,8 @@
             </div>
 
             <div class="products-grid row row-cols-2 row-cols-md-3" id="products-grid">
+                @if($products->count() > 0)
                 @foreach($products as $product)
-
                 <div class="product-card-wrapper">
                     <div class="product-card mb-3 mb-md-4 mb-xxl-5">
                         <div class="pc__img-wrapper">
@@ -408,6 +408,9 @@
                     </div>
                 </div>
                 @endforeach
+                @else
+                <div class="alert alert-info">No products found</div>
+                @endif
             </div>
 
             <div class="divider"></div>
