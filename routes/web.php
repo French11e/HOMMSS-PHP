@@ -88,3 +88,20 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/admin/order/{order_id}/details', [AdminController::class, 'order_details'])->name('admin.order.details');
     Route::put('/admin/order/update-status', [AdminController::class, 'update_order_status'])->name('admin.order.status.update');
 });
+
+// Password Reset Routes
+Route::get('/forgot-password', function () {
+    return view('auth.passwords.email');
+})->middleware('guest')->name('password.request');
+
+Route::post('/forgot-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])
+    ->middleware(['guest'])
+    ->name('password.email');
+
+Route::get('/reset-password/{token}', function (string $token) {
+    return view('auth.passwords.reset', ['token' => $token]);
+})->middleware('guest')->name('password.reset');
+
+Route::post('/reset-password', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])
+    ->middleware(['guest', 'throttle:5,60']) // 5 attempts per 60 minutes
+    ->name('password.update');

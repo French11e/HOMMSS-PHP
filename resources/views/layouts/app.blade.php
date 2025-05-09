@@ -717,6 +717,7 @@
     <div id="scrollTop" class="visually-hidden end-0"></div>
     <div class="page-overlay"></div>
 
+    <!-- Scripts -->
     <script src="{{asset ('assets/js/plugins/jquery.min.js') }}"></script>
     <script src="{{asset ('assets/js/plugins/bootstrap.bundle.min.js') }}"></script>
     <script src="{{asset ('assets/js/plugins/bootstrap-slider.min.js') }}"></script>
@@ -724,6 +725,7 @@
     <script src="{{asset ('assets/js/plugins/swiper.min.js') }}"></script>
     <script src="{{asset ('assets/js/plugins/countdown.js') }}"></script>
     <script src="{{asset ('assets/js/lazy-loading.js') }}"></script>
+    @yield('scripts')
     <script>
         $("#search-input").on("keyup", function() {
             var searchQuery = $(this).val();
