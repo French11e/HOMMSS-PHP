@@ -88,51 +88,150 @@
                             </div>
                         </form>
 
+                        <!-- Google user without password -->
+                        @if(Auth::user()->google_id && !Auth::user()->password)
+                        <div class="col-md-12 mt-4">
+                            <div class="alert alert-info">
+                                <h5 class="text-uppercase mb-2">Google Account</h5>
+                                <p>You're signed in with Google. You can set a password to also log in directly with your email.</p>
+
+                                <button class="btn btn-outline-primary mt-2" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#setPasswordForm" aria-expanded="false" aria-controls="setPasswordForm">
+                                    Set Password
+                                </button>
+
+                                <div class="collapse mt-3" id="setPasswordForm">
+                                    <form method="POST" action="{{ route('user.set.password') }}" class="needs-validation" novalidate="">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-floating my-3">
+                                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                                        id="password" name="password" placeholder="New password" required="">
+                                                    <label for="password">New password</label>
+                                                    @error('password')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-floating my-3">
+                                                    <input type="password" class="form-control" id="password_confirmation"
+                                                        name="password_confirmation" placeholder="Confirm new password" required=""
+                                                        oninput="checkPasswordMatch(this)">
+                                                    <label for="password_confirmation">Confirm new password</label>
+                                                    <div id="password-match-feedback" class="form-text"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="my-3">
+                                                    <button type="submit" class="btn btn-primary">Set Password</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Google user with password -->
+                        @elseif(Auth::user()->google_id && Auth::user()->password)
+                        <div class="col-md-12 mt-4">
+                            <div class="alert alert-info">
+                                <h5 class="text-uppercase mb-2">Password Management</h5>
+                                <p>You can log in with either Google or your email/password.</p>
+                            </div>
+
+                            <form method="POST" action="{{ route('user.change.password') }}" class="needs-validation" novalidate="">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-floating my-3">
+                                            <input type="password" class="form-control @error('current_password') is-invalid @enderror"
+                                                id="current_password" name="current_password" placeholder="Current password" required="">
+                                            <label for="current_password">Current password</label>
+                                            @error('current_password')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-floating my-3">
+                                            <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                                id="password" name="password" placeholder="New password" required="">
+                                            <label for="password">New password</label>
+                                            @error('password')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-floating my-3">
+                                            <input type="password" class="form-control" id="password_confirmation"
+                                                name="password_confirmation" placeholder="Confirm new password" required=""
+                                                oninput="checkPasswordMatch(this)">
+                                            <label for="password_confirmation">Confirm new password</label>
+                                            <div id="password-match-feedback" class="form-text"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="my-3">
+                                            <button type="submit" class="btn btn-primary">Change Password</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Regular user (not Google) -->
+                        @else
                         <div class="col-md-12 mt-4">
                             <div class="my-3">
                                 <h5 class="text-uppercase mb-3">Password Change</h5>
                             </div>
-                        </div>
 
-                        <form method="POST" action="{{ route('user.change.password') }}" class="needs-validation" novalidate="">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-floating my-3">
-                                        <input type="password" class="form-control @error('current_password') is-invalid @enderror"
-                                            id="current_password" name="current_password" placeholder="Current password" required="">
-                                        <label for="current_password">Current password</label>
-                                        @error('current_password')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
+                            <form method="POST" action="{{ route('user.change.password') }}" class="needs-validation" novalidate="">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-floating my-3">
+                                            <input type="password" class="form-control @error('current_password') is-invalid @enderror"
+                                                id="current_password" name="current_password" placeholder="Current password" required="">
+                                            <label for="current_password">Current password</label>
+                                            @error('current_password')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-floating my-3">
+                                            <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                                id="password" name="password" placeholder="New password" required="">
+                                            <label for="password">New password</label>
+                                            @error('password')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                            <div class="form-text">
+                                                Must be 12+ characters and include uppercase, lowercase, number, and special character.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-floating my-3">
+                                            <input type="password" class="form-control" id="password_confirmation"
+                                                name="password_confirmation" placeholder="Confirm new password" required=""
+                                                oninput="checkPasswordMatch(this)">
+                                            <label for="password_confirmation">Confirm new password</label>
+                                            <div id="password-match-feedback" class="form-text"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="my-3">
+                                            <button type="submit" class="btn btn-primary">Change Password</button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-floating my-3">
-                                        <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                            id="password" name="password" placeholder="New password" required="">
-                                        <label for="password">New password</label>
-                                        @error('password')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-floating my-3">
-                                        <input type="password" class="form-control" id="password_confirmation"
-                                            name="password_confirmation" placeholder="Confirm new password" required=""
-                                            oninput="checkPasswordMatch(this)">
-                                        <label for="password_confirmation">Confirm new password</label>
-                                        <div id="password-match-feedback" class="form-text"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="my-3">
-                                        <button type="submit" class="btn btn-primary">Change Password</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

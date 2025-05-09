@@ -53,8 +53,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/account-details', [UserController::class, 'accountDetails'])->name('user.account.details');
     Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('user.update.profile');
     Route::post('/change-password', [UserController::class, 'changePassword'])->name('user.change.password');
-
     Route::post('/update-profile-picture', [UserController::class, 'updateProfilePicture'])->name('user.update.profile.picture');
+
+    Route::post('/set-password', [UserController::class, 'setPassword'])->name('user.set.password');
 });
 
 Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');

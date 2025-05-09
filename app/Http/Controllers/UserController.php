@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -113,10 +115,15 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Profile picture updated successfully');
     }
 
-    public function changePassword(Request $request)
+    public function setPassword(Request $request)
     {
+        $user = User::find(Auth::id());
+
+        if (!$user->google_id) {
+            return redirect()->back()->with('error', 'This action is only available for Google accounts.');
+        }
+
         $request->validate([
-            'current_password' => 'required|current_password',
             'password' => [
                 'required',
                 'string',
@@ -126,10 +133,34 @@ class UserController extends Controller
             ],
         ], [
             'password.regex' => 'The password must contain at least: 1 uppercase, 1 lowercase, 1 number and 1 special character',
-            'current_password.current_password' => 'The current password is incorrect',
         ]);
 
-        $user = \App\Models\User::find(Auth::id());
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->back()->with('success', 'Password set successfully. You can now log in with either Google or your email/password.');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $user = User::find(Auth::id());
+
+        $request->validate([
+            'current_password' => 'required|current_password',
+            'password' => [
+                'required',
+                'string',
+                'min:12',
+                'confirmed',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.]).{12,}$/',
+                'different:current_password',
+            ],
+        ], [
+            'password.regex' => 'The password must contain at least: 1 uppercase, 1 lowercase, 1 number and 1 special character',
+            'current_password.current_password' => 'The current password is incorrect',
+            'password.different' => 'The new password must be different from your current password',
+        ]);
+
         $user->password = Hash::make($request->password);
         $user->save();
 
