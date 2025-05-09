@@ -11,6 +11,32 @@
             <div class="col-lg-9">
                 <div class="page-content my-account__edit">
                     <div class="my-account__edit-form">
+                        <!-- Profile Picture Section -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <div class="profile-picture-container text-center mb-3">
+                                    <div class="profile-picture mx-auto" style="width: 150px; height: 150px; overflow: hidden; border-radius: 50%; position: relative;">
+                                        @if(Auth::user()->profile_picture)
+                                        <img src="{{ asset('uploads/profile/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+                                        @else
+                                        <img src="{{ asset('images/default-profile.png') }}" alt="Default Profile" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+                                        @endif
+                                    </div>
+                                </div>
+                                <form method="POST" action="{{ route('user.update.profile.picture') }}" enctype="multipart/form-data" class="text-center">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <input type="file" name="profile_picture" id="profile_picture" class="form-control @error('profile_picture') is-invalid @enderror" accept="image/*">
+                                        @error('profile_picture')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <button type="submit" class="btn btn-outline-primary btn-sm">Update Profile Picture</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Profile Information Form -->
                         <form method="POST" action="{{ route('user.update.profile') }}" class="needs-validation" novalidate="">
                             @csrf
                             <div class="row">
@@ -40,6 +66,16 @@
                                             placeholder="Email Address" name="email" value="{{ old('email', Auth::user()->email) }}" required="">
                                         <label for="account_email">Email Address</label>
                                         @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-floating my-3">
+                                        <textarea class="form-control @error('bio') is-invalid @enderror"
+                                            placeholder="About Me" name="bio" style="height: 100px">{{ old('bio', Auth::user()->bio) }}</textarea>
+                                        <label for="bio">About Me</label>
+                                        @error('bio')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -123,5 +159,18 @@
             feedback.classList.add("text-success");
         }
     }
+
+    // Preview profile picture before upload
+    document.getElementById('profile_picture').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const profilePicContainer = document.querySelector('.profile-picture img');
+                profilePicContainer.src = event.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
 </script>
 @endsection
