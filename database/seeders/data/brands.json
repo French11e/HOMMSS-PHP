@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "name": "Brand 1",
+        "slug": "brand-1",
+        "image": "1746373064.png",
+        "created_at": "2025-05-04T15:37:46.000000Z",
+        "updated_at": "2025-05-04T15:37:46.000000Z"
+    },
+    {
+        "id": 2,
+        "name": "FLOOR TILES",
+        "slug": "floor-tiles",
+        "image": null,
+        "created_at": "2025-05-08T18:06:30.000000Z",
+        "updated_at": "2025-05-08T18:06:30.000000Z"
+    },
+    {
+        "id": 3,
+        "name": "KITCHEN SINK",
+        "slug": "kitchen-sink",
+        "image": null,
+        "created_at": "2025-05-08T18:06:46.000000Z",
+        "updated_at": "2025-05-08T18:06:46.000000Z"
+    },
+    {
+        "id": 4,
+        "name": "SANITARY WARE",
+        "slug": "sanitary-ware",
+        "image": null,
+        "created_at": "2025-05-08T18:08:12.000000Z",
+        "updated_at": "2025-05-08T18:08:12.000000Z"
+    },
+    {
+        "id": 5,
+        "name": "NATURAL GRANITE",
+        "slug": "natural-granite",
+        "image": null,
+        "created_at": "2025-05-08T18:08:31.000000Z",
+        "updated_at": "2025-05-08T18:08:31.000000Z"
+    },
+    {
+        "id": 6,
+        "name": "WALL TILES",
+        "slug": "wall-tiles",
+        "image": null,
+        "created_at": "2025-05-08T18:08:43.000000Z",
+        "updated_at": "2025-05-08T18:08:43.000000Z"
+    }
+]

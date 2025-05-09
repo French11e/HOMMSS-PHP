@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "name": "Category 1",
+        "slug": "category-1",
+        "image": "1746373098.png",
+        "parent_id": null,
+        "created_at": "2025-05-04T15:38:18.000000Z",
+        "updated_at": "2025-05-04T15:38:18.000000Z"
+    },
+    {
+        "id": 2,
+        "name": "ANTI-SLIP",
+        "slug": "anti-slip",
+        "image": "1746727342.jpg",
+        "parent_id": null,
+        "created_at": "2025-05-08T18:02:22.000000Z",
+        "updated_at": "2025-05-08T18:02:22.000000Z"
+    },
+    {
+        "id": 3,
+        "name": "GLAZED",
+        "slug": "glazed",
+        "image": "1746727385.jpg",
+        "parent_id": null,
+        "created_at": "2025-05-08T18:03:05.000000Z",
+        "updated_at": "2025-05-08T18:03:05.000000Z"
+    },
+    {
+        "id": 4,
+        "name": "MATTE",
+        "slug": "matte",
+        "image": "1746727423.jpg",
+        "parent_id": null,
+        "created_at": "2025-05-08T18:03:43.000000Z",
+        "updated_at": "2025-05-08T18:03:43.000000Z"
+    },
+    {
+        "id": 5,
+        "name": "RUSTIC",
+        "slug": "rustic",
+        "image": null,
+        "parent_id": null,
+        "created_at": "2025-05-08T18:04:49.000000Z",
+        "updated_at": "2025-05-08T18:04:49.000000Z"
+    },
+    {
+        "id": 6,
+        "name": "BASIN",
+        "slug": "basin",
+        "image": null,
+        "parent_id": null,
+        "created_at": "2025-05-08T18:09:53.000000Z",
+        "updated_at": "2025-05-08T18:09:53.000000Z"
+    },
+    {
+        "id": 7,
+        "name": "TOILET",
+        "slug": "toilet",
+        "image": null,
+        "parent_id": null,
+        "created_at": "2025-05-08T18:10:03.000000Z",
+        "updated_at": "2025-05-08T18:10:03.000000Z"
+    },
+    {
+        "id": 8,
+        "name": "VANITY MIRROR",
+        "slug": "vanity-mirror",
+        "image": null,
+        "parent_id": null,
+        "created_at": "2025-05-08T18:10:17.000000Z",
+        "updated_at": "2025-05-08T18:10:17.000000Z"
+    }
+]

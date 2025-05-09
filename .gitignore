@@ -2,7 +2,6 @@
 /node_modules
 /public/build
 /public/hot
-/public/storage
 /storage/*.key
 /storage/pail
 /vendor
@@ -21,3 +20,12 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+# Keep uploads directory but ignore its contents
+/public/uploads/*
+!/public/uploads/.gitkeep
+!/public/uploads/brands/.gitkeep
+!/public/uploads/categories/.gitkeep
+!/public/uploads/products/.gitkeep
+!/public/uploads/products/thumbnails/.gitkeep
+
