@@ -44,10 +44,33 @@ class UserController extends Controller
     public function order_cancel(Request $request)
     {
         $order = Order::find($request->order_id);
+
+        if (!$order) {
+            return back()->with('error', 'Order not found.');
+        }
+
+        // Check if order is already canceled
+        if ($order->status === 'canceled') {
+            return back()->with('info', 'This order has already been canceled.');
+        }
+
+        // Check if order is already delivered
+        if ($order->status === 'delivered') {
+            return back()->with('error', 'Cannot cancel an order that has already been delivered.');
+        }
+
         $order->status = 'canceled';
         $order->canceled_date = Carbon::now();
         $order->save();
-        return back()->with('status', 'Order has been canceled successfully');
+
+        // Update transaction status if exists
+        $transaction = Transaction::where('order_id', $order->id)->first();
+        if ($transaction) {
+            $transaction->status = 'refunded';
+            $transaction->save();
+        }
+
+        return back()->with('status', 'Order has been canceled successfully.');
     }
 
     public function accountDetails()

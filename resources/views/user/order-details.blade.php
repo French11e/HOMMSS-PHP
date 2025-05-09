@@ -168,6 +168,28 @@
                             </div>
                         </div>
                     </div>
+
+                    @if(Session::has('status'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ Session::get('status') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
+
+                    @if(Session::has('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ Session::get('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
+
+                    @if(Session::has('info'))
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        {{ Session::get('info') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
+
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered">
                             <tr>
@@ -315,13 +337,18 @@
                 </div>
 
                 <div class="wg-box mt-5 text-right">
+                    @if($order->status == 'ordered')
                     <form action="{{route('user.order.cancel')}}" method="POST">
                         @csrf
                         @method('PUT')
                         <input type="hidden" name="order_id" value="{{$order->id}}">
-                        <!-- Changed button type to submit -->
                         <button type="submit" class="btn btn-danger cancel-order">Cancel Order</button>
                     </form>
+                    @elseif($order->status == 'canceled')
+                    <div class="alert alert-info">This order has been canceled.</div>
+                    @elseif($order->status == 'delivered')
+                    <div class="alert alert-success">This order has been delivered.</div>
+                    @endif
                 </div>
 
 
@@ -350,9 +377,17 @@
             }).then(function(result) {
                 if (result) {
                     form.submit();
+
+                    // We don't need to show a success message here
+                    // as the page will refresh and show the session flash message
                 }
             });
         });
+
+        // Auto-hide alerts after 5 seconds
+        setTimeout(function() {
+            $('.alert').fadeOut('slow');
+        }, 5000);
     });
 </script>
 @endpush
