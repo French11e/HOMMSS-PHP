@@ -49,10 +49,11 @@ class User extends Authenticatable
         ];
     }
 
-    // app/Models/User.php
-    public function setMobileAttribute($value)
+    /**
+     * Get the orders for the user.
+     */
+    public function orders()
     {
-        // Store only digits in database
-        $this->attributes['mobile'] = preg_replace('/[^0-9]/', '', $value);
+        return $this->hasMany(Order::class);
     }
 }

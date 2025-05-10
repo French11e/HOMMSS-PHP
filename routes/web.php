@@ -87,6 +87,10 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
     Route::get('/admin/order/{order_id}/details', [AdminController::class, 'order_details'])->name('admin.order.details');
     Route::put('/admin/order/update-status', [AdminController::class, 'update_order_status'])->name('admin.order.status.update');
+    Route::get('/admin/users', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.users');
+    Route::get('/admin/user/{id}/edit', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.user.edit');
+    Route::put('/admin/user/update', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.user.update');
+    Route::get('/admin/user/{id}/orders', [\App\Http\Controllers\Admin\UserController::class, 'orders'])->name('admin.user.orders');
 });
 
 // Password Reset Routes
