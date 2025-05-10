@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
@@ -9,9 +10,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Validator;
@@ -217,5 +217,120 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('home')->with('status', 'Your account has been permanently deleted.');
+    }
+
+    public function addresses()
+    {
+        $addresses = Address::where('user_id', Auth::user()->id)->get();
+        return view('user.addresses', compact('addresses'));
+    }
+
+    public function createAddress()
+    {
+        return view('user.address-create');
+    }
+
+    public function storeAddress(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:100',
+            'phone' => 'required|numeric|digits:11',
+            'postal' => 'required|numeric|digits:4',
+            'barangay' => 'required',
+            'city' => 'required',
+            'province' => 'required',
+            'region' => 'required',
+            'address' => 'required',
+            'landmark' => 'required',
+        ]);
+
+        $address = new Address();
+        $address->name = $request->name;
+        $address->phone = $request->phone;
+        $address->postal = $request->postal;
+        $address->barangay = $request->barangay;
+        $address->city = $request->city;
+        $address->province = $request->province;
+        $address->region = $request->region;
+        $address->address = $request->address;
+        $address->landmark = $request->landmark;
+        $address->country = 'Philippines';
+        $address->user_id = Auth::user()->id;
+
+        // If this is the first address, make it default
+        if (Address::where('user_id', Auth::user()->id)->count() == 0) {
+            $address->isdefault = true;
+        }
+
+        $address->save();
+
+        return redirect()->route('user.addresses')->with('success', 'Address added successfully');
+    }
+
+    public function editAddress($id)
+    {
+        $address = Address::where('id', $id)->where('user_id', Auth::user()->id)->firstOrFail();
+        return view('user.address-edit', compact('address'));
+    }
+
+    public function updateAddress(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|max:100',
+            'phone' => 'required|numeric|digits:11',
+            'postal' => 'required|numeric|digits:4',
+            'barangay' => 'required',
+            'city' => 'required',
+            'province' => 'required',
+            'region' => 'required',
+            'address' => 'required',
+            'landmark' => 'required',
+        ]);
+
+        $address = Address::where('id', $id)->where('user_id', Auth::user()->id)->firstOrFail();
+        $address->name = $request->name;
+        $address->phone = $request->phone;
+        $address->postal = $request->postal;
+        $address->barangay = $request->barangay;
+        $address->city = $request->city;
+        $address->province = $request->province;
+        $address->region = $request->region;
+        $address->address = $request->address;
+        $address->landmark = $request->landmark;
+        $address->save();
+
+        return redirect()->route('user.addresses')->with('success', 'Address updated successfully');
+    }
+
+    public function setDefaultAddress($id)
+    {
+        // First, set all addresses to non-default
+        Address::where('user_id', Auth::user()->id)->update(['isdefault' => false]);
+
+        // Then set the selected address as default
+        $address = Address::where('id', $id)->where('user_id', Auth::user()->id)->firstOrFail();
+        $address->isdefault = true;
+        $address->save();
+
+        return redirect()->route('user.addresses')->with('success', 'Default address updated');
+    }
+
+    public function deleteAddress($id)
+    {
+        $address = Address::where('id', $id)->where('user_id', Auth::user()->id)->firstOrFail();
+
+        // If deleting default address, set another as default if available
+        if ($address->isdefault) {
+            $address->delete();
+            $newDefault = Address::where('user_id', Auth::user()->id)->first();
+            if ($newDefault) {
+                $newDefault->isdefault = true;
+                $newDefault->save();
+            }
+        } else {
+            $address->delete();
+        }
+
+        return redirect()->route('user.addresses')->with('success', 'Address deleted successfully');
     }
 }

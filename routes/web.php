@@ -50,6 +50,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/account-order/{order_id}/details', [UserController::class, 'order_details'])->name('user.order.details');
     Route::put('/account-order/cancel-order', [UserController::class, 'order_cancel'])->name('user.order.cancel');
 
+    // Address routes
+    Route::get('/account-addresses', [UserController::class, 'addresses'])->name('user.addresses');
+    Route::get('/account-address/create', [UserController::class, 'createAddress'])->name('user.address.create');
+    Route::post('/account-address/store', [UserController::class, 'storeAddress'])->name('user.address.store');
+    Route::get('/account-address/{id}/edit', [UserController::class, 'editAddress'])->name('user.address.edit');
+    Route::put('/account-address/{id}/update', [UserController::class, 'updateAddress'])->name('user.address.update');
+    Route::delete('/account-address/{id}/delete', [UserController::class, 'deleteAddress'])->name('user.address.delete');
+    Route::put('/account-address/{id}/set-default', [UserController::class, 'setDefaultAddress'])->name('user.address.default');
+
     Route::get('/account-details', [UserController::class, 'accountDetails'])->name('user.account.details');
     Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('user.update.profile');
     Route::post('/change-password', [UserController::class, 'changePassword'])->name('user.change.password');
