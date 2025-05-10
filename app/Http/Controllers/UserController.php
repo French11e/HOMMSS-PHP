@@ -189,4 +189,33 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'Password changed successfully');
     }
+
+    public function deleteAccount(Request $request)
+    {
+        $user = Auth::user();
+        $userId = $user->id;
+
+        // Verify password for non-Google users
+        if (!$user->google_id) {
+            $request->validate([
+                'password' => 'required',
+            ]);
+
+            if (!Hash::check($request->password, $user->password)) {
+                return back()->withErrors(['password' => 'Password is incorrect']);
+            }
+        }
+
+        // Logout the user
+        Auth::logout();
+
+        // Delete the user account using the User model
+        \App\Models\User::destroy($userId);
+
+        // Invalidate the session
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home')->with('status', 'Your account has been permanently deleted.');
+    }
 }

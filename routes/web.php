@@ -93,6 +93,10 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/admin/user/{id}/orders', [\App\Http\Controllers\Admin\UserController::class, 'orders'])->name('admin.user.orders');
 });
 
+// Add these routes for settings
+Route::get('/admin/settings', [\App\Http\Controllers\Admin\AdminController::class, 'settings'])->name('admin.settings');
+Route::put('/admin/settings/update', [\App\Http\Controllers\Admin\AdminController::class, 'updateSettings'])->name('admin.settings.update');
+
 // Password Reset Routes
 Route::get('/forgot-password', function () {
     return view('auth.passwords.email');
@@ -122,3 +126,6 @@ Route::post('/otp/verify', [\App\Http\Controllers\Auth\LoginController::class, '
 Route::get('/otp/resend', [\App\Http\Controllers\Auth\LoginController::class, 'resendOtp'])
     ->middleware('guest')
     ->name('otp.resend');
+
+// User account deletion
+Route::delete('/user/account/delete', [\App\Http\Controllers\UserController::class, 'deleteAccount'])->name('user.account.delete');
