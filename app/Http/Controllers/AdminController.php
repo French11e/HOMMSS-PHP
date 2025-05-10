@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
@@ -477,7 +478,7 @@ class AdminController extends Controller
 
     public function order_details($order_id)
     {
-        $order = Order::find($order_id);
+        $order = Order::with(['user', 'user.orders'])->find($order_id);
         if (!$order) {
             abort(404, 'Order not found');
         }

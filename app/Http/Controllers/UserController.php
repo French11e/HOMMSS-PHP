@@ -59,6 +59,11 @@ class UserController extends Controller
             return back()->with('error', 'Cannot cancel an order that has already been delivered.');
         }
 
+        // Check if order is already shipped
+        if ($order->status === 'shipped') {
+            return back()->with('error', 'Cannot cancel an order that has already been shipped. Please contact customer support.');
+        }
+
         $order->status = 'canceled';
         $order->canceled_date = Carbon::now();
         $order->save();
@@ -70,7 +75,7 @@ class UserController extends Controller
             $transaction->save();
         }
 
-        return back()->with('status', 'Order has been canceled successfully.');
+        return back()->with('success', 'Your order has been canceled successfully.');
     }
 
     public function accountDetails()

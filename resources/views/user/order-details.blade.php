@@ -5,11 +5,6 @@
         padding-top: 90px !important;
     }
 
-    .pr-6px {
-        padding-right: 6px;
-        text-transform: uppercase;
-    }
-
     .my-account {
         background-color: white;
     }
@@ -24,16 +19,27 @@
         color: #333;
     }
 
-    .my-account .wg-box {
-        display: flex;
-        padding: 24px;
-        flex-direction: column;
-        gap: 24px;
-        border-radius: 12px;
-        background: white;
-        box-shadow: 0px 4px 24px 2px rgba(20, 25, 38, 0.05);
-        margin-bottom: 20px;
-        border: 1px solid #e1e1e1;
+    .table> :not(caption)>tr>th {
+        padding: 0.625rem 1.5rem !important;
+        background-color: #f8f9fa !important;
+        color: #333;
+        border-bottom: 1px solid #e1e1e1;
+    }
+
+    .table>tr>td {
+        padding: 0.625rem 1.5rem !important;
+        background-color: white;
+    }
+
+    .table-bordered> :not(caption)>tr>th,
+    .table-bordered> :not(caption)>tr>td {
+        border-width: 1px;
+        border-color: #e1e1e1;
+    }
+
+    .table> :not(caption)>tr>td {
+        padding: .8rem 1rem !important;
+        color: #333;
     }
 
     .bg-success {
@@ -51,60 +57,12 @@
         color: #000;
     }
 
-    .table-transaction>tbody>tr:nth-of-type(odd) {
-        background-color: white !important;
-    }
-
-    .table-transaction th,
-    .table-transaction td {
-        padding: 0.625rem 1.5rem .25rem !important;
-        color: #333 !important;
+    .wg-table {
         background-color: white;
-    }
-
-    .table> :not(caption)>tr>th {
-        padding: 0.625rem 1.5rem .25rem !important;
-        background-color: #f8f9fa !important;
-        color: #333;
-        border-bottom: 1px solid #e1e1e1;
-    }
-
-    .table-bordered>:not(caption)>*>* {
-        border-width: inherit;
-        line-height: 32px;
-        font-size: 14px;
+        border-radius: 12px;
+        box-shadow: 0px 4px 24px 2px rgba(20, 25, 38, 0.05);
+        padding: 20px;
         border: 1px solid #e1e1e1;
-        vertical-align: middle;
-        background-color: white;
-    }
-
-    .table-striped .image {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 50px;
-        height: 50px;
-        flex-shrink: 0;
-        border-radius: 10px;
-        overflow: hidden;
-        background-color: white;
-    }
-
-    .table-striped td:nth-child(1) {
-        min-width: 250px;
-        padding-bottom: 7px;
-    }
-
-    .pname {
-        display: flex;
-        gap: 13px;
-        align-items: center;
-    }
-
-    .table-bordered> :not(caption)>tr>th,
-    .table-bordered> :not(caption)>tr>td {
-        border-width: 1px;
-        border-color: #e1e1e1;
     }
 
     .divider {
@@ -113,37 +71,220 @@
         margin: 20px 0;
     }
 
-    .btn-danger {
-        background-color: #f44032;
-        border-color: #f44032;
-    }
-
-    .btn-danger:hover {
-        background-color: #d9372a;
-        border-color: #d9372a;
-    }
-
-    .my-account__address-item__detail {
-        background-color: white;
-        padding: 15px;
-        border-radius: 8px;
-        border: 1px solid #e1e1e1;
-    }
-
-    .my-account__address-item__detail p {
-        margin-bottom: 5px;
+    .list-icon-function .item.eye {
         color: #333;
     }
 
-    .badge {
-        padding: 5px 10px;
-        border-radius: 4px;
-        font-weight: 500;
+    .list-icon-function .item.eye:hover {
+        color: #40c710;
     }
 
-    .secondary {
-        background-color: #6c757d;
+    .table-striped>tbody>tr:nth-of-type(odd) {
+        --bs-table-accent-bg: rgba(0, 0, 0, 0.02);
+    }
+
+    .wgp-pagination .pagination {
+        justify-content: center;
+    }
+
+    .wgp-pagination .page-link {
+        color: #333;
+        border-color: #e1e1e1;
+    }
+
+    .wgp-pagination .page-item.active .page-link {
+        background-color: #40c710;
+        border-color: #40c710;
         color: white;
+    }
+
+    /* Enhanced order tracking styles */
+    .order-tracking {
+        margin: 40px auto;
+        max-width: 850px;
+    }
+
+    .tracking-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .tracking-container {
+        background-color: white;
+        border-radius: 12px;
+        padding: 35px 25px;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .tracking-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(to right, #40c710, #8be472);
+    }
+
+    .tracking-line {
+        height: 3px;
+        background: #e9ecef;
+        position: absolute;
+        width: 80%;
+        left: 10%;
+        top: 45px;
+        z-index: 1;
+    }
+
+    .tracking-steps {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        z-index: 3;
+        width: 100%;
+    }
+
+    .tracking-step {
+        text-align: center;
+        position: relative;
+        width: 20%;
+    }
+
+    .step-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 12px;
+        color: #adb5bd;
+        font-size: 18px;
+        border: 2px solid #e9ecef;
+        position: relative;
+        z-index: 5;
+        transition: all 0.3s ease;
+    }
+
+    .step-active .step-icon {
+        background: #40c710;
+        color: white;
+        border-color: #40c710;
+        box-shadow: 0 0 0 5px rgba(64, 199, 16, 0.2);
+        transform: scale(1.05);
+    }
+
+    .step-label {
+        font-size: 15px;
+        font-weight: 700;
+        margin-top: 8px;
+        color: #333;
+        transition: all 0.3s ease;
+    }
+
+    .step-active .step-label {
+        color: #40c710;
+    }
+
+    .step-date {
+        font-size: 13px;
+        color: #6c757d;
+        margin-top: 4px;
+    }
+
+    /* Progress connector line */
+    .progress-line {
+        position: absolute;
+        height: 3px;
+        background: linear-gradient(to right, #40c710, #8be472);
+        top: 45px;
+        left: 10%;
+        z-index: 2;
+        transition: width 0.5s ease;
+        border-radius: 3px;
+    }
+
+    .status-ordered .progress-line {
+        width: 10%;
+    }
+
+    .status-processing .progress-line {
+        width: 30%;
+    }
+
+    .status-shipped .progress-line {
+        width: 50%;
+    }
+
+    .status-delivered .progress-line {
+        width: 70%;
+    }
+
+    /* Adjust order header layout */
+    .order-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .order-header-info {
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 15px 25px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .order-header-info h5 {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .order-status-badge {
+        padding: 8px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 30px;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-top: 5px;
+        display: inline-block;
+    }
+
+    /* Status colors with gradients */
+    .bg-success {
+        background: linear-gradient(to right, #40c710, #8be472) !important;
+    }
+
+    .bg-danger {
+        background: linear-gradient(to right, #f44336, #ff7961) !important;
+    }
+
+    .bg-info {
+        background: linear-gradient(to right, #2196f3, #64b5f6) !important;
+    }
+
+    .bg-primary {
+        background: linear-gradient(to right, #3f51b5, #7986cb) !important;
+    }
+
+    .bg-warning {
+        background: linear-gradient(to right, #ffc107, #ffd761) !important;
     }
 </style>
 
@@ -152,242 +293,163 @@
     <section class="my-account container" style="background-color: white;">
         <h2 class="page-title">Order Details</h2>
         <div class="row">
-            <div class="col-lg-2">
-                @include('user.account-nav')
-            </div>
+            <div class="col-12">
+                <!-- Order Header -->
+                <div class="wg-table">
+                    <div class="order-header">
+                        <div class="order-header-info">
+                            <h5 class="mb-1">Order #{{ $order->id }}</h5>
+                            <p class="text-muted mb-2">Placed on {{ date('F d, Y', strtotime($order->created_at)) }}</p>
 
-            <div class="col-lg-10">
-                <div class="wg-box">
-                    <div class="flex items-center justify-between gap10 flex-wrap">
-                        <div class="row">
-                            <div class="col-6">
-                                <h5 style="color: #333;">Ordered Details</h5>
-                            </div>
-                            <div class="col-6 text-right">
-                                <a class="btn btn-sm btn-danger" href="{{route('user.orders')}}">Back</a>
+                            @if($order->status == 'delivered')
+                            <span class="order-status-badge bg-success">Delivered</span>
+                            @elseif($order->status == 'canceled')
+                            <span class="order-status-badge bg-danger">Canceled</span>
+                            @elseif($order->status == 'processing')
+                            <span class="order-status-badge bg-info">Processing</span>
+                            @elseif($order->status == 'shipped')
+                            <span class="order-status-badge bg-primary">Shipped</span>
+                            @else
+                            <span class="order-status-badge bg-warning">Ordered</span>
+                            @endif
+                        </div>
+
+                        <!-- Order Tracking -->
+                        <div class="order-tracking">
+                            <h5 class="tracking-title">Order Status</h5>
+                            <div class="tracking-container status-{{ $order->status }}">
+                                <div class="tracking-line"></div>
+                                <div class="progress-line"></div>
+
+                                <div class="tracking-steps">
+                                    <div class="tracking-step {{ $order->status != 'canceled' ? 'step-active' : '' }}">
+                                        <div class="step-icon">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </div>
+                                        <div class="step-label">Ordered</div>
+                                        <div class="step-date">{{ date('M d, Y', strtotime($order->created_at)) }}</div>
+                                    </div>
+
+                                    <div class="tracking-step {{ in_array($order->status, ['processing', 'shipped', 'delivered']) ? 'step-active' : '' }}">
+                                        <div class="step-icon">
+                                            <i class="fa fa-cog"></i>
+                                        </div>
+                                        <div class="step-label">Processing</div>
+                                        <div class="step-date">{{ $order->processing_date ? date('M d, Y', strtotime($order->processing_date)) : 'Pending' }}</div>
+                                    </div>
+
+                                    <div class="tracking-step {{ in_array($order->status, ['shipped', 'delivered']) ? 'step-active' : '' }}">
+                                        <div class="step-icon">
+                                            <i class="fa fa-truck"></i>
+                                        </div>
+                                        <div class="step-label">Shipped</div>
+                                        <div class="step-date">{{ $order->shipped_date ? date('M d, Y', strtotime($order->shipped_date)) : 'Pending' }}</div>
+                                    </div>
+
+                                    <div class="tracking-step {{ $order->status == 'delivered' ? 'step-active' : '' }}">
+                                        <div class="step-icon">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                        <div class="step-label">Delivered</div>
+                                        <div class="step-date">{{ $order->delivered_date ? date('M d, Y', strtotime($order->delivered_date)) : 'Pending' }}</div>
+                                    </div>
+
+                                    <div class="tracking-step {{ $order->status == 'canceled' ? 'step-active' : '' }}">
+                                        <div class="step-icon">
+                                            <i class="fa fa-times"></i>
+                                        </div>
+                                        <div class="step-label">Canceled</div>
+                                        <div class="step-date">{{ $order->canceled_date ? date('M d, Y', strtotime($order->canceled_date)) : 'N/A' }}</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    @if(Session::has('status'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ Session::get('status') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    @endif
-
-                    @if(Session::has('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{ Session::get('error') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    @endif
-
-                    @if(Session::has('info'))
-                    <div class="alert alert-info alert-dismissible fade show" role="alert">
-                        {{ Session::get('info') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    @endif
-
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <tr>
-                                <th>Order No</th>
-                                <td>{{$order->id}}</td>
-                                <th>Mobile</th>
-                                <td>{{$order->phone}}</td>
-                                <th>Zip Code</th>
-                                <td>{{$order->postal}}</td>
-                            </tr>
-                            <tr>
-                                <th>Order Date</th>
-                                <td>{{$order->created_at}}</td>
-                                <th>Delivered Date</th>
-                                <td>{{$order->delivered_date}}</td>
-                                <th>Canceled Date</th>
-                                <td>{{$order->canceled_date}}</td>
-                            </tr>
-                            <tr>
-                                <th>Order Status</th>
-                                <td colspan="5">
-                                    @if($order->status == 'delivered')
-                                    <span class="badge bg-success">Delivered</span>
-                                    @elseif($order->status == 'canceled')
-                                    <span class="badge bg-danger">Canceled</span>
-                                    @else
-                                    <span class="badge bg-warning">Ordered</span>
-                                    @endif
-                                </td>
-                            </tr>
-                        </table>
                     </div>
                     <div class="divider"></div>
-                </div>
 
-                <div class="wg-box">
-                    <div class="flex items-center justify-between gap10 flex-wrap">
-                        <div class="wg-filter flex-grow">
-                            <h5 style="color: #333;">Ordered Items</h5>
+                    <!-- Order Information -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5 class="mb-3">Shipping Information</h5>
+                            <p class="mb-1"><strong>{{ $order->firstname }} {{ $order->lastname }}</strong></p>
+                            <p class="mb-1">{{ $order->line1 }}</p>
+                            @if($order->line2)
+                            <p class="mb-1">{{ $order->line2 }}</p>
+                            @endif
+                            <p class="mb-1">{{ $order->city }}, {{ $order->province }} {{ $order->postal }}</p>
+                            <p class="mb-1">{{ $order->country }}</p>
+                            <p class="mb-1">Phone: {{ $order->phone }}</p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h5 class="mb-3">Order Summary</h5>
+                            <table class="table table-sm">
+                                <tr>
+                                    <td>Subtotal</td>
+                                    <td class="text-end">₱{{ number_format($order->subtotal, 2) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Tax</td>
+                                    <td class="text-end">₱{{ number_format($order->tax, 2) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Shipping</td>
+                                    <td class="text-end">₱{{ number_format($order->shipping ?? 0, 2) }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Total</th>
+                                    <th class="text-end">₱{{ number_format($order->total, 2) }}</th>
+                                </tr>
+                            </table>
                         </div>
                     </div>
+
+                    <!-- Order Items -->
+                    <h5 class="mb-3">Order Items</h5>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Product</th>
                                     <th class="text-center">Price</th>
                                     <th class="text-center">Quantity</th>
-                                    <th class="text-center">SKU</th>
-                                    <th class="text-center">Category</th>
-                                    <th class="text-center">Brand</th>
-                                    <th class="text-center">Options</th>
-                                    <th class="text-center">Return Status</th>
-                                    <th class="text-center">Action</th>
+                                    <th class="text-center">Subtotal</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($orderItems as $item)
+                                @foreach($order->orderItems as $item)
                                 <tr>
-                                    <td class="pname">
-                                        <div class="image">
-                                            <img src="{{asset('uploads/products/thumbnails')}}/{{$item->product->image}}" alt="{{$item->product->name}}" class="image">
-                                        </div>
-                                        <div class="name">
-                                            <a href="{{route('shop.product.details', ['product_slug'=>$item->product->slug])}}" target="_blank" class="body-title-2" style="color: #333;">{{$item->product->name}}</a>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">₱{{$item->price}}</td>
-                                    <td class="text-center">{{$item->quantity}}</td>
-                                    <td class="text-center">{{$item->product->SKU}}</td>
-                                    <td class="text-center">{{$item->product->category->name}}</td>
-                                    <td class="text-center">{{$item->product->brand->name}}</td>
-                                    <td class="text-center">{{$item->options}}</td>
-                                    <td class="text-center">{{$item->rstatus == 0 ? "No":"Yes"}}</td>
-                                    <td class="text-center">
-                                        <div class="list-icon-function view-icon">
-                                            <div class="item eye">
-                                                <i class="icon-eye" style="color: #333;"></i>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ asset('assets/images/products') }}/{{ $item->product->image }}" alt="{{ $item->product->name }}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px; margin-right: 15px;">
+                                            <div>
+                                                <p class="mb-1 fw-bold">{{ $item->product->name }}</p>
+                                                @if($item->options)
+                                                <p class="mb-0 text-muted small">{{ $item->options }}</p>
+                                                @endif
                                             </div>
                                         </div>
                                     </td>
+                                    <td class="text-center">₱{{ number_format($item->price, 2) }}</td>
+                                    <td class="text-center">{{ $item->quantity }}</td>
+                                    <td class="text-center">₱{{ number_format($item->price * $item->quantity, 2) }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
+
                     <div class="divider"></div>
-                    <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
-                        {{$orderItems->links('pagination::bootstrap-5')}}
+
+                    <!-- Back Button -->
+                    <div class="text-center">
+                        <a href="{{ route('user.orders') }}" class="back-button">
+                            <i class="fa fa-arrow-left me-2"></i> Back to Orders
+                        </a>
                     </div>
                 </div>
-
-                <div class="wg-box mt-5">
-                    <h5 style="color: #333;">Shipping Address</h5>
-                    <div class="my-account__address-item col-md-6">
-                        <div class="my-account__address-item__detail">
-                            <p>{{$order->name}}</p>
-                            <p>{{$order->address}}</p>
-                            <p>{{$order->barangay}},</p>
-                            <p>{{$order->city}}, {{$order->province}} </p>
-                            <p>{{$order->region}}, {{$order->landmark}}</p>
-                            <p>{{$order->postal}}</p>
-                            <br>
-                            <p>Mobile : {{$order->phone}}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="wg-box mt-5">
-                    <h5 style="color: #333;">Transactions</h5>
-                    <table class="table table-striped table-bordered table-transaction">
-                        <tbody>
-                            <tr>
-                                <th>Subtotal</th>
-                                <td>₱{{$order->subtotal}}</td>
-                                <th>Tax</th>
-                                <td>₱{{$order->tax}}</td>
-                            </tr>
-                            <tr>
-                                <th>Total</th>
-                                <td>₱{{$order->total}}</td>
-                                <th>Payment Mode</th>
-                                <td>
-                                    @if($transaction)
-                                    {{$transaction->mode}}
-                                    @else
-                                    Not available
-                                    @endif
-                                </td>
-                                <th>Status</th>
-                                <td>
-                                    @if($transaction && $transaction->status == 'approved')
-                                    <span class="badge bg-success">Approved</span>
-                                    @elseif($transaction && $transaction->status == 'declined')
-                                    <span class="badge bg-danger">Declined</span>
-                                    @elseif($transaction && $transaction->status == 'refunded')
-                                    <span class="badge secondary">Refunded</span>
-                                    @else
-                                    <span class="badge bg-warning">Pending</span>
-                                    @endif
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="wg-box mt-5 text-right">
-                    @if($order->status == 'ordered')
-                    <form action="{{route('user.order.cancel')}}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="order_id" value="{{$order->id}}">
-                        <button type="submit" class="btn btn-danger cancel-order">Cancel Order</button>
-                    </form>
-                    @elseif($order->status == 'canceled')
-                    <div class="alert alert-info">This order has been canceled.</div>
-                    @elseif($order->status == 'delivered')
-                    <div class="alert alert-success">This order has been delivered.</div>
-                    @endif
-                </div>
-
-
             </div>
         </div>
     </section>
 </main>
 @endsection
-
-@push('scripts')
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-<script>
-    $(function() {
-        // The confirmation is still triggered by the cancel-order button
-        $('.cancel-order').on('click', function(e) {
-            e.preventDefault(); // Prevent the default form submit behavior
-            var form = $(this).closest('form');
-
-            swal({
-                title: "Are you sure?",
-                text: "You want to cancel this order?",
-                icon: "warning",
-                buttons: ["No", "Yes"],
-                dangerMode: true,
-            }).then(function(result) {
-                if (result) {
-                    form.submit();
-
-                    // We don't need to show a success message here
-                    // as the page will refresh and show the session flash message
-                }
-            });
-        });
-
-        // Auto-hide alerts after 5 seconds
-        setTimeout(function() {
-            $('.alert').fadeOut('slow');
-        }, 5000);
-    });
-</script>
-@endpush
