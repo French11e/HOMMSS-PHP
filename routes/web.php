@@ -105,3 +105,16 @@ Route::get('/reset-password/{token}', function (string $token) {
 Route::post('/reset-password', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])
     ->middleware(['guest', 'throttle:5,60']) // 5 attempts per 60 minutes
     ->name('password.update');
+
+// OTP Verification Routes
+Route::get('/otp/verify', [\App\Http\Controllers\Auth\LoginController::class, 'showOtpForm'])
+    ->middleware('guest')
+    ->name('otp.verify.form');
+
+Route::post('/otp/verify', [\App\Http\Controllers\Auth\LoginController::class, 'verifyOtp'])
+    ->middleware('guest')
+    ->name('otp.verify');
+
+Route::get('/otp/resend', [\App\Http\Controllers\Auth\LoginController::class, 'resendOtp'])
+    ->middleware('guest')
+    ->name('otp.resend');
