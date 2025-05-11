@@ -131,7 +131,7 @@
         left: 0;
         right: 0;
         height: 4px;
-        background: linear-gradient(to right, #B9A16B, #d6c7a4);
+        background: #2275fc;
     }
 
     .tracking-line {
@@ -176,10 +176,10 @@
     }
 
     .step-active .step-icon {
-        background: #B9A16B;
+        background: #2275fc;
         color: white;
-        border-color: #B9A16B;
-        box-shadow: 0 0 0 5px rgba(185, 161, 107, 0.2);
+        border-color: #2275fc;
+        box-shadow: 0 0 0 5px rgba(34, 117, 252, 0.2);
         transform: scale(1.05);
     }
 
@@ -192,7 +192,7 @@
     }
 
     .step-active .step-label {
-        color: #B9A16B;
+        color: #2275fc;
     }
 
     .step-date {
@@ -205,7 +205,7 @@
     .progress-line {
         position: absolute;
         height: 3px;
-        background: linear-gradient(to right, #B9A16B, #d6c7a4);
+        background: #2275fc;
         top: 45px;
         left: 10%;
         z-index: 2;
@@ -266,25 +266,27 @@
         display: inline-block;
     }
 
-    /* Status colors with gradients */
+    /* Status colors - solid blue instead of gradient */
     .bg-success {
-        background: linear-gradient(to right, #B9A16B, #d6c7a4) !important;
+        background-color: #2275fc !important;
     }
 
     .bg-danger {
-        background: linear-gradient(to right, #f44336, #ff7961) !important;
+        background-color: #f44032 !important;
+        color: white;
     }
 
     .bg-info {
-        background: linear-gradient(to right, #2196f3, #64b5f6) !important;
+        background-color: #2196f3 !important;
     }
 
     .bg-primary {
-        background: linear-gradient(to right, #3f51b5, #7986cb) !important;
+        background-color: #3f51b5 !important;
     }
 
     .bg-warning {
-        background: linear-gradient(to right, #ffc107, #ffd761) !important;
+        background-color: #f5d700 !important;
+        color: #000;
     }
 </style>
 

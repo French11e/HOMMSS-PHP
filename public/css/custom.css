@@ -161,3 +161,74 @@ body {
     width: 20px;
     margin: 0 auto;
 }
+
+/* Normal scrollbar styling for orders table */
+.wg-table.table-orders,
+.table-container {
+    overflow-x: auto;
+}
+
+.wg-table.table-orders::-webkit-scrollbar,
+.table-container::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    display: block;
+}
+
+.wg-table.table-orders::-webkit-scrollbar-track,
+.table-container::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 6px;
+}
+
+.wg-table.table-orders::-webkit-scrollbar-thumb,
+.table-container::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 6px;
+    border: 2px solid #f1f1f1;
+}
+
+.wg-table.table-orders::-webkit-scrollbar-thumb:hover,
+.table-container::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+/* Override any existing scrollbar hiding */
+.overflow-h::-webkit-scrollbar,
+.wg-table::-webkit-scrollbar {
+    width: 12px !important;
+    height: 12px !important;
+    display: block !important;
+}
+
+/* Add this to override any Discord-inspired scrollbar styles for user pages */
+body.user-dashboard .table-responsive::-webkit-scrollbar,
+body.user-dashboard .wg-table::-webkit-scrollbar,
+body.user-dashboard .orders-table-wrapper::-webkit-scrollbar {
+    width: 12px !important;
+    height: 12px !important;
+    display: block !important;
+}
+
+body.user-dashboard .table-responsive::-webkit-scrollbar-track,
+body.user-dashboard .wg-table::-webkit-scrollbar-track,
+body.user-dashboard .orders-table-wrapper::-webkit-scrollbar-track {
+    background-color: #f1f1f1 !important;
+    border-radius: 6px !important;
+}
+
+body.user-dashboard .table-responsive::-webkit-scrollbar-thumb,
+body.user-dashboard .wg-table::-webkit-scrollbar-thumb,
+body.user-dashboard .orders-table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #888 !important;
+    border-radius: 6px !important;
+    border: 2px solid #f1f1f1 !important;
+}
+
+body.user-dashboard .table-responsive::-webkit-scrollbar-thumb:hover,
+body.user-dashboard .wg-table::-webkit-scrollbar-thumb:hover,
+body.user-dashboard .orders-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: #555 !important;
+}
+
+

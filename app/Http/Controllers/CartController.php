@@ -67,21 +67,35 @@ class CartController extends Controller
     public function place_an_order(Request $request)
     {
         $user_id = Auth::user()->id;
-        $address = Address::where('user_id', $user_id)->where('isdefault', true)->first();
+        
+        // Validate payment method
+        $request->validate([
+            'mode' => 'required|in:card,paypal,cod',
+        ], [
+            'mode.required' => 'Please select a payment method',
+            'mode.in' => 'Invalid payment method selected',
+        ]);
 
-        if (!$address) {
+        // Process address selection or creation
+        if ($request->has('selected_address') && !empty($request->selected_address)) {
+            $address = Address::where('id', $request->selected_address)
+                              ->where('user_id', $user_id)
+                              ->firstOrFail();
+        } else {
+            // Validate new address inputs
             $request->validate([
                 'name' => 'required|max:100',
                 'phone' => 'required|numeric|digits:11',
                 'postal' => 'required|numeric|digits:4',
-                'barangay' => 'required ',
-                'city' => 'required ',
-                'province' => 'required ',
-                'region' => 'required ',
-                'address' => 'required ',
-                'landmark' => 'required ',
+                'barangay' => 'required',
+                'city' => 'required',
+                'province' => 'required',
+                'region' => 'required',
+                'address' => 'required',
+                'landmark' => 'required',
             ]);
 
+            // Create new address
             $address = new Address();
             $address->name = $request->name;
             $address->phone = $request->phone;
@@ -94,31 +108,38 @@ class CartController extends Controller
             $address->landmark = $request->landmark;
             $address->country = 'Philippines';
             $address->user_id = $user_id;
-            $address->isdefault = true;
+            
+            // Save as default if requested
+            if ($request->has('save_as_default')) {
+                // If setting as default, unset any existing default
+                Address::where('user_id', $user_id)->update(['isdefault' => false]);
+                $address->isdefault = true;
+            }
+            
             $address->save();
         }
 
-        $this->setAmountforCheckout();
-
+        // Create order
         $order = new Order();
-
         $order->user_id = $user_id;
-        $order->subtotal = Session::get('checkout')['subtotal'];
-        $order->discount = Session::get('checkout')['discount'];
-        $order->tax = Session::get('checkout')['tax'];
-        $order->total = Session::get('checkout')['total'];
+        $order->subtotal = str_replace(',', '', Cart::instance('cart')->subtotal());
+        $order->discount = 0;
+        $order->tax = str_replace(',', '', Cart::instance('cart')->tax());
+        $order->total = str_replace(',', '', Cart::instance('cart')->total());
         $order->name = $address->name;
         $order->phone = $address->phone;
+        $order->postal = $address->postal;
         $order->barangay = $address->barangay;
-        $order->address = $address->address;
         $order->city = $address->city;
         $order->province = $address->province;
-        $order->country = $address->country;
         $order->region = $address->region;
+        $order->address = $address->address;
         $order->landmark = $address->landmark;
-        $order->postal = $address->postal;
+        $order->country = $address->country;
+        $order->status = 'ordered';
         $order->save();
 
+        // Create order items
         foreach (Cart::instance('cart')->content() as $item) {
             $orderItem = new OrderItem();
             $orderItem->product_id = $item->id;
@@ -128,26 +149,28 @@ class CartController extends Controller
             $orderItem->save();
         }
 
-        if ($request->mode == 'card') {
-            //
-        } elseif ($request->mode == 'card') {
-            //
-        } elseif ($request->mode == 'Cash on Delivery') {
-            $transaction = new Transaction();
-            $transaction->user_id = $user_id;
-            $transaction->order_id = $order->id;
-            $transaction->mode = $request->mode;
+        // Create transaction record with payment method - ENSURE THIS RUNS
+        $transaction = new Transaction();
+        $transaction->user_id = $user_id;
+        $transaction->order_id = $order->id;
+        $transaction->mode = $request->mode;
+        
+        // Set appropriate status based on payment method
+        if ($request->mode == 'cod') {
             $transaction->status = 'pending';
-            $transaction->save();
+        } else if ($request->mode == 'card') {
+            $transaction->status = 'pending'; // Will be updated after payment processing
+        } else if ($request->mode == 'paypal') {
+            $transaction->status = 'pending'; // Will be updated after payment processing
         }
+        
+        $transaction->save();
 
-
+        // Clear cart
         Cart::instance('cart')->destroy();
-        Session::forget('checkout');
-        Session::forget('coupon');
-        Session::forget('discounts');
-        Session::put('order_id', $order->id);
-        return redirect()->route('cart.order.confirmation');
+
+        // Redirect to confirmation page with transaction data
+        return redirect()->route('order.confirmation', ['order_id' => $order->id]);
     }
 
     public function setAmountforCheckout()
@@ -185,3 +208,6 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 }
+
+
+

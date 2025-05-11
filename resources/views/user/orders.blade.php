@@ -97,6 +97,86 @@
         border-color: #40c710;
         color: white;
     }
+
+    /* Override scrollbar styles specifically for this page */
+    .wg-table::-webkit-scrollbar,
+    .table-container::-webkit-scrollbar {
+        width: 12px !important;
+        height: 12px !important;
+        display: block !important;
+    }
+
+    .wg-table::-webkit-scrollbar-track,
+    .table-container::-webkit-scrollbar-track {
+        background-color: #f1f1f1 !important;
+        border-radius: 6px !important;
+    }
+
+    .wg-table::-webkit-scrollbar-thumb,
+    .table-container::-webkit-scrollbar-thumb {
+        background-color: #888 !important;
+        border-radius: 6px !important;
+        border: 2px solid #f1f1f1 !important;
+    }
+
+    .wg-table::-webkit-scrollbar-thumb:hover,
+    .table-container::-webkit-scrollbar-thumb:hover {
+        background-color: #555 !important;
+    }
+    
+    /* Ensure table has proper overflow */
+    .table-responsive {
+        overflow-x: auto;
+    }
+    
+    /* Add a class to ensure the table wrapper has visible scrollbars */
+    .orders-table-wrapper {
+        overflow-x: auto;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    /* Custom styling for user orders table */
+    .orders-table-wrapper {
+        overflow-x: auto;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    /* Normal visible scrollbar for user orders */
+    .orders-table-wrapper::-webkit-scrollbar {
+        width: 12px;
+        height: 12px;
+        display: block;
+    }
+    
+    .orders-table-wrapper::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+        border-radius: 6px;
+    }
+    
+    .orders-table-wrapper::-webkit-scrollbar-thumb {
+        background-color: #888;
+        border-radius: 6px;
+        border: 2px solid #f1f1f1;
+    }
+    
+    .orders-table-wrapper::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+    }
+    
+    /* Override any Discord-inspired scrollbar styles */
+    .table-responsive::-webkit-scrollbar,
+    .wg-table::-webkit-scrollbar {
+        display: block !important;
+        width: 12px !important;
+        height: 12px !important;
+    }
+    
+    /* Ensure the pagination has proper spacing */
+    .wgp-pagination {
+        margin-top: 15px;
+    }
 </style>
 
 <main class="pt-90" style="padding-top: 0px; background-color: white;">
@@ -172,3 +252,4 @@
     </section>
 </main>
 @endsection
+

@@ -53,7 +53,21 @@
                 </div>
                 <div class="order-info__item">
                     <label>Payment Method</label>
-                    <span>{{ $order->transaction ? $order->transaction->mode : 'Not available' }}</span>
+                    <span>
+                        @if($order->transaction)
+                            @if($order->transaction->mode == 'cod')
+                                Cash on Delivery
+                            @elseif($order->transaction->mode == 'card')
+                                Credit/Debit Card
+                            @elseif($order->transaction->mode == 'paypal')
+                                PayPal
+                            @else
+                                {{ ucfirst($order->transaction->mode) }}
+                            @endif
+                        @else
+                            Cash on Delivery
+                        @endif
+                    </span>
                 </div>
             </div>
             <div class="checkout__totals-wrapper">
@@ -105,3 +119,4 @@
     </section>
 </main>
 @endsection
+

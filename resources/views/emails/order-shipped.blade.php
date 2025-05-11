@@ -27,7 +27,7 @@
 
         .button {
             display: inline-block;
-            background-color: #B9A16B;
+            background-color: #2275fc;
             color: white;
             padding: 10px 20px;
             text-decoration: none;

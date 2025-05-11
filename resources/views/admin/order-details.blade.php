@@ -76,7 +76,7 @@
 
     .tracking-progress {
         height: 4px;
-        background: #B9A16B;
+        background: #2275fc;
         position: absolute;
         left: 10%;
         top: 25px;
