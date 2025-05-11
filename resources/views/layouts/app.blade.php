@@ -795,16 +795,24 @@
     <script>
         // Simple lazy loading that won't break existing images
         document.addEventListener("DOMContentLoaded", function() {
-            // Use native lazy loading which is already in your HTML
-            // This script is just for browsers that don't support it
-            if (!('loading' in HTMLImageElement.prototype)) {
-                const images = document.querySelectorAll('img[loading="lazy"]');
-                images.forEach(img => {
-                    img.setAttribute('loading', 'eager');
+            // Use Intersection Observer API for better performance
+            if ('IntersectionObserver' in window) {
+                const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+                const imageObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            if (img.dataset.src) img.src = img.dataset.src;
+                            if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+                            imageObserver.unobserve(img);
+                        }
+                    });
                 });
+                lazyImages.forEach(img => imageObserver.observe(img));
             }
         });
     </script>
 </body>
 
 </html>
+

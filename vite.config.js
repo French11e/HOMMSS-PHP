@@ -6,12 +6,23 @@ export default defineConfig({
     plugins: [
         tailwindcss(),
         laravel({
-            input: ["resources/js/app.js", "resources/css/app.css"], // Using app.scss for Sass
+            input: ["resources/js/app.js", "resources/css/app.css"],
             refresh: true,
         }),
     ],
     build: {
         manifest: true,
         outDir: "public/build",
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    vendor: [
+                        'bootstrap',
+                        'jquery'
+                    ]
+                }
+            }
+        }
     },
 });
+

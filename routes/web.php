@@ -150,3 +150,7 @@ Route::middleware(['auth'])->group(function () {
     // Make sure this route exists
     Route::post('/user/set-password', [\App\Http\Controllers\UserController::class, 'setPassword'])->name('user.set.password');
 });
+
+// Product reviews
+Route::post('/product/{product_id}/review', [ReviewController::class, 'store'])->name('product.review.store');
+

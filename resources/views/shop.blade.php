@@ -65,7 +65,6 @@
                                 </li>
                                 @endforeach
 
-
                             </ul>
                         </div>
                     </div>
@@ -310,111 +309,88 @@
                             <div class="swiper-container background-img js-swiper-slider" data-settings='{"resizeObserver": true}'>
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
-                                        <a href="{{route('shop.product.details',['product_slug'=>$product->slug])}}">
+                                        <a href="{{route('shop.product.details',['product_slug'=>$product->slug])}}" 
+                                           aria-label="View details of {{$product->name}}">
                                             <img loading="lazy"
                                                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 330 400'%3E%3C/svg%3E"
                                                 data-src="{{asset('uploads/products')}}/{{$product->image}}"
                                                 width="330" height="400" alt="{{$product->name}}" class="pc__img lazy">
                                         </a>
                                     </div>
-                                    <div class="swiper-slide">
-                                        @foreach (explode(",",$product->images) as $gimg)
-                                        <a href="{{route('shop.product.details',['product_slug'=>$product->slug])}}">
-                                            <img loading="lazy"
-                                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 330 400'%3E%3C/svg%3E"
-                                                data-src="{{asset('uploads/products')}}/{{$gimg}}"
-                                                width="330" height="400" alt="{{$product->name}}" class="pc__img lazy">
-                                        </a>
-                                        @endforeach
-                                    </div>
                                 </div>
-                                <span class="pc__img-prev"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_prev_sm" />
-                                    </svg></span>
-                                <span class="pc__img-next"><svg width="7" height="11" viewBox="0 0 7 11"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_next_sm" />
-                                    </svg></span>
                             </div>
-                            @if(Cart::instance('cart')->content()->where('id',$product->id)->count() > 0)
-                            <a href="{{route('cart.index')}}" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn-warning mb-3">Go to Cart</a>
-                            @else
-                            <form name="addtocart-form" method="post" action="{{route('cart.add', ['product_slug' => $product->slug])}}">
-                                @csrf
-                                <input type="hidden" name="id" value="{{$product->id}}" />
-                                <input type="hidden" name="quantity" value="1" />
-                                <input type="hidden" name="name" value="{{$product->name}}" />
-                                <input type="hidden" name="price" value="{{$product->sale_price == '' ?  $product->regular_price : $product->sale_price}}" />
-                                <button type="submit" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium" data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
-                            </form>
-                            @endif
                         </div>
-
                         <div class="pc__info position-relative">
-                            <p class="pc__category">{{$product->category->name}}</p>
-                            <h6 class="pc__title"><a href="{{route('shop.product.details',['product_slug'=>$product->slug])}}">{{$product->name}}</a></h6>
-                            <div class="product-card__price d-flex">
+                            <h6 class="pc__title">
+                                <a href="{{route('shop.product.details',['product_slug'=>$product->slug])}}">{{$product->name}}</a>
+                            </h6>
+                            
+                            <!-- Add product rating -->
+                            <div class="product-rating d-flex align-items-center mb-2">
+                                @php
+                                    $avgRating = $product->getAverageRatingAttribute();
+                                    $fullStars = floor($avgRating);
+                                    $halfStar = $avgRating - $fullStars > 0.4;
+                                    $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0);
+                                @endphp
+                                
+                                <div class="reviews-group d-flex">
+                                    @for($i = 1; $i <= $fullStars; $i++)
+                                        <svg class="review-star" width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg" style="fill: #ffc107;">
+                                            <use href="#icon_star" />
+                                        </svg>
+                                    @endfor
+                                    
+                                    @if($halfStar)
+                                        <svg class="review-star" width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg" style="fill: url(#half-star-gradient-{{$product->id}});">
+                                            <defs>
+                                                <linearGradient id="half-star-gradient-{{$product->id}}" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                    <stop offset="50%" style="stop-color:#ffc107" />
+                                                    <stop offset="50%" style="stop-color:#ccc" />
+                                                </linearGradient>
+                                            </defs>
+                                            <use href="#icon_star" />
+                                        </svg>
+                                    @endif
+                                    
+                                    @for($i = 1; $i <= $emptyStars; $i++)
+                                        <svg class="review-star" width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
+                                            <use href="#icon_star" />
+                                        </svg>
+                                    @endfor
+                                </div>
+                                
+                                @if($product->reviews->count() > 0)
+                                    <span class="reviews-note text-lowercase text-secondary ms-1">
+                                        ({{ $product->reviews->count() }})
+                                    </span>
+                                @endif
+                            </div>
+                            
+                            <div class="product__price d-flex">
                                 <span class="money price">
                                     @if($product->sale_price)
-                                    <s>{{$product->regular_price}} </s> ₱{{$product->sale_price}}
+                                        <s>₱{{$product->regular_price}}</s> ₱{{$product->sale_price}}
                                     @else
-                                    ₱{{$product->regular_price}}
+                                        ₱{{$product->regular_price}}
                                     @endif
                                 </span>
                             </div>
-                            <div class="product-card__review d-flex align-items-center">
-                                <div class="reviews-group d-flex">
-                                    <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_star" />
-                                    </svg>
-                                    <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_star" />
-                                    </svg>
-                                    <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_star" />
-                                    </svg>
-                                    <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_star" />
-                                    </svg>
-                                    <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_star" />
-                                    </svg>
-                                </div>
-                                <span class="reviews-note text-lowercase text-secondary ms-1">8k+ reviews</span>
-                            </div>
-
-                            @if(Cart::instance('wishlist')->content()->where('id', $product->id)->count() > 0)
-                            <form method="POST" action="{{ route('wishlist.item.remove', ['rowId' => Cart::instance('wishlist')->content()->where('id', $product->id)->first()->rowId]) }}" class="wishlist-remove-form">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist filled-heart" title="Remove from Wishlist">
-                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_heart" />
-                                    </svg>
-                                </button>
-                            </form>
-                            @else
-                            <form method="POST" action="{{ route('wishlist.add') }}" class="wishlist-form">
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{ $product->id }}" />
-                                <input type="hidden" name="name" value="{{ $product->name }}" />
-                                <input type="hidden" name="price" value="{{ $product->sale_price ?: $product->regular_price }}" />
-                                <input type="hidden" name="quantity" value="1" />
-                                <button type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist" title="Remove from Wishlist">
-                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <use href="#icon_heart" />
-                                    </svg>
-                                </button>
-                            </form>
-                            @endif
-
+                            <button type="button" 
+                                    class="pc__btn-wl position-absolute bg-transparent border-0 p-0"
+                                    aria-label="Add {{$product->name}} to wishlist">
+                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_heart"></use>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </div>
                 @endforeach
                 @else
-                <div class="alert alert-info">No products found</div>
+                <div class="col-12">
+                    <p class="text-center">No products found</p>
+                </div>
                 @endif
             </div>
 
@@ -519,3 +495,5 @@
     });
 </script>
 @endpush
+
+
