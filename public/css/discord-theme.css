@@ -1,0 +1,78 @@
+/* Icon styling improvements */
+.menu-list .menu-item .icon {
+    margin-right: 12px !important;
+    color: var(--discord-muted) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 20px !important;
+    height: 20px !important;
+    flex-shrink: 0 !important;
+    transition: color 0.15s ease !important;
+}
+
+.menu-list .menu-item .icon i {
+    font-size: 18px !important;
+    line-height: 1 !important;
+}
+
+/* Icon-specific colors */
+.menu-list .menu-item a:hover .icon-home,
+.menu-list .menu-item.active a .icon-home {
+    color: #5865f2 !important; /* Discord blue */
+}
+
+.menu-list .menu-item a:hover .icon-package,
+.menu-list .menu-item.active a .icon-package {
+    color: #3ba55c !important; /* Discord green */
+}
+
+.menu-list .menu-item a:hover .icon-tag,
+.menu-list .menu-item.active a .icon-tag {
+    color: #faa61a !important; /* Discord yellow */
+}
+
+.menu-list .menu-item a:hover .icon-folder,
+.menu-list .menu-item.active a .icon-folder {
+    color: #ed4245 !important; /* Discord red */
+}
+
+.menu-list .menu-item a:hover .icon-shopping-bag,
+.menu-list .menu-item.active a .icon-shopping-bag {
+    color: #9b59b6 !important; /* Purple */
+}
+
+.menu-list .menu-item a:hover .icon-sliders,
+.menu-list .menu-item.active a .icon-sliders {
+    color: #3498db !important; /* Blue */
+}
+
+.menu-list .menu-item a:hover .icon-users,
+.menu-list .menu-item.active a .icon-users {
+    color: #2ecc71 !important; /* Green */
+}
+
+.menu-list .menu-item a:hover .icon-settings,
+.menu-list .menu-item.active a .icon-settings {
+    color: #e67e22 !important; /* Orange */
+}
+
+.menu-list .menu-item a:hover .icon-log-out,
+.menu-list .menu-item.active a .icon-log-out {
+    color: #e74c3c !important; /* Red */
+}
+
+/* Active item styling */
+.menu-list .menu-item.active > a .icon,
+.menu-list .menu-item.active > .menu-item-button .icon {
+    color: var(--discord-active-text) !important;
+}
+
+/* Submenu bullet styling */
+.menu-list .menu-item .sub-menu .sub-menu-item a::before {
+    content: "•" !important;
+    color: var(--discord-muted) !important;
+    position: absolute !important;
+    left: 24px !important;
+    font-size: 12px !important;
+}

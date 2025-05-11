@@ -451,9 +451,8 @@
                             <div class="center-heading">Main Home</div>
                             <ul class="menu-list">
                                 <li class="menu-item">
-                                    <a href="{{ route('admin.index') }}
-                                    " class="">
-                                        <div class="icon"><i class="icon-grid"></i></div>
+                                    <a href="{{ route('admin.index') }}" class="">
+                                        <div class="icon"><i class="icon-home"></i></div>
                                         <div class="text">Dashboard</div>
                                     </a>
                                 </li>
@@ -463,7 +462,7 @@
                             <ul class="menu-list">
                                 <li class="menu-item has-children">
                                     <a href="javascript:void(0);" class="menu-item-button">
-                                        <div class="icon"><i class="icon-shopping-cart"></i></div>
+                                        <div class="icon"><i class="icon-package"></i></div>
                                         <div class="text">Products</div>
                                     </a>
                                     <ul class="sub-menu">
@@ -481,7 +480,7 @@
                                 </li>
                                 <li class="menu-item has-children">
                                     <a href="javascript:void(0);" class="menu-item-button">
-                                        <div class="icon"><i class="icon-layers"></i></div>
+                                        <div class="icon"><i class="icon-tag"></i></div>
                                         <div class="text">Brand</div>
                                     </a>
                                     <ul class="sub-menu">
@@ -499,7 +498,7 @@
                                 </li>
                                 <li class="menu-item has-children">
                                     <a href="javascript:void(0);" class="menu-item-button">
-                                        <div class="icon"><i class="icon-layers"></i></div>
+                                        <div class="icon"><i class="icon-folder"></i></div>
                                         <div class="text">Category</div>
                                     </a>
                                     <ul class="sub-menu">
@@ -518,7 +517,7 @@
 
                                 <li class="menu-item has-children">
                                     <a href="javascript:void(0);" class="menu-item-button">
-                                        <div class="icon"><i class="icon-file-plus"></i></div>
+                                        <div class="icon"><i class="icon-shopping-bag"></i></div>
                                         <div class="text">Order</div>
                                     </a>
                                     <ul class="sub-menu">
@@ -534,32 +533,38 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="menu-item">
-                                    <a href="slider.html" class="">
-                                        <div class="icon"><i class="icon-image"></i></div>
-                                        <div class="text">Slider</div>
-                                    </a>
-                                </li>
 
                                 <li class="menu-item">
                                     <a href="{{ route('admin.users') }}" class="">
-                                        <div class="icon"><i class="icon-user"></i></div>
+                                        <div class="icon"><i class="icon-users"></i></div>
                                         <div class="text">Users</div>
                                     </a>
                                 </li>
 
-                                <li class="menu-item">
-                                    <a href="{{ route('admin.settings') }}" class="">
+                                <li class="menu-item has-children">
+                                    <a href="javascript:void(0);" class="menu-item-button">
                                         <div class="icon"><i class="icon-settings"></i></div>
                                         <div class="text">Settings</div>
                                     </a>
+                                    <ul class="sub-menu">
+                                        <li class="sub-menu-item">
+                                            <a href="{{ route('admin.settings') }}" class="">
+                                                <div class="text">General Settings</div>
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="slider.html" class="">
+                                                <div class="text">Homepage Slider</div>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
 
                                 <li class="menu-item">
                                     <form method="POST" action="{{route('logout')}}" id="logout-form">
                                         @csrf
                                         <a href="{{route('logout')}}" class="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <div class="icon"><i class="icon-settings"></i></div>
+                                            <div class="icon"><i class="icon-log-out"></i></div>
                                             <div class="text">Logout</div>
                                         </a>
                                     </form>
