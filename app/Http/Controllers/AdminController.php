@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
 use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -507,6 +509,9 @@ class AdminController extends Controller
             return back()->with('error', 'Order not found.');
         }
 
+        // Store previous status to check if status changed
+        $previousStatus = $order->status;
+
         // Make sure the status value is properly quoted as a string
         $order->status = (string)$request->order_status;
 
@@ -523,6 +528,26 @@ class AdminController extends Controller
 
         $order->save();
 
+        // Send email notification if status changed to processing
+        if ($request->order_status == 'processing' && $previousStatus != 'processing') {
+            $emailSent = $this->sendOrderProcessingEmail($order);
+            if ($emailSent) {
+                return back()->with('status', 'Order status updated and processing confirmation email sent to customer.');
+            } else {
+                return back()->with('status', 'Order status updated but failed to send processing confirmation email.');
+            }
+        }
+
+        // Send email notification if status changed to shipped
+        if ($request->order_status == 'shipped' && $previousStatus != 'shipped') {
+            $emailSent = $this->sendOrderShippedEmail($order);
+            if ($emailSent) {
+                return back()->with('status', 'Order status updated and shipping confirmation email sent to customer.');
+            } else {
+                return back()->with('status', 'Order status updated but failed to send shipping confirmation email.');
+            }
+        }
+
         // Update transaction status if order is delivered
         if ($request->order_status == 'delivered') {
             $transaction = Transaction::where('order_id', $order->id)->first();
@@ -533,5 +558,67 @@ class AdminController extends Controller
         }
 
         return back()->with('status', 'Order status has been updated successfully.');
+    }
+
+    private function sendOrderProcessingEmail($order)
+    {
+        // Load the user to get their email
+        $user = User::find($order->user_id);
+
+        if ($user && $user->email) {
+            try {
+                Mail::send('emails.order-processing', ['order' => $order], function ($message) use ($user, $order) {
+                    $message->to($user->email)
+                        ->subject('Your Order #' . $order->id . ' Is Being Processed');
+                });
+
+                // Log the successful email sending
+                Log::info('Processing confirmation email sent to: ' . $user->email . ' for order #' . $order->id);
+
+                // Add a note to the order
+                $order->notes = ($order->notes ? $order->notes . "\n" : '') .
+                    "Processing confirmation email sent to " . $user->email . " on " . now()->format('Y-m-d H:i:s');
+                $order->save();
+
+                return true;
+            } catch (\Exception $e) {
+                // Log the error
+                Log::error('Failed to send processing confirmation email: ' . $e->getMessage());
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    private function sendOrderShippedEmail($order)
+    {
+        // Load the user to get their email
+        $user = User::find($order->user_id);
+
+        if ($user && $user->email) {
+            try {
+                Mail::send('emails.order-shipped', ['order' => $order], function ($message) use ($user, $order) {
+                    $message->to($user->email)
+                        ->subject('Your Order #' . $order->id . ' Has Been Shipped');
+                });
+
+                // Log the successful email sending
+                Log::info('Shipping confirmation email sent to: ' . $user->email . ' for order #' . $order->id);
+
+                // Add a note to the order
+                $order->notes = ($order->notes ? $order->notes . "\n" : '') .
+                    "Shipping confirmation email sent to " . $user->email . " on " . now()->format('Y-m-d H:i:s');
+                $order->save();
+
+                return true;
+            } catch (\Exception $e) {
+                // Log the error
+                Log::error('Failed to send shipping confirmation email: ' . $e->getMessage());
+                return false;
+            }
+        }
+
+        return false;
     }
 }
