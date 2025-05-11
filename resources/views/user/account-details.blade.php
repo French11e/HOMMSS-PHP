@@ -305,5 +305,24 @@
             feedback.classList.add("text-success");
         }
     }
+
+    // Delete account functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const deleteConfirmationInput = document.getElementById('delete-confirmation');
+        const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+        const deleteAccountForm = document.getElementById('delete-account-form');
+
+        if (deleteConfirmationInput && confirmDeleteBtn && deleteAccountForm) {
+            deleteConfirmationInput.addEventListener('input', function() {
+                confirmDeleteBtn.disabled = this.value !== 'DELETE';
+            });
+
+            confirmDeleteBtn.addEventListener('click', function() {
+                if (deleteConfirmationInput.value === 'DELETE') {
+                    deleteAccountForm.submit();
+                }
+            });
+        }
+    });
 </script>
 @endsection

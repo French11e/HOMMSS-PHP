@@ -247,6 +247,8 @@ class UserController extends Controller
         $user = Auth::user();
         $userId = $user->id;
 
+        Log::info('Account deletion requested', ['user_id' => $userId]);
+
         // Verify password for users with password set
         if (!$user->google_id || ($user->google_id && $user->password)) {
             $request->validate([
@@ -254,21 +256,31 @@ class UserController extends Controller
             ]);
 
             if (!Hash::check($request->password, $user->password)) {
+                Log::warning('Account deletion failed: incorrect password', ['user_id' => $userId]);
                 return back()->withErrors(['password' => 'Password is incorrect']);
             }
         }
 
-        // Logout the user
-        Auth::logout();
+        try {
+            // Logout the user
+            Auth::logout();
 
-        // Delete the user account using the User model
-        \App\Models\User::destroy($userId);
+            // Delete the user account using the User model
+            \App\Models\User::destroy($userId);
 
-        // Invalidate the session
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+            // Invalidate the session
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
 
-        return redirect()->route('home')->with('status', 'Your account has been permanently deleted.');
+            Log::info('Account successfully deleted', ['user_id' => $userId]);
+            return redirect()->route('home')->with('status', 'Your account has been permanently deleted.');
+        } catch (\Exception $e) {
+            Log::error('Error deleting account', [
+                'user_id' => $userId,
+                'error' => $e->getMessage()
+            ]);
+            return redirect()->route('user.account.details')->with('error', 'An error occurred while deleting your account. Please try again.');
+        }
     }
 
     public function addresses()
