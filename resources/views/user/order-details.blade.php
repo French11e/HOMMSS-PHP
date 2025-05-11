@@ -93,8 +93,8 @@
     }
 
     .wgp-pagination .page-item.active .page-link {
-        background-color: #40c710;
-        border-color: #40c710;
+        background-color: #B9A16B;
+        border-color: #B9A16B;
         color: white;
     }
 
@@ -131,7 +131,7 @@
         left: 0;
         right: 0;
         height: 4px;
-        background: linear-gradient(to right, #40c710, #8be472);
+        background: linear-gradient(to right, #B9A16B, #d6c7a4);
     }
 
     .tracking-line {
@@ -176,10 +176,10 @@
     }
 
     .step-active .step-icon {
-        background: #40c710;
+        background: #B9A16B;
         color: white;
-        border-color: #40c710;
-        box-shadow: 0 0 0 5px rgba(64, 199, 16, 0.2);
+        border-color: #B9A16B;
+        box-shadow: 0 0 0 5px rgba(185, 161, 107, 0.2);
         transform: scale(1.05);
     }
 
@@ -192,7 +192,7 @@
     }
 
     .step-active .step-label {
-        color: #40c710;
+        color: #B9A16B;
     }
 
     .step-date {
@@ -205,7 +205,7 @@
     .progress-line {
         position: absolute;
         height: 3px;
-        background: linear-gradient(to right, #40c710, #8be472);
+        background: linear-gradient(to right, #B9A16B, #d6c7a4);
         top: 45px;
         left: 10%;
         z-index: 2;
@@ -268,7 +268,7 @@
 
     /* Status colors with gradients */
     .bg-success {
-        background: linear-gradient(to right, #40c710, #8be472) !important;
+        background: linear-gradient(to right, #B9A16B, #d6c7a4) !important;
     }
 
     .bg-danger {

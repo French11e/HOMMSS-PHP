@@ -515,17 +515,40 @@ class AdminController extends Controller
         // Make sure the status value is properly quoted as a string
         $order->status = (string)$request->order_status;
 
-        // Set appropriate date based on status
-        if ($request->order_status == 'processing') {
+        // Set or clear appropriate dates based on status
+        if ($request->order_status == 'ordered') {
+            // Clear processing, shipped, and delivered dates when moved back to ordered
+            $order->processing_date = null;
+            $order->shipped_date = null;
+            $order->delivered_date = null;
+        } elseif ($request->order_status == 'processing') {
+            // Set processing date, clear shipped and delivered dates
             $order->processing_date = Carbon::now();
+            $order->shipped_date = null;
+            $order->delivered_date = null;
         } elseif ($request->order_status == 'shipped') {
-            $order->shipped_date = Carbon::now();
+            // Set shipped date if not already set, clear delivered date
+            if (!$order->shipped_date) {
+                $order->shipped_date = Carbon::now();
+            }
+            $order->delivered_date = null;
         } elseif ($request->order_status == 'delivered') {
-            $order->delivered_date = Carbon::now();
+            // Set delivered date if not already set
+            if (!$order->delivered_date) {
+                $order->delivered_date = Carbon::now();
+            }
         } elseif ($request->order_status == 'canceled') {
-            $order->canceled_date = Carbon::now();
+            // Set canceled date if not already set
+            if (!$order->canceled_date) {
+                $order->canceled_date = Carbon::now();
+            }
         }
 
+        $order->save();
+
+        // Add a note about the status change
+        $statusNote = "Order status changed from '{$previousStatus}' to '{$request->order_status}' on " . now()->format('Y-m-d H:i:s');
+        $order->notes = ($order->notes ? $order->notes . "\n" : '') . $statusNote;
         $order->save();
 
         // Send email notification if status changed to processing

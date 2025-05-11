@@ -76,7 +76,7 @@
 
     .tracking-progress {
         height: 4px;
-        background: #40c710;
+        background: #B9A16B;
         position: absolute;
         left: 10%;
         top: 25px;
@@ -114,8 +114,13 @@
     }
 
     .step-active .step-icon {
-        background: #40c710;
+        background: #B9A16B;
         color: white;
+        border-color: #B9A16B;
+    }
+
+    .step-active .step-label {
+        color: #B9A16B;
     }
 
     .step-label {
