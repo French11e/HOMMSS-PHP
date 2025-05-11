@@ -4,6 +4,29 @@
     <div class="mb-4 pb-4"></div>
     <section class="my-account container">
         <h2 class="page-title">Account Details</h2>
+
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+
+        @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
+
+        @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
         <div class="row">
             <div class="col-lg-3">
                 @include('user.account-nav')
@@ -79,129 +102,132 @@
                                     </div>
                                 </form>
 
-                                <!-- Google user without password -->
-                                @if(Auth::user()->google_id && !Auth::user()->password)
-                                <div class="col-md-12 mt-4">
-                                    <div class="alert alert-info">
-                                        <h5 class="text-uppercase mb-2">Google Account</h5>
-                                        <p>You're signed in with Google. You can set a password to also log in directly with your email.</p>
+                                <!-- Password Management Section -->
+                                <div id="password-management-section">
+                                    @php
+                                    $user = Auth::user();
+                                    $hasGoogleId = !empty($user->google_id);
+                                    $hasPassword = !empty($user->password);
+                                    @endphp
 
-                                        <button class="btn btn-outline-primary mt-2" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#setPasswordForm" aria-expanded="false" aria-controls="setPasswordForm">
-                                            Set Password
-                                        </button>
+                                    @if($hasGoogleId && !$hasPassword)
+                                    <!-- Google user without password -->
+                                    <div class="col-md-12 mt-4">
+                                        <div class="alert alert-info">
+                                            <h5 class="text-uppercase mb-2">Google Account</h5>
+                                            <p>You're signed in with Google. You can set a password to also log in directly with your email.</p>
 
-                                        <div class="collapse mt-3" id="setPasswordForm">
-                                            <form method="POST" action="{{ route('user.set.password') }}" class="form-new-product form-style-1 needs-validation" novalidate="">
-                                                @csrf
+                                            <button class="btn btn-outline-primary mt-2" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#setPasswordForm" aria-expanded="false" aria-controls="setPasswordForm">
+                                                Set Password
+                                            </button>
 
-                                                <fieldset class="name">
-                                                    <div class="body-title">New password <span class="tf-color-1">*</span></div>
-                                                    <input class="flex-grow" type="password" placeholder="New password"
-                                                        id="password" name="password" aria-required="true" required="">
-                                                </fieldset>
-                                                @error('password')<span class="alert alert-danger text-center">{{$message}}</span>@enderror
+                                            <div class="collapse mt-3" id="setPasswordForm">
+                                                <form method="POST" action="{{ route('user.set.password') }}" class="form-new-product form-style-1 needs-validation" novalidate>
+                                                    @csrf
+                                                    <fieldset class="name">
+                                                        <div class="body-title">New password <span class="tf-color-1">*</span></div>
+                                                        <input class="flex-grow" type="password" placeholder="New password"
+                                                            id="password" name="password" aria-required="true" required>
+                                                    </fieldset>
+                                                    @error('password')<span class="alert alert-danger text-center d-block">{{$message}}</span>@enderror
 
-                                                <fieldset class="name">
-                                                    <div class="body-title">Confirm new password <span class="tf-color-1">*</span></div>
-                                                    <input class="flex-grow" type="password" placeholder="Confirm new password"
-                                                        id="password_confirmation" name="password_confirmation" aria-required="true" required=""
-                                                        oninput="checkPasswordMatch(this)">
-                                                    <div id="password-match-feedback" class="form-text"></div>
-                                                </fieldset>
+                                                    <fieldset class="name">
+                                                        <div class="body-title">Confirm new password <span class="tf-color-1">*</span></div>
+                                                        <input class="flex-grow" type="password" placeholder="Confirm new password"
+                                                            id="password_confirmation" name="password_confirmation" aria-required="true" required
+                                                            oninput="checkPasswordMatch(this)">
+                                                        <div id="password-match-feedback" class="form-text"></div>
+                                                    </fieldset>
 
-                                                <div class="col-md-12">
-                                                    <div class="my-3">
-                                                        <button type="submit" class="btn btn-primary tf-button">Set Password</button>
+                                                    <div class="col-md-12">
+                                                        <div class="my-3">
+                                                            <button type="submit" class="btn btn-primary tf-button">Set Password</button>
+                                                        </div>
                                                     </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @elseif($hasGoogleId && $hasPassword)
+                                    <!-- Google user with password -->
+                                    <div class="col-md-12 mt-4">
+                                        <div class="alert alert-info">
+                                            <h5 class="text-uppercase mb-2">PASSWORD CHANGE</h5>
+                                            <p>You can log in with either Google or your email/password.</p>
+                                        </div>
+
+                                        <form method="POST" action="{{ route('user.change.password') }}" class="form-new-product form-style-1 needs-validation" novalidate="">
+                                            @csrf
+                                            <fieldset class="name">
+                                                <div class="body-title">Current password <span class="tf-color-1">*</span></div>
+                                                <input class="flex-grow" type="password" placeholder="Current password"
+                                                    id="current_password" name="current_password" aria-required="true" required="">
+                                            </fieldset>
+                                            @error('current_password')<span class="alert alert-danger text-center">{{$message}}</span>@enderror
+
+                                            <fieldset class="name">
+                                                <div class="body-title">New password <span class="tf-color-1">*</span></div>
+                                                <input class="flex-grow" type="password" placeholder="New password"
+                                                    id="password" name="password" aria-required="true" required="">
+                                            </fieldset>
+                                            @error('password')<span class="alert alert-danger text-center">{{$message}}</span>@enderror
+
+                                            <fieldset class="name">
+                                                <div class="body-title">Confirm new password <span class="tf-color-1">*</span></div>
+                                                <input class="flex-grow" type="password" placeholder="Confirm new password"
+                                                    id="password_confirmation" name="password_confirmation" aria-required="true" required=""
+                                                    oninput="checkPasswordMatch(this)">
+                                                <div id="password-match-feedback" class="form-text"></div>
+                                            </fieldset>
+
+                                            <div class="col-md-12">
+                                                <div class="my-3">
+                                                    <button type="submit" class="btn btn-primary tf-button">Change Password</button>
                                                 </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Google user with password -->
-                                @elseif(Auth::user()->google_id && Auth::user()->password)
-                                <div class="col-md-12 mt-4">
-                                    <div class="alert alert-info">
-                                        <h5 class="text-uppercase mb-2">Password Management</h5>
-                                        <p>You can log in with either Google or your email/password.</p>
-                                    </div>
-
-                                    <form method="POST" action="{{ route('user.change.password') }}" class="form-new-product form-style-1 needs-validation" novalidate="">
-                                        @csrf
-
-                                        <fieldset class="name">
-                                            <div class="body-title">Current password <span class="tf-color-1">*</span></div>
-                                            <input class="flex-grow" type="password" placeholder="Current password"
-                                                id="current_password" name="current_password" aria-required="true" required="">
-                                        </fieldset>
-                                        @error('current_password')<span class="alert alert-danger text-center">{{$message}}</span>@enderror
-
-                                        <fieldset class="name">
-                                            <div class="body-title">New password <span class="tf-color-1">*</span></div>
-                                            <input class="flex-grow" type="password" placeholder="New password"
-                                                id="password" name="password" aria-required="true" required="">
-                                        </fieldset>
-                                        @error('password')<span class="alert alert-danger text-center">{{$message}}</span>@enderror
-
-                                        <fieldset class="name">
-                                            <div class="body-title">Confirm new password <span class="tf-color-1">*</span></div>
-                                            <input class="flex-grow" type="password" placeholder="Confirm new password"
-                                                id="password_confirmation" name="password_confirmation" aria-required="true" required=""
-                                                oninput="checkPasswordMatch(this)">
-                                            <div id="password-match-feedback" class="form-text"></div>
-                                        </fieldset>
-
-                                        <div class="col-md-12">
-                                            <div class="my-3">
-                                                <button type="submit" class="btn btn-primary tf-button">Change Password</button>
                                             </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- Regular user (not Google) -->
-                                @else
-                                <div class="col-md-12 mt-4">
-                                    <div class="my-3">
-                                        <h5 class="text-uppercase mb-3">Password Change</h5>
+                                        </form>
                                     </div>
-
-                                    <form method="POST" action="{{ route('user.change.password') }}" class="form-new-product form-style-1 needs-validation" novalidate="">
-                                        @csrf
-
-                                        <fieldset class="name">
-                                            <div class="body-title">Current password <span class="tf-color-1">*</span></div>
-                                            <input class="flex-grow" type="password" placeholder="Current password"
-                                                id="current_password" name="current_password" aria-required="true" required="">
-                                        </fieldset>
-                                        @error('current_password')<span class="alert alert-danger text-center">{{$message}}</span>@enderror
-
-                                        <fieldset class="name">
-                                            <div class="body-title">New password <span class="tf-color-1">*</span></div>
-                                            <input class="flex-grow" type="password" placeholder="New password"
-                                                id="password" name="password" aria-required="true" required="">
-                                            <div class="form-text">
-                                                Must be 12+ characters and include uppercase, lowercase, number, and special character.
-                                            </div>
-                                        </fieldset>
-                                        @error('password')<span class="alert alert-danger text-center">{{$message}}</span>@enderror
-
-                                        <fieldset class="name">
-                                            <div class="body-title">Confirm new password <span class="tf-color-1">*</span></div>
-                                            <input class="flex-grow" type="password" placeholder="Confirm new password"
-                                                id="password_confirmation" name="password_confirmation" aria-required="true" required=""
-                                                oninput="checkPasswordMatch(this)">
-                                            <div id="password-match-feedback" class="form-text"></div>
-                                        </fieldset>
-
-                                        <div class="col-md-12">
-                                            <div class="my-3">
-                                                <button type="submit" class="btn btn-primary tf-button">Change Password</button>
-                                            </div>
+                                    @else
+                                    <!-- Regular user -->
+                                    <div class="col-md-12 mt-4">
+                                        <div class="alert alert-info">
+                                            <h5 class="text-uppercase mb-2">PASSWORD CHANGE</h5>
                                         </div>
-                                    </form>
+
+                                        <form method="POST" action="{{ route('user.change.password') }}" class="form-new-product form-style-1 needs-validation" novalidate="">
+                                            @csrf
+                                            <fieldset class="name">
+                                                <div class="body-title">Current password <span class="tf-color-1">*</span></div>
+                                                <input class="flex-grow" type="password" placeholder="Current password"
+                                                    id="current_password" name="current_password" aria-required="true" required="">
+                                            </fieldset>
+                                            @error('current_password')<span class="alert alert-danger text-center">{{$message}}</span>@enderror
+
+                                            <fieldset class="name">
+                                                <div class="body-title">New password <span class="tf-color-1">*</span></div>
+                                                <input class="flex-grow" type="password" placeholder="New password"
+                                                    id="password" name="password" aria-required="true" required="">
+                                            </fieldset>
+                                            @error('password')<span class="alert alert-danger text-center">{{$message}}</span>@enderror
+
+                                            <fieldset class="name">
+                                                <div class="body-title">Confirm new password <span class="tf-color-1">*</span></div>
+                                                <input class="flex-grow" type="password" placeholder="Confirm new password"
+                                                    id="password_confirmation" name="password_confirmation" aria-required="true" required=""
+                                                    oninput="checkPasswordMatch(this)">
+                                                <div id="password-match-feedback" class="form-text"></div>
+                                            </fieldset>
+
+                                            <div class="col-md-12">
+                                                <div class="my-3">
+                                                    <button type="submit" class="btn btn-primary tf-button">Change Password</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    @endif
                                 </div>
-                                @endif
                             </div>
                         </div>
                     </div>
@@ -223,13 +249,11 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="deleteAccountModalLabel">Confirm Account Deletion</h5>
+                                            <h5 class="modal-title" id="deleteAccountModalLabel">Delete Account</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>Are you absolutely sure you want to delete your account? This action cannot be undone.</p>
-                                            <p>All your personal data, orders, and preferences will be permanently removed.</p>
-
+                                            <p class="text-danger">Warning: This action cannot be undone. All your data will be permanently deleted.</p>
                                             <form method="POST" action="{{ route('user.account.delete') }}" id="delete-account-form">
                                                 @csrf
                                                 @method('DELETE')
@@ -239,7 +263,7 @@
                                                     <input type="text" class="form-control" id="delete-confirmation" required>
                                                 </div>
 
-                                                @if(!Auth::user()->google_id)
+                                                @if(!Auth::user()->google_id || (Auth::user()->google_id && Auth::user()->password))
                                                 <div class="mb-3">
                                                     <label for="password-confirmation" class="form-label">Enter your password</label>
                                                     <input type="password" class="form-control" id="password-confirmation" name="password" required>
@@ -281,37 +305,5 @@
             feedback.classList.add("text-success");
         }
     }
-
-    // Preview profile picture before upload
-    document.getElementById('profile_picture').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const profilePicContainer = document.querySelector('.profile-picture img');
-                profilePicContainer.src = event.target.result;
-            }
-            reader.readAsDataURL(file);
-        }
-    });
-
-    // Delete account confirmation
-    document.addEventListener('DOMContentLoaded', function() {
-        const deleteConfirmationInput = document.getElementById('delete-confirmation');
-        const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
-        const deleteAccountForm = document.getElementById('delete-account-form');
-
-        if (deleteConfirmationInput && confirmDeleteBtn) {
-            deleteConfirmationInput.addEventListener('input', function() {
-                confirmDeleteBtn.disabled = this.value !== 'DELETE';
-            });
-
-            confirmDeleteBtn.addEventListener('click', function() {
-                if (deleteConfirmationInput.value === 'DELETE') {
-                    deleteAccountForm.submit();
-                }
-            });
-        }
-    });
 </script>
 @endsection

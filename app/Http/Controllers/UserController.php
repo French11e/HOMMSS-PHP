@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Validator;
@@ -147,47 +148,93 @@ class UserController extends Controller
     {
         $user = User::find(Auth::id());
 
+        Log::info('Setting password for user', [
+            'user_id' => $user->id,
+            'has_google_id' => !empty($user->google_id),
+            'has_password' => !empty($user->password),
+            'request_data' => $request->all()
+        ]);
+
         if (!$user->google_id) {
+            Log::warning('User attempted to set password but is not a Google user');
             return redirect()->back()->with('error', 'This action is only available for Google accounts.');
         }
 
-        $request->validate([
-            'password' => [
-                'required',
-                'string',
-                'min:12',
-                'confirmed',
-                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.]).{12,}$/',
-            ],
-        ], [
-            'password.regex' => 'The password must contain at least: 1 uppercase, 1 lowercase, 1 number and 1 special character',
-        ]);
+        try {
+            $validated = $request->validate([
+                'password' => [
+                    'required',
+                    'string',
+                    'min:12',
+                    'confirmed',
+                    'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.]).{12,}$/',
+                ],
+            ], [
+                'password.regex' => 'The password must contain at least: 1 uppercase, 1 lowercase, 1 number and 1 special character',
+            ]);
 
-        $user->password = Hash::make($request->password);
-        $user->save();
+            Log::info('Password validation passed', ['user_id' => $user->id]);
 
-        return redirect()->back()->with('success', 'Password set successfully. You can now log in with either Google or your email/password.');
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            Log::info('Password set successfully for user', [
+                'user_id' => $user->id,
+                'has_password_now' => !empty($user->password)
+            ]);
+
+            return redirect()->back()->with('success', 'Password set successfully. You can now log in with either Google or your email/password.');
+        } catch (\Exception $e) {
+            Log::error('Error setting password', [
+                'user_id' => $user->id,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return redirect()->back()->withErrors(['password' => $e->getMessage()])->withInput();
+        }
     }
 
     public function changePassword(Request $request)
     {
         $user = User::find(Auth::id());
 
-        $request->validate([
-            'current_password' => 'required|current_password',
-            'password' => [
-                'required',
-                'string',
-                'min:12',
-                'confirmed',
-                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.]).{12,}$/',
-                'different:current_password',
-            ],
-        ], [
-            'password.regex' => 'The password must contain at least: 1 uppercase, 1 lowercase, 1 number and 1 special character',
-            'current_password.current_password' => 'The current password is incorrect',
-            'password.different' => 'The new password must be different from your current password',
-        ]);
+        // Different validation rules based on authentication type
+        if ($user->google_id && !$user->password) {
+            // Google user setting password for the first time
+            $request->validate([
+                'password' => [
+                    'required',
+                    'string',
+                    'min:12',
+                    'confirmed',
+                    'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.]).{12,}$/',
+                ],
+            ], [
+                'password.regex' => 'The password must contain at least: 1 uppercase, 1 lowercase, 1 number and 1 special character',
+            ]);
+        } else {
+            // Regular user or Google user with password changing password
+            $request->validate([
+                'current_password' => 'required',
+                'password' => [
+                    'required',
+                    'string',
+                    'min:12',
+                    'confirmed',
+                    'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.]).{12,}$/',
+                    'different:current_password',
+                ],
+            ], [
+                'password.regex' => 'The password must contain at least: 1 uppercase, 1 lowercase, 1 number and 1 special character',
+                'password.different' => 'The new password must be different from your current password',
+            ]);
+
+            // Verify current password
+            if (!Hash::check($request->current_password, $user->password)) {
+                return back()->withErrors(['current_password' => 'The current password is incorrect']);
+            }
+        }
 
         $user->password = Hash::make($request->password);
         $user->save();
@@ -200,8 +247,8 @@ class UserController extends Controller
         $user = Auth::user();
         $userId = $user->id;
 
-        // Verify password for non-Google users
-        if (!$user->google_id) {
+        // Verify password for users with password set
+        if (!$user->google_id || ($user->google_id && $user->password)) {
             $request->validate([
                 'password' => 'required',
             ]);
@@ -337,5 +384,22 @@ class UserController extends Controller
         }
 
         return redirect()->route('user.addresses')->with('success', 'Address deleted successfully');
+    }
+
+    public function checkAccountStatus()
+    {
+        $user = Auth::user();
+        $status = [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'has_google_id' => !empty($user->google_id),
+            'has_password' => !empty($user->password),
+            'account_type' => !empty($user->google_id) ?
+                (!empty($user->password) ? 'Google with password' : 'Google without password') :
+                'Regular account'
+        ];
+
+        return response()->json($status);
     }
 }

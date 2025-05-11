@@ -138,3 +138,14 @@ Route::get('/otp/resend', [\App\Http\Controllers\Auth\LoginController::class, 'r
 
 // User account deletion
 Route::delete('/user/account/delete', [\App\Http\Controllers\UserController::class, 'deleteAccount'])->name('user.account.delete');
+
+// Diagnostic route
+Route::get('/user/account-status', [\App\Http\Controllers\UserController::class, 'checkAccountStatus'])
+    ->middleware('auth')
+    ->name('user.account.status');
+
+// User account routes
+Route::middleware(['auth'])->group(function () {
+    // Make sure this route exists
+    Route::post('/user/set-password', [\App\Http\Controllers\UserController::class, 'setPassword'])->name('user.set.password');
+});
