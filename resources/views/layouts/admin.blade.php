@@ -24,8 +24,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
 
-    <!-- Discord Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Roboto Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Discord-inspired CSS -->
     <style>
@@ -45,7 +45,7 @@
 
         /* Global Styles */
         body.body {
-            font-family: 'Noto Sans', sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-color: var(--discord-bg);
             color: var(--discord-text);
         }

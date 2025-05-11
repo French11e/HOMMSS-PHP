@@ -210,7 +210,12 @@
                 <div class="wg-filter flex-grow">
                     <h5>Ordered Details</h5>
                 </div>
-                <a class="tf-button style-1 w208" href="{{route('admin.orders')}}">Back</a>
+                <div class="flex gap-2">
+                    <a class="tf-button style-2" href="{{ route('admin.order.packing-slip', ['order_id' => $order->id]) }}" target="_blank">
+                        <i class="icon-printer mr-1"></i>Print Packing Slip
+                    </a>
+                    <a class="tf-button style-1" href="{{route('admin.orders')}}">Back</a>
+                </div>
             </div>
             <div class="table-responsive">
                 @if(Session::has('status'))

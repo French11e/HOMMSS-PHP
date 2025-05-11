@@ -489,6 +489,16 @@ class AdminController extends Controller
         return view('admin.order-details', compact('order', 'orderItems', 'transaction'));
     }
 
+    public function orderPackingSlip($order_id)
+    {
+        $order = Order::with(['user', 'orderItems.product'])->find($order_id);
+        if (!$order) {
+            abort(404, 'Order not found');
+        }
+
+        return view('admin.order-packing-slip', compact('order'));
+    }
+
     public function update_order_status(Request $request)
     {
         $order = Order::find($request->order_id);

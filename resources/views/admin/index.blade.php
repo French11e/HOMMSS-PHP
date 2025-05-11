@@ -273,7 +273,7 @@
                             name: 'Pending',
                             data: [{
                                 {
-                                    $OrderAmountM
+                                    $OrderedAmountM
                                 }
                             }]
                         },
@@ -334,7 +334,7 @@
                     tooltip: {
                         y: {
                             formatter: function(val) {
-                                return "$ " + val + ""
+                                return "₱" + val
                             }
                         }
                     }
