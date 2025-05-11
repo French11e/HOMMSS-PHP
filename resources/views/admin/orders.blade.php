@@ -14,7 +14,7 @@
                     <i class="icon-chevron-right"></i>
                 </li>
                 <li>
-                    <div class="text-tiny">Orders</div>
+                    <div class="text-tiny">All Orders</div>
                 </li>
             </ul>
         </div>
@@ -35,62 +35,67 @@
             </div>
             <div class="wg-table table-all-user">
                 <div class="table-responsive">
+                    @if(Session::has('status'))
+                    <p class="alert alert-success">{{Session::get('status')}}</p>
+                    @endif
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th style="width:70px">OrderNo</th>
-                                <th class="text-center">Name</th>
-                                <th class="text-center">Phone</th>
-                                <th class="text-center">Subtotal</th>
-                                <th class="text-center">Tax</th>
-                                <th class="text-center">Total</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Order Date</th>
-                                <th class="text-center">Total Items</th>
-                                <th class="text-center">Delivered On</th>
-                                <th></th>
+                                <th>#</th>
+                                <th>Customer</th>
+                                <th>Phone</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Order Date</th>
+                                <th class="text-center">Items</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($orders as $order)
                             <tr>
-                                <td class="text-center">{{$order->id}}</td>
-                                <td class="text-center">{{$order->name}}</td>
-                                <td class="text-center">{{$order->phone}}</td>
-                                <td class="text-center">₱{{$order->subtotal}}</td>
-                                <td class="text-center">₱{{$order->tax}}</td>
-                                <td class="text-center">₱{{$order->total}}</td>
-                                <td class="text-center">
+                                <td>{{$order->id}}</td>
+                                <td class="pname">
+                                    <div class="name">
+                                        <a href="{{ route('admin.user.orders', ['id' => $order->user_id]) }}" class="body-title-2">{{$order->name}}</a>
+                                        <div class="text-tiny mt-3">{{$order->address}}</div>
+                                    </div>
+                                </td>
+                                <td>{{$order->phone}}</td>
+                                <td>₱{{$order->total}}</td>
+                                <td>
                                     @if($order->status == 'delivered')
                                     <span class="badge bg-success">Delivered</span>
+                                    @elseif($order->status == 'processing')
+                                    <span class="badge bg-info">Processing</span>
+                                    @elseif($order->status == 'shipped')
+                                    <span class="badge bg-primary">Shipped</span>
                                     @elseif($order->status == 'canceled')
                                     <span class="badge bg-danger">Canceled</span>
                                     @else
                                     <span class="badge bg-warning">Ordered</span>
                                     @endif
                                 </td>
-                                <td class="text-center">{{$order->created_at}}</td>
+                                <td>{{$order->created_at->format('M d, Y')}}</td>
                                 <td class="text-center">{{$order->orderItems->count()}}</td>
-                                <td class="text-center">{{$order->delivered_date}}</td>
-                                <td class="text-center">
-                                    <a href="{{route('admin.order.details', ['order_id' => $order->id])}}">
-                                        <div class="list-icon-function view-icon">
+                                <td>
+                                    <div class="list-icon-function">
+                                        <a href="{{route('admin.order.details', ['order_id' => $order->id])}}">
                                             <div class="item eye">
                                                 <i class="icon-eye"></i>
                                             </div>
-                                        </div>
-                                    </a>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
-
                     </table>
                 </div>
             </div>
             <div class="divider"></div>
             <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
-                {{$orders->links('pagination::bootstrap-4')}}
+                {{ $orders->links('pagination::bootstrap-5') }}
             </div>
         </div>
     </div>

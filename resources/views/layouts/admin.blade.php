@@ -10,7 +10,6 @@
 
     <title>HOMMSS</title>
 
-
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="author" content="surfside media" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.min.css') }}">
@@ -25,8 +24,404 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
 
-    @stack('styles')
+    <!-- Discord Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- Discord-inspired CSS -->
+    <style>
+        /* Discord Light Theme Colors */
+        :root {
+            --discord-bg: #ffffff;
+            --discord-sidebar: #f2f3f5;
+            --discord-hover: #e3e5e8;
+            --discord-text: #2e3338;
+            --discord-muted: #747f8d;
+            --discord-accent: #5865f2;
+            --discord-green: #3ba55c;
+            --discord-divider: #e3e5e8;
+            --discord-card: #f8f9fa;
+            --discord-shadow: rgba(0, 0, 0, 0.08);
+        }
+
+        /* Global Styles */
+        body.body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: var(--discord-bg);
+            color: var(--discord-text);
+        }
+
+        /* Sidebar Styling */
+        .section-menu-left {
+            background-color: var(--discord-sidebar);
+            border-right: 1px solid var(--discord-divider);
+        }
+
+        .box-logo {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--discord-divider);
+        }
+
+        .center-heading {
+            color: var(--discord-muted);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 24px 16px 8px;
+            letter-spacing: 0.02em;
+        }
+
+        .menu-list .menu-item a {
+            border-radius: 4px;
+            margin: 2px 8px;
+            padding: 8px 12px;
+            transition: background-color 0.15s ease;
+        }
+
+        .menu-list .menu-item a:hover {
+            background-color: var(--discord-hover);
+        }
+
+        .menu-list .menu-item a .icon i {
+            color: var(--discord-muted);
+        }
+
+        .menu-list .menu-item a .text {
+            font-weight: 500;
+        }
+
+        .menu-list .menu-item.has-children .sub-menu {
+            background-color: transparent;
+            padding-left: 12px;
+        }
+
+        .menu-list .menu-item.has-children .sub-menu .sub-menu-item a {
+            padding: 6px 12px;
+            margin-left: 24px;
+        }
+
+        /* Header Styling */
+        .header-dashboard {
+            background-color: var(--discord-bg);
+            border-bottom: 1px solid var(--discord-divider);
+            padding: 0;
+            box-shadow: 0 1px 3px var(--discord-shadow);
+        }
+
+        .header-dashboard .wrap {
+            padding: 12px 16px;
+        }
+
+        .form-search {
+            background-color: var(--discord-sidebar);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .form-search input {
+            background-color: var(--discord-sidebar);
+            border: none;
+            padding: 8px 12px;
+            color: var(--discord-text);
+        }
+
+        .form-search .button-submit button {
+            color: var(--discord-muted);
+        }
+
+        /* Content Area */
+        .main-content {
+            padding: 24px;
+            background-color: var(--discord-bg);
+        }
+
+        /* Cards and Widgets */
+        .wg-chart-default,
+        .wg-box {
+            background-color: var(--discord-card);
+            border-radius: 8px;
+            border: 1px solid var(--discord-divider);
+            box-shadow: 0 2px 10px var(--discord-shadow);
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: var(--discord-accent);
+            border-color: var(--discord-accent);
+        }
+
+        .btn-primary:hover {
+            background-color: #4752c4;
+            border-color: #4752c4;
+        }
+
+        .btn-success {
+            background-color: var(--discord-green);
+            border-color: var(--discord-green);
+        }
+
+        /* Tables */
+        .table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+        }
+
+        .table th {
+            background-color: var(--discord-sidebar);
+            color: var(--discord-text);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.03em;
+        }
+
+        .table td,
+        .table th {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--discord-divider);
+        }
+
+        /* Footer */
+        .bottom-page {
+            border-top: 1px solid var(--discord-divider);
+            padding: 16px 24px;
+            color: var(--discord-muted);
+            font-size: 14px;
+        }
+
+        /* Discord-style Icon Improvements */
+        /* Icon Base Styling */
+        [class^="icon-"],
+        [class*=" icon-"] {
+            color: var(--discord-muted);
+            font-size: 18px;
+            transition: color 0.15s ease;
+        }
+
+        /* Menu Icons */
+        .menu-list .menu-item a .icon i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            color: var(--discord-muted);
+        }
+
+        .menu-list .menu-item a:hover .icon i {
+            color: var(--discord-text);
+        }
+
+        .menu-list .menu-item.active a .icon i {
+            color: var(--discord-accent);
+        }
+
+        /* Action Icons */
+        .list-icon-function .item {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            background-color: transparent;
+            transition: background-color 0.15s ease;
+        }
+
+        .list-icon-function .item:hover {
+            background-color: var(--discord-hover);
+        }
+
+        .list-icon-function .item i {
+            font-size: 16px;
+        }
+
+        .list-icon-function .item.edit i {
+            color: var(--discord-accent);
+        }
+
+        .list-icon-function .item.delete i {
+            color: #ed4245;
+            /* Discord red */
+        }
+
+        /* Status Icons */
+        .icon-check,
+        .icon-check-circle {
+            color: var(--discord-green);
+        }
+
+        .icon-alert-circle,
+        .icon-alert-triangle {
+            color: #faa61a;
+            /* Discord yellow/warning */
+        }
+
+        .icon-x,
+        .icon-x-circle {
+            color: #ed4245;
+            /* Discord red */
+        }
+
+        /* Notification Icons */
+        .icon-bell {
+            color: var(--discord-muted);
+        }
+
+        /* Interactive Icons */
+        .icon-plus,
+        .icon-edit-3,
+        .icon-trash-2 {
+            transition: transform 0.15s ease;
+        }
+
+        .icon-plus:hover,
+        .icon-edit-3:hover,
+        .icon-trash-2:hover {
+            transform: scale(1.1);
+        }
+
+        /* Header Icons */
+        .header-dashboard .icon {
+            color: var(--discord-text);
+            font-size: 20px;
+        }
+
+        /* Button Icons */
+        .btn i {
+            margin-right: 6px;
+            font-size: 16px;
+            vertical-align: text-bottom;
+        }
+
+        /* Form Icons */
+        .form-group .icon {
+            color: var(--discord-muted);
+        }
+
+        /* Table Scrollbar Styling */
+        .wg-table {
+            overflow-x: auto;
+            max-width: 100%;
+        }
+
+        /* Discord-style scrollbar */
+        .wg-table::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .wg-table::-webkit-scrollbar-track {
+            background-color: var(--discord-sidebar);
+            border-radius: 4px;
+        }
+
+        .wg-table::-webkit-scrollbar-thumb {
+            background-color: #c7ccd1;
+            border-radius: 4px;
+        }
+
+        .wg-table::-webkit-scrollbar-thumb:hover {
+            background-color: #a0a6ad;
+        }
+
+        /* Fix for ORDER NO header specifically */
+        .wg-table th:first-child {
+            white-space: nowrap !important;
+            min-width: 120px !important;
+            /* Increased width */
+            padding-left: 16px;
+            padding-right: 16px;
+            text-align: center;
+        }
+
+        /* Ensure all table headers have proper spacing and don't wrap */
+        .wg-table th {
+            white-space: nowrap !important;
+            padding: 12px 16px;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            background-color: var(--discord-sidebar);
+            border-bottom: 1px solid var(--discord-divider);
+            overflow: visible !important;
+        }
+
+        /* Ensure table doesn't collapse columns */
+        .wg-table table {
+            table-layout: fixed;
+            width: 100%;
+            min-width: 800px;
+            /* Ensure minimum width for all content */
+        }
+
+        /* Ensure horizontal scrolling works properly */
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .wg-table {
+            overflow-x: auto;
+            max-width: 100%;
+        }
+
+        /* Recent orders section styling */
+        .recent-orders {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--discord-divider);
+            margin-bottom: 24px;
+        }
+
+        .recent-orders .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background-color: var(--discord-card);
+            border-bottom: 1px solid var(--discord-divider);
+        }
+
+        .recent-orders .header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .recent-orders .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        /* Table row styling */
+        .wg-table tbody tr {
+            transition: background-color 0.15s ease;
+        }
+
+        .wg-table tbody tr:hover {
+            background-color: var(--discord-hover);
+        }
+
+        /* View all link */
+        .view-all {
+            color: var(--discord-accent);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .view-all:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    @stack('styles')
 </head>
 
 <body class="body">
@@ -143,12 +538,6 @@
                                     <a href="slider.html" class="">
                                         <div class="icon"><i class="icon-image"></i></div>
                                         <div class="text">Slider</div>
-                                    </a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="coupons.html" class="">
-                                        <div class="icon"><i class="icon-grid"></i></div>
-                                        <div class="text">Coupons</div>
                                     </a>
                                 </li>
 

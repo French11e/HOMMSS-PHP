@@ -497,9 +497,15 @@ class AdminController extends Controller
             return back()->with('error', 'Order not found.');
         }
 
-        $order->status = $request->order_status;
+        // Make sure the status value is properly quoted as a string
+        $order->status = (string)$request->order_status;
 
-        if ($request->order_status == 'delivered') {
+        // Set appropriate date based on status
+        if ($request->order_status == 'processing') {
+            $order->processing_date = Carbon::now();
+        } elseif ($request->order_status == 'shipped') {
+            $order->shipped_date = Carbon::now();
+        } elseif ($request->order_status == 'delivered') {
             $order->delivered_date = Carbon::now();
         } elseif ($request->order_status == 'canceled') {
             $order->canceled_date = Carbon::now();
@@ -507,6 +513,7 @@ class AdminController extends Controller
 
         $order->save();
 
+        // Update transaction status if order is delivered
         if ($request->order_status == 'delivered') {
             $transaction = Transaction::where('order_id', $order->id)->first();
             if ($transaction) {

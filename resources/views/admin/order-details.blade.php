@@ -153,6 +153,38 @@
         background-color: #ffc107 !important;
         color: #212529;
     }
+
+    /* Fix for table headers */
+    .table th {
+        white-space: nowrap;
+        padding: 12px 16px !important;
+        background-color: #f8f9fa !important;
+        color: #333;
+        border-bottom: 1px solid #e1e1e1;
+        font-weight: 600;
+    }
+
+    /* Ensure consistent table styling */
+    .table td {
+        padding: 12px 16px !important;
+    }
+
+    /* Improve table borders */
+    .table-bordered {
+        border: 1px solid #e1e1e1;
+    }
+
+    .table-bordered th,
+    .table-bordered td {
+        border: 1px solid #e1e1e1;
+    }
+
+    /* Ensure proper spacing in the order items table */
+    .table thead th {
+        text-transform: uppercase;
+        font-size: 13px;
+        letter-spacing: 0.03em;
+    }
 </style>
 <div class="main-content-inner">
     <div class="main-content-wrap">
@@ -186,23 +218,23 @@
                 @endif
                 <table class="table table-striped table-bordered">
                     <tr>
-                        <th>Order No</th>
+                        <th>Order&nbsp;No</th>
                         <td>{{$order->id}}</td>
                         <th>Mobile</th>
                         <td>{{$order->phone}}</td>
-                        <th>Zip Code</th>
+                        <th>Zip&nbsp;Code</th>
                         <td>{{$order->postal}}</td>
                     </tr>
                     <tr>
-                        <th>Order Date</th>
+                        <th>Order&nbsp;Date</th>
                         <td>{{$order->created_at}}</td>
-                        <th>Delivered Date</th>
+                        <th>Delivered&nbsp;Date</th>
                         <td>{{$order->delivered_date}}</td>
-                        <th>Canceled Date</th>
+                        <th>Canceled&nbsp;Date</th>
                         <td>{{$order->canceled_date}}</td>
                     </tr>
                     <tr>
-                        <th>Order Status</th>
+                        <th>Order&nbsp;Status</th>
                         <td colspan="5">
                             @if($order->status == 'delivered')
                             <span class="badge bg-success">Delivered</span>
@@ -302,7 +334,7 @@
                             <th class="text-center">Category</th>
                             <th class="text-center">Brand</th>
                             <th class="text-center">Options</th>
-                            <th class="text-center">Return Status</th>
+                            <th class="text-center">Return&nbsp;Status</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
