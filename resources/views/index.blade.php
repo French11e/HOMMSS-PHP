@@ -204,6 +204,25 @@
         width: 100%;
         height: 100vh;
         min-height: 600px;
+        margin-top: 0;
+        /* Remove the gap */
+    }
+
+    /* Header styling */
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        z-index: 1030;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Adjust main content to account for fixed header */
+    main {
+        padding-top: 80px;
+        /* Add padding to main instead of margin to slider */
     }
 
     .swiper-slide {

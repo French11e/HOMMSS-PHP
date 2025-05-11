@@ -19,9 +19,14 @@
     .filled-heart {
         color: red
     }
+
+    /* Remove the pt-90 class as we're handling this in the main layout */
+    .shop-main {
+        padding-top: 1rem;
+    }
 </style>
 
-<main class="pt-90">
+<main>
     <section class="shop-main container d-flex pt-4 pt-xl-5">
         <div class="shop-sidebar side-sticky bg-body" id="shopFilter">
             <div class="aside-header d-flex d-lg-none align-items-center">

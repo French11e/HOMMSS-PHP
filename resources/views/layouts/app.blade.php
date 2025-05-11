@@ -28,6 +28,32 @@
         integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
     @stack('styles')
+
+    <style>
+        /* Header styling for all pages */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            z-index: 1030;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Adjust main content to account for fixed header */
+        main {
+            padding-top: 80px;
+        }
+
+        /* For home page slider */
+        .home-slider {
+            width: 100%;
+            height: 100vh;
+            min-height: 600px;
+            margin-top: 0;
+        }
+    </style>
 </head>
 
 <body class="gradient-bg">
@@ -446,7 +472,7 @@
     </div>
 
 
-    <header id="header" class="header header-fullwidth header-transparent-bg">
+    <header id="header" class="header header-fullwidth">
         <div class="container">
             <div class="header-desk header-desk_type_1">
                 <div class="logo">
