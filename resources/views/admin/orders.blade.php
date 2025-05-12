@@ -22,19 +22,28 @@
         <div class="wg-box">
             <div class="flex items-center justify-between gap10 flex-wrap">
                 <div class="wg-filter flex-grow">
-                    <form class="form-search">
+                    <form class="form-search" method="GET" action="{{ route('admin.orders') }}" id="order-search-form">
                         <fieldset class="name">
                             <input type="text" placeholder="Search here..." class="" name="name"
-                                tabindex="2" value="" aria-required="true" required="">
+                                tabindex="2" value="{{ request('name') }}" aria-required="true">
                         </fieldset>
                         <div class="button-submit">
                             <button class="" type="submit"><i class="icon-search"></i></button>
                         </div>
                     </form>
                 </div>
+                @if(request('name'))
+                <a href="{{ route('admin.orders') }}" class="btn btn-sm btn-outline-secondary">Clear Search</a>
+                @endif
             </div>
             <div class="wg-table table-all-user">
                 <div class="table-responsive">
+                    <div id="loading-indicator" class="search-loading" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p>Searching orders...</p>
+                    </div>
                     @if(Session::has('status'))
                     <p class="alert alert-success">{{Session::get('status')}}</p>
                     @endif
@@ -101,3 +110,23 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(function() {
+        // Show loading indicator when form is submitted
+        $('#order-search-form').on('submit', function(e) {
+            // Show loading indicator
+            $('#loading-indicator').show();
+            
+            // The form will naturally submit and reload the page
+        });
+        
+        // Show loading indicator when pagination links are clicked
+        $('.pagination a').on('click', function() {
+            $('#loading-indicator').show();
+        });
+    });
+</script>
+@endpush
+

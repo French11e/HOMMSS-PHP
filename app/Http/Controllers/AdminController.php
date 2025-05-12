@@ -472,9 +472,29 @@ class AdminController extends Controller
         return redirect()->route('admin.products')->with('status', 'Product has been deleted successfully');
     }
 
-    public function orders()
+    public function orders(Request $request)
     {
-        $orders = Order::orderBy('created_at', 'DESC')->paginate(12);
+        $search = $request->input('name');
+        
+        $query = Order::orderBy('created_at', 'DESC');
+        
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                  ->orWhere('phone', 'like', '%' . $search . '%')
+                  ->orWhere('id', 'like', '%' . $search . '%')
+                  ->orWhere('address', 'like', '%' . $search . '%')
+                  ->orWhere('total', 'like', '%' . $search . '%');
+            });
+        }
+        
+        $orders = $query->paginate(12);
+        
+        // Pass the search parameter to maintain it during pagination
+        if ($search) {
+            $orders->appends(['name' => $search]);
+        }
+        
         return view('admin.orders', compact('orders'));
     }
 
@@ -645,3 +665,4 @@ class AdminController extends Controller
         return false;
     }
 }
+
