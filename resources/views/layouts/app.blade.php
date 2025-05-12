@@ -27,9 +27,9 @@
     @stack('styles')
 
     <style>
-        /* Header styling for all pages */
+        /* Header styling for all pages - always fixed */
         .header {
-            position: fixed;
+            position: fixed !important;
             top: 0;
             left: 0;
             width: 100%;
@@ -40,7 +40,7 @@
 
         /* Adjust main content to account for fixed header */
         main {
-            padding-top: 80px;
+            padding-top: 80px; /* Adjust this value based on your header height */
         }
 
         /* For home page slider */
@@ -469,7 +469,7 @@
     </div>
 
 
-    <header id="header" class="header header-fullwidth">
+    <header id="header" class="header">
         <div class="container">
             <div class="header-desk header-desk_type_1">
                 <div class="logo">
@@ -812,7 +812,23 @@
             }
         });
     </script>
+    @push('scripts')
+    <script>
+        $(function() {
+            // Initialize any other scripts here
+            
+            // No scroll event needed - header stays fixed
+        });
+    </script>
+    @endpush
 </body>
 
 </html>
+
+
+
+
+
+
+
 

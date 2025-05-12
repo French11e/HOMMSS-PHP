@@ -943,6 +943,10 @@ function pureFadeOut(e) {
             },
 
             _stickyScrollHander() {
+                // Disable the sticky scroll handler to keep header fixed
+                return;
+                
+                /* Original code commented out
                 if (this.$header.classList.contains("sticky_disabled")) {
                     return;
                 }
@@ -966,6 +970,7 @@ function pureFadeOut(e) {
 
                 this.lastScrollTop =
                     currentScrollTop <= 0 ? 0 : currentScrollTop;
+                */
             },
         });
 
@@ -1875,3 +1880,4 @@ window.addEventListener("load", () => {
         document.querySelector("#" + url).click();
     } catch {}
 });
+
