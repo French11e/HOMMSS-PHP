@@ -22,7 +22,7 @@
         <div class="wg-box">
             <div class="flex items-center justify-between gap10 flex-wrap">
                 <div class="wg-filter flex-grow">
-                    <form class="form-search">
+                    <form class="form-search" id="user-search-form">
                         <fieldset class="name">
                             <input type="text" placeholder="Search here..." class="" name="name"
                                 tabindex="2" value="" aria-required="true" required="">
@@ -35,6 +35,13 @@
             </div>
             <div class="wg-table table-all-user">
                 <div class="table-responsive">
+                    <div id="loading-indicator" class="search-loading" style="display: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="6" x2="12" y2="12"></line>
+                        </svg>
+                        <p>Loading users...</p>
+                    </div>
                     @if(Session::has('status'))
                     <p class="alert alert-success">{{Session::get('status')}}</p>
                     @endif
@@ -92,3 +99,23 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(function() {
+        // Show loading indicator when form is submitted
+        $('#user-search-form').on('submit', function(e) {
+            // Show loading indicator
+            $('#loading-indicator').show();
+            
+            // The form will naturally submit and reload the page
+        });
+        
+        // Show loading indicator when pagination links are clicked
+        $('.pagination a').on('click', function() {
+            $('#loading-indicator').show();
+        });
+    });
+</script>
+@endpush
+

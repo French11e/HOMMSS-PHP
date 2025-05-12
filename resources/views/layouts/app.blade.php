@@ -181,6 +181,7 @@
         </symbol>
         <symbol id="icon_prev_md" viewBox="0 0 25 25">
             <path
+                d="M5.98293 11.6078L17.2253 0.369152C17.7186 -0.12291 18.5179 -0.12291 19.0124 0.369152C19.5057 0.861216 19.5057 1.66045 19.0124 2.15252L8.66176 12.4994L19.0112 22.8463C19.5045 23.3384 19.5045 24.1376 19.0112 24.631C18.5179 25.123 17.7174 25.123 17.2241 24.631L5.98168 13.
                 d="M5.98293 11.6078L17.2253 0.369152C17.7186 -0.12291 18.5179 -0.12291 19.0124 0.369152C19.5057 0.861216 19.5057 1.66045 19.0124 2.15252L8.66176 12.4994L19.0112 22.8463C19.5045 23.3384 19.5045 24.1376 19.0112 24.631C18.5179 25.123 17.7174 25.123 17.2241 24.631L5.98168 13.3924C5.49595 12.9054 5.49595 12.0936 5.98293 11.6078Z"
                 fill="currentColor" />
         </symbol>
@@ -514,7 +515,7 @@
                             <form action="#" method="GET" class="search-field container">
                                 <p class="text-uppercase text-secondary fw-medium mb-4">What are you looking for?</p>
                                 <div class="position-relative">
-                                    <input class="search-field__input search-popup__input w-100 fw-medium" type="text" name="search-keyword" id="search-input" placeholder="Search products" />
+                                    <input class="search-field__input search-popup__input w-100 fw-medium" type="text" name="search-keyword" id="search-input" placeholder="Search products" autocomplete="off" />
                                     <button class="btn-icon search-popup__submit" type="submit">
                                         <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -524,9 +525,8 @@
                                     <button class="btn-icon btn-close-lg search-popup__reset" type="reset"></button>
                                 </div>
 
-                                <div class="search-popup__results">
-                                    <ul id="box-content-search">
-                                    </ul>
+                                <div class="box-content-search" id="box-content-search">
+                                    <!-- Search results will be loaded here -->
                                 </div>
                             </form>
                         </div>
@@ -824,6 +824,12 @@
 </body>
 
 </html>
+
+
+
+
+
+
 
 
 

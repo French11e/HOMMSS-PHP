@@ -76,7 +76,7 @@
 
     .tracking-progress {
         height: 4px;
-        background: #2275fc;
+        background: #2275fc; /* Blue progress line */
         position: absolute;
         left: 10%;
         top: 25px;
@@ -114,13 +114,13 @@
     }
 
     .step-active .step-icon {
-        background: #B9A16B;
+        background: #2275fc; /* Changed from #B9A16B (brown) to #2275fc (blue) */
         color: white;
-        border-color: #B9A16B;
+        border-color: #2275fc; /* Changed from #B9A16B to #2275fc */
     }
 
     .step-active .step-label {
-        color: #B9A16B;
+        color: #2275fc; /* Changed from #B9A16B to #2275fc */
     }
 
     .step-label {

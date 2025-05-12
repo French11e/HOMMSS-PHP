@@ -37,7 +37,7 @@ Route::post('/wishlist/move-to-cart/{rowId}', [WishlistController::class, 'move_
 Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 Route::post('/place-an-order', [CartController::class, 'place_an_order'])->name('cart.place.an.order');
 Route::get('/order-confirmation', [CartController::class, 'order_confirmation'])->name('cart.order.confirmation');
-
+Route::get('/order/{order_id}/confirmation', [OrderController::class, 'redirectToConfirmation'])->name('order.confirmation');
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->middleware('throttle:5,1');
@@ -153,4 +153,21 @@ Route::middleware(['auth'])->group(function () {
 
 // Product reviews
 Route::post('/product/{product_id}/review', [ReviewController::class, 'store'])->name('product.review.store');
+
+// Add these routes for legal pages
+Route::get('/terms-of-service', function () {
+    return view('legal.terms');
+})->name('terms');
+
+Route::get('/privacy-policy', function () {
+    return view('legal.privacy');
+})->name('privacy');
+
+Route::get('/refund-policy', function () {
+    return view('legal.refund');
+})->name('refund');
+
+
+
+
 

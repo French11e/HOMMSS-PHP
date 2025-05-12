@@ -169,8 +169,11 @@ class CartController extends Controller
         // Clear cart
         Cart::instance('cart')->destroy();
 
-        // Redirect to confirmation page with transaction data
-        return redirect()->route('order.confirmation', ['order_id' => $order->id]);
+        // Store order ID in session
+        Session::put('order_id', $order->id);
+        
+        // Redirect to order confirmation page with correct route name
+        return redirect()->route('cart.order.confirmation');
     }
 
     public function setAmountforCheckout()
@@ -208,6 +211,7 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 }
+
 
 
 
