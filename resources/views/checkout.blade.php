@@ -231,9 +231,9 @@
                                 </label>
                             </div>
                             <div class="form-check mb-3">
-                                <input class="form-check-input" type="radio" name="mode" id="mode2" value="paypal">
+                                <input class="form-check-input" type="radio" name="mode" id="mode2" value="gcash">
                                 <label class="form-check-label" for="mode2">
-                                    <i class="icon-paypal me-2"></i> Paypal
+                                    <i class="icon-paypal me-2"></i> Gcash
                                 </label>
                             </div>
                             <div class="form-check mb-3">

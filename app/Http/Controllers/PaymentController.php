@@ -34,7 +34,7 @@ class PaymentController extends Controller
         // Validate payment data
         $request->validate([
             'order_id' => 'required|exists:orders,id',
-            'payment_method' => 'required|in:card,paypal',
+            'payment_method' => 'required|in:card,gcash',
             // Add other validation rules based on payment method
         ]);
 
@@ -52,9 +52,9 @@ class PaymentController extends Controller
                 // Process card payment
                 // This would integrate with your payment gateway
                 $success = $this->processCardPayment($request, $order);
-            } else if ($request->payment_method == 'paypal') {
-                // Process PayPal payment
-                $success = $this->processPayPalPayment($request, $order);
+            } else if ($request->payment_method == 'gcash') {
+                // Process Gcash payment
+                $success = $this->processGcashPayment($request, $order);
             }
 
             if ($success) {
@@ -93,11 +93,11 @@ class PaymentController extends Controller
     }
 
     /**
-     * Process PayPal payment
+     * Process Gcash payment
      */
-    private function processPayPalPayment(Request $request, Order $order)
+    private function processGcashPayment(Request $request, Order $order)
     {
-        // Implement PayPal payment processing logic
+        // Implement Gcash payment processing logic
 
         // For demonstration purposes, we'll return true
         return true;
@@ -138,3 +138,4 @@ class PaymentController extends Controller
         return view('payment.failed');
     }
 }
+

@@ -59,8 +59,8 @@
                                 Cash on Delivery
                             @elseif($order->transaction->mode == 'card')
                                 Credit/Debit Card
-                            @elseif($order->transaction->mode == 'paypal')
-                                PayPal
+                            @elseif($order->transaction->mode == 'gcash')
+                                Gcash
                             @else
                                 {{ ucfirst($order->transaction->mode) }}
                             @endif
@@ -119,4 +119,5 @@
     </section>
 </main>
 @endsection
+
 

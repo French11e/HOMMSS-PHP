@@ -70,7 +70,7 @@ class CartController extends Controller
         
         // Validate payment method
         $request->validate([
-            'mode' => 'required|in:card,paypal,cod',
+            'mode' => 'required|in:card,gcash,cod',
         ], [
             'mode.required' => 'Please select a payment method',
             'mode.in' => 'Invalid payment method selected',
@@ -160,7 +160,7 @@ class CartController extends Controller
             $transaction->status = 'pending';
         } else if ($request->mode == 'card') {
             $transaction->status = 'pending'; // Will be updated after payment processing
-        } else if ($request->mode == 'paypal') {
+        } else if ($request->mode == 'gcash') {
             $transaction->status = 'pending'; // Will be updated after payment processing
         }
         
@@ -211,6 +211,7 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 }
+
 
 
 
