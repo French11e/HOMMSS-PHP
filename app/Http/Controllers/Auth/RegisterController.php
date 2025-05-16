@@ -27,13 +27,10 @@ class RegisterController extends Controller
             'mobile' => [
                 'required',
                 'string',
-                'regex:/^\+?\d{10,15}$/', // Allows optional + prefix
+                'regex:/^\+?\d{10,15}$/',
                 'unique:users',
                 function ($attribute, $value, $fail) {
-                    // Remove all non-digit characters
                     $digits = preg_replace('/\D/', '', $value);
-
-                    // Validate length after cleaning
                     if (strlen($digits) < 10 || strlen($digits) > 15) {
                         $fail('The mobile number must be between 10 and 15 digits.');
                     }
@@ -46,12 +43,22 @@ class RegisterController extends Controller
                 'confirmed',
                 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.]).{12,}$/',
             ],
-
-
-            'honeypot' => ['present', 'max:0']
+            'honeypot' => ['present', 'max:0'],
+            'timestamp' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    // Form must be submitted between 2 seconds and 1 hour
+                    $now = time();
+                    $formTime = (int)$value;
+                    if ($now - $formTime < 2 || $now - $formTime > 3600) {
+                        $fail('Invalid form submission timing');
+                    }
+                },
+            ],
         ], [
             'password.regex' => 'The password must contain at least: 1 uppercase, 1 lowercase, 1 number and 1 special character',
-            'honeypot.max' => 'Invalid form submission'
+            'honeypot.max' => 'Invalid form submission',
+            'timestamp.required' => 'Invalid form submission',
         ]);
     }
 
@@ -65,3 +72,4 @@ class RegisterController extends Controller
         ]);
     }
 }
+

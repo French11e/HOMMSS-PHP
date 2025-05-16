@@ -634,11 +634,10 @@ class AdminController extends Controller
         return false;
     }
 
-    private function sendOrderShippedEmail($order)
+    public function sendOrderShippedEmail($order)
     {
-        // Load the user to get their email
-        $user = User::find($order->user_id);
-
+        // Code for sending email
+        
         if ($user && $user->email) {
             try {
                 Mail::send('emails.order-shipped', ['order' => $order], function ($message) use ($user, $order) {
@@ -664,5 +663,101 @@ class AdminController extends Controller
 
         return false;
     }
+    
+    public function requestRevenueReport(Request $request)
+    {
+        $startDate = $request->input('start_date') ? $request->input('start_date') : date('Y-01-01');
+        $endDate = $request->input('end_date') ? $request->input('end_date') : date('Y-12-31');
+        
+        // Dispatch job to generate report in the background
+        GenerateRevenueReport::dispatch($startDate, $endDate, auth()->id());
+        
+        return redirect()->back()->with('status', 'Report generation has started. You will be notified when it\'s ready.');
+    }
+
+    /**
+     * Generate a revenue report
+     */
+    public function revenueReport(Request $request)
+    {
+        // Increase timeout
+        ini_set('max_execution_time', 300);
+        
+        $startDate = $request->input('start_date', date('Y-01-01'));
+        $endDate = $request->input('end_date', date('Y-12-31'));
+        
+        // Get total revenue
+        $totalAmount = DB::table('orders')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->sum('total');
+        
+        // Get ordered amount
+        $totalOrderedAmount = DB::table('orders')
+            ->where('status', 'ordered')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->sum('total');
+        
+        // Get delivered amount
+        $totalDeliveredAmount = DB::table('orders')
+            ->where('status', 'delivered')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->sum('total');
+        
+        // Get canceled amount
+        $totalCanceledAmount = DB::table('orders')
+            ->where('status', 'canceled')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->sum('total');
+        
+        // Get monthly data
+        $monthlyData = DB::table('orders')
+            ->selectRaw('MONTH(created_at) as month, 
+                         SUM(total) as TotalAmount,
+                         SUM(IF(status = "ordered", total, 0)) as TotalOrderedAmount,
+                         SUM(IF(status = "delivered", total, 0)) as TotalDeliveredAmount,
+                         SUM(IF(status = "canceled", total, 0)) as TotalCanceledAmount')
+            ->whereYear('created_at', date('Y', strtotime($startDate)))
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->get()
+            ->keyBy('month');
+        
+        // Create complete monthly data structure
+        $monthlyDatas = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $data = $monthlyData[$i] ?? null;
+            
+            $monthlyDatas[] = (object)[
+                'MonthNo' => $i,
+                'MonthName' => date('F', mktime(0, 0, 0, $i, 1)),
+                'TotalAmount' => $data ? $data->TotalAmount : 0,
+                'TotalOrderedAmount' => $data ? $data->TotalOrderedAmount : 0,
+                'TotalDeliveredAmount' => $data ? $data->TotalDeliveredAmount : 0,
+                'TotalCanceledAmount' => $data ? $data->TotalCanceledAmount : 0
+            ];
+        }
+        
+        return view('admin.revenue-report', [
+            'monthlyDatas' => $monthlyDatas,
+            'TotalAmount' => $totalAmount,
+            'TotalOrderedAmount' => $totalOrderedAmount,
+            'TotalDeliveredAmount' => $totalDeliveredAmount,
+            'TotalCanceledAmount' => $totalCanceledAmount,
+            'startDate' => $startDate,
+            'endDate' => $endDate
+        ]);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 

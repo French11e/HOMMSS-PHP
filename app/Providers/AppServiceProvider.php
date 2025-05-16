@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,5 +24,17 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // You can remove the custom validation rule since we're manually checking the password now
+        if (config('app.env') === 'local') {
+            DB::listen(function ($query) {
+                Log::info(
+                    $query->sql,
+                    [
+                        'bindings' => $query->bindings,
+                        'time' => $query->time
+                    ]
+                );
+            });
+        }
     }
 }
+

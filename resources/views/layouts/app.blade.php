@@ -35,20 +35,26 @@
             width: 100%;
             background-color: #fff;
             z-index: 1030;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #eee;
         }
 
         /* Adjust main content to account for fixed header */
         main {
-            padding-top: 80px; /* Adjust this value based on your header height */
+            padding-top: 120px; /* Consistent padding for all pages */
+            position: relative;
         }
-
-        /* For home page slider */
-        .home-slider {
-            width: 100%;
-            height: 100vh;
-            min-height: 600px;
-            margin-top: 0;
+        
+        /* Ensure all page containers have proper spacing */
+        .page-container {
+            padding-top: 20px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 991px) {
+            main {
+                padding-top: 100px;
+            }
         }
     </style>
 </head>
@@ -182,7 +188,7 @@
         <symbol id="icon_prev_md" viewBox="0 0 25 25">
             <path
                 d="M5.98293 11.6078L17.2253 0.369152C17.7186 -0.12291 18.5179 -0.12291 19.0124 0.369152C19.5057 0.861216 19.5057 1.66045 19.0124 2.15252L8.66176 12.4994L19.0112 22.8463C19.5045 23.3384 19.5045 24.1376 19.0112 24.631C18.5179 25.123 17.7174 25.123 17.2241 24.631L5.98168 13.
-                d="M5.98293 11.6078L17.2253 0.369152C17.7186 -0.12291 18.5179 -0.12291 19.0124 0.369152C19.5057 0.861216 19.5057 1.66045 19.0124 2.15252L8.66176 12.4994L19.0112 22.8463C19.5045 23.3384 19.5045 24.1376 19.0112 24.631C18.5179 25.123 17.7174 25.123 17.2241 24.631L5.98168 13.3924C5.49595 12.9054 5.49595 12.0936 5.98293 11.6078Z"
+                d=" M5.98293 11.6078L17.2253 0.369152C17.7186 -0.12291 18.5179 -0.12291 19.0124 0.369152C19.5057 0.861216 19.5057 1.66045 19.0124 2.15252L8.66176 12.4994L19.0112 22.8463C19.5045 23.3384 19.5045 24.1376 19.0112 24.631C18.5179 25.123 17.7174 25.123 17.2241 24.631L5.98168 13.3924C5.49595 12.9054 5.49595 12.0936 5.98293 11.6078Z"
                 fill="currentColor" />
         </symbol>
         <symbol id="icon_shield" viewBox="0 0 52 52">
@@ -591,112 +597,34 @@
                             <img src="{{ asset('assets/images/logo.png') }}" alt="SurfsideMedia" class="logo__image d-block" />
                         </a>
                     </div>
-                    <p class="footer-address">Blk1 Lot 1 Ph6 Glocal St., Sterling Industrial Park, Libtong, Meycauayan Bulacan, Philippines 3020</p>
+                    <p class="footer-address">Blk1 Lot 1 Ph6 Glocal St., Sterling Industrial Park,<br> Libtong, Meycauayan Bulacan, Philippines 3020</p>
                     <p class="m-0"><strong class="fw-medium">hommss@gmail.com</strong></p>
-                    <p><strong class="fw-medium">+63 9000000000</strong></p>
+                    <p><strong class="fw-medium">(044) 816 7442</strong></p>
 
                     <ul class="social-links list-unstyled d-flex flex-wrap mb-0">
                         <li>
-                            <a href="#" class="footer__social-link d-block">
+                            <a href="https://www.facebook.com/hommss.tiles" class="footer__social-link d-block">
                                 <svg class="svg-icon svg-icon_facebook" width="9" height="15" viewBox="0 0 9 15"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <use href="#icon_facebook" />
                                 </svg>
                             </a>
                         </li>
-                        <li>
-                            <a href="#" class="footer__social-link d-block">
-                                <svg class="svg-icon svg-icon_twitter" width="14" height="13" viewBox="0 0 14 13"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_twitter" />
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="footer__social-link d-block">
-                                <svg class="svg-icon svg-icon_instagram" width="14" height="13" viewBox="0 0 14 13"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_instagram" />
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="footer__social-link d-block">
-                                <svg class="svg-icon svg-icon_youtube" width="16" height="11" viewBox="0 0 16 11"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M15.0117 1.8584C14.8477 1.20215 14.3281 0.682617 13.6992 0.518555C12.5234 0.19043 7.875 0.19043 7.875 0.19043C7.875 0.19043 3.19922 0.19043 2.02344 0.518555C1.39453 0.682617 0.875 1.20215 0.710938 1.8584C0.382812 3.00684 0.382812 5.46777 0.382812 5.46777C0.382812 5.46777 0.382812 7.90137 0.710938 9.07715C0.875 9.7334 1.39453 10.2256 2.02344 10.3896C3.19922 10.6904 7.875 10.6904 7.875 10.6904C7.875 10.6904 12.5234 10.6904 13.6992 10.3896C14.3281 10.2256 14.8477 9.7334 15.0117 9.07715C15.3398 7.90137 15.3398 5.46777 15.3398 5.46777C15.3398 5.46777 15.3398 3.00684 15.0117 1.8584ZM6.34375 7.68262V3.25293L10.2266 5.46777L6.34375 7.68262Z" />
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="footer__social-link d-block">
-                                <svg class="svg-icon svg-icon_pinterest" width="14" height="15" viewBox="0 0 14 15"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_pinterest" />
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
 
-                <div class="footer-column footer-menu mb-4 mb-lg-0">
-                    <h6 class="sub-menu__title text-uppercase">Company</h6>
-                    <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">About Us</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Careers</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Affiliates</a></li>
-                        <li class="sub-menu__item"><a href="blog_list1.html" class="menu-link menu-link_us-s">Blog</a></li>
-                        <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Contact Us</a></li>
-                    </ul>
-                </div>
 
-                <!-- <div class="footer-column footer-menu mb-4 mb-lg-0">
-                    <h6 class="sub-menu__title text-uppercase">Shop</h6>
-                    <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">New Arrivals</a></li>
-                        <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Accessories</a></li>
-                        <li class="sub-menu__item"><a href="shop4.html" class="menu-link menu-link_us-s">Men</a></li>
-                        <li class="sub-menu__item"><a href="shop5.html" class="menu-link menu-link_us-s">Women</a></li>
-                        <li class="sub-menu__item"><a href="shop1.html" class="menu-link menu-link_us-s">Shop All</a></li>
-                    </ul>
-                </div> -->
 
-                <div class="footer-column footer-menu mb-4 mb-lg-0">
-                    <h6 class="sub-menu__title text-uppercase">Help</h6>
-                    <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Customer Service</a></li>
-                        <li class="sub-menu__item"><a href="{{route('login')}}" class="menu-link menu-link_us-s">My Account</a>
-                        </li>
-                        <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Find a Store</a>
-                        </li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Legal & Privacy</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Gift Card</a></li>
-                    </ul>
-                </div>
-
-                <!-- <div class="footer-column footer-menu mb-4 mb-lg-0">
-                    <h6 class="sub-menu__title text-uppercase">Categories</h6>
-                    <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shirts</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Jeans</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shoes</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Bags</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shop All</a></li>
-                    </ul>
-                </div> -->
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="container d-md-flex align-items-center">
-                <span class="footer-copyright me-auto">©2025 HOMMSS CORPORATION </span>
-                <div class="footer-settings d-md-flex align-items-center">
-                    <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Terms &amp;
-                        Conditions</a>
                 </div>
             </div>
-        </div>
+
+            <div class="footer-bottom">
+                <div class="container d-md-flex align-items-center">
+                    <span class="footer-copyright me-auto">©2025 HOMMSS CORPORATION </span>
+                    <div class="footer-settings d-md-flex align-items-center">
+                        <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Terms &amp;
+                            Conditions</a>
+                    </div>
+                </div>
+            </div>
     </footer>
 
 
@@ -815,26 +743,31 @@
     @push('scripts')
     <script>
         $(function() {
-            // Initialize any other scripts here
+            // Ensure proper spacing based on actual navbar height
+            function adjustSpacing() {
+                const headerHeight = $('.header').outerHeight();
+                $('main').css('padding-top', headerHeight + 20 + 'px'); // 20px extra space
+                
+                // Adjust specific page elements if they exist
+                if ($('.product-details-container').length) {
+                    $('.product-details-container').css('padding-top', headerHeight + 20 + 'px');
+                }
+                
+                if ($('.shop-main').length) {
+                    $('.shop-main').css('padding-top', headerHeight + 20 + 'px');
+                    $('.shop-sidebar').css('top', headerHeight + 20 + 'px');
+                }
+            }
             
-            // No scroll event needed - header stays fixed
+            // Run on page load and window resize
+            adjustSpacing();
+            $(window).on('resize', adjustSpacing);
         });
     </script>
     @endpush
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

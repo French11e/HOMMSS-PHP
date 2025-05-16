@@ -12,8 +12,11 @@
                         <form method="POST" action="{{ route('register') }}" name="register-form" class="needs-validation" novalidate>
                             @csrf
 
-                            <!-- Honeypot -->
-                            <input type="text" name="honeypot" id="honeypot" class="d-none" value="" tabindex="-1" autocomplete="off">
+                            <!-- Honeypot (improved) -->
+                            <div class="visually-hidden" aria-hidden="true" style="position: absolute; left: -9999px;">
+                                <input type="text" name="honeypot" id="honeypot" value="" tabindex="-1" autocomplete="off">
+                                <input type="hidden" name="timestamp" value="{{ time() }}">
+                            </div>
 
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>

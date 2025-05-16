@@ -42,10 +42,12 @@ class AdminController extends Controller
 
             $user->password = Hash::make($request->new_password);
         }
-
-        /** @var \App\Models\User $user */
+        
         $user->save();
-
-        return redirect()->route('admin.settings')->with('status', 'Settings updated successfully!');
+        
+        return redirect()->back()->with('status', 'Profile updated successfully');
     }
 }
+
+
+

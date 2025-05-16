@@ -19,28 +19,23 @@ class HomeController extends Controller
     {
         $query = $request->input('query');
         
-        // Validate search query
-        if (strlen($query) < 3) {
-            return response()->json([]);
-        }
+        // Validate search input
+        $validated = $request->validate([
+            'query' => 'required|string|min:3|max:100',
+        ]);
         
-        // Search for products with category information
-        $products = Product::with('category')
-            ->where('name', 'like', '%' . $query . '%')
-            ->orWhere('description', 'like', '%' . $query . '%')
-            ->orWhere('short_description', 'like', '%' . $query . '%')
-            ->orWhereHas('category', function($q) use ($query) {
-                $q->where('name', 'like', '%' . $query . '%');
-            })
-            ->orWhereHas('brand', function($q) use ($query) {
-                $q->where('name', 'like', '%' . $query . '%');
-            })
-            ->select('id', 'name', 'slug', 'image', 'regular_price', 'category_id')
-            ->limit(10)
-            ->get();
+        // Use parameter binding for search
+        $results = Product::where('name', 'LIKE', "%{$validated['query']}%")
+                         ->orWhere('description', 'LIKE', "%{$validated['query']}%")
+                         ->limit(10)
+                         ->get();
         
-        return response()->json($products);
+        return response()->json($results);
     }
 }
+
+
+
+
 
 
