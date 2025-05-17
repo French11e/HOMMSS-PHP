@@ -541,23 +541,11 @@
                                     </a>
                                 </li>
 
-                                <li class="menu-item has-children">
-                                    <a href="javascript:void(0);" class="menu-item-button">
+                                <li class="menu-item">
+                                    <a href="{{ route('admin.settings') }}" class="">
                                         <div class="icon"><i class="icon-settings"></i></div>
                                         <div class="text">Settings</div>
                                     </a>
-                                    <ul class="sub-menu">
-                                        <li class="sub-menu-item">
-                                            <a href="{{ route('admin.settings') }}" class="">
-                                                <div class="text">General Settings</div>
-                                            </a>
-                                        </li>
-                                        <li class="sub-menu-item">
-                                            <a href="slider.html" class="">
-                                                <div class="text">Homepage Slider</div>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
 
                                 <li class="menu-item">

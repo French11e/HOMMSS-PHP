@@ -42,12 +42,9 @@ class AdminController extends Controller
 
             $user->password = Hash::make($request->new_password);
         }
-        
+
         $user->save();
-        
+
         return redirect()->back()->with('status', 'Profile updated successfully');
     }
 }
-
-
-
